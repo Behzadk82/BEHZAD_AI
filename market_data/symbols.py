@@ -1,58 +1,49 @@
 
 import json
-import os
 import re
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
-from urllib.parse import urlparse
+from urllib.parse import urlencode
 
 
 class SymbolManager:
-    """
-    دریافت و اعتبارسنجی فهرست نمادها.
-    این ماژول صرفاً برای جمع‌آوری و تحلیل اطلاعات است.
-    """
+    """دریافت و اعتبارسنجی فهرست ابزارهای بازار از TSETMC."""
 
-    ALLOWED_HOSTS = {
-        "www.tsetmc.com",
-        "tsetmc.com",
-        "cdn.tsetmc.com"
-    }
+    BASE_URL = (
+        "https://cdn.tsetmc.com/api/"
+        "ClosingPrice/GetMarketWatch"
+    )
 
-    def __init__(self, timeout=20):
+    MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
+    def __init__(self, timeout=25):
         self.timeout = timeout
 
-    def validate_url(self, url):
-        parsed = urlparse(url)
+    def build_url(self):
+        params = [
+            ("market", "0"),
+            ("withBestLimits", "false"),
+            ("hEven", "0"),
+            ("RefID", "0"),
+        ]
 
-        return (
-            parsed.scheme == "https"
-            and parsed.hostname in self.ALLOWED_HOSTS
-        )
+        for i in range(9):
+            params.append((f"paperTypes[{i}]", str(i + 1)))
+
+        return self.BASE_URL + "?" + urlencode(params)
 
     def fetch_data(self):
-        url = os.environ.get("TSETMC_SYMBOLS_URL", "").strip()
-
-        if not url:
-            return {
-                "success": False,
-                "error": "symbols_url_not_configured",
-                "message": "آدرس API فهرست نمادها هنوز تنظیم نشده است."
-            }
-
-        if not self.validate_url(url):
-            return {
-                "success": False,
-                "error": "invalid_source_url",
-                "message": "آدرس منبع اطلاعات معتبر نیست."
-            }
-
         request = urllib.request.Request(
-            url,
+            self.build_url(),
             headers={
-                "User-Agent": "Mozilla/5.0 BEHZAD_AI/0.4",
-                "Accept": "application/json"
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 Chrome/126 Safari/537.36"
+                ),
+                "Accept": "application/json",
+                "Referer": "https://www.tsetmc.com/",
+                "Origin": "https://www.tsetmc.com"
             }
         )
 
@@ -69,17 +60,27 @@ class SymbolManager:
                         "http_status": response.status
                     }
 
-                raw = response.read(10 * 1024 * 1024)
+                raw = response.read(
+                    self.MAX_RESPONSE_SIZE + 1
+                )
 
-                if len(raw) >= 10 * 1024 * 1024:
+                if len(raw) > self.MAX_RESPONSE_SIZE:
                     return {
                         "success": False,
                         "error": "response_too_large"
                     }
 
+                try:
+                    data = json.loads(raw.decode("utf-8"))
+                except (UnicodeDecodeError, json.JSONDecodeError):
+                    return {
+                        "success": False,
+                        "error": "invalid_json_response"
+                    }
+
                 return {
                     "success": True,
-                    "data": json.loads(raw.decode("utf-8"))
+                    "data": data
                 }
 
         except urllib.error.HTTPError as error:
@@ -102,16 +103,21 @@ class SymbolManager:
 
         if isinstance(data, dict):
             for key in (
+                "marketwatch",
                 "data",
                 "instruments",
                 "result",
-                "instrumentList",
-                "instrument"
+                "instrumentList"
             ):
                 value = data.get(key)
 
                 if isinstance(value, list):
                     return value
+
+                if isinstance(value, dict):
+                    for nested in value.values():
+                        if isinstance(nested, list):
+                            return nested
 
         return []
 
@@ -119,27 +125,21 @@ class SymbolManager:
         if not isinstance(item, dict):
             return None
 
-        symbol = (
-            item.get("lVal18AFC")
-            or item.get("symbol")
-            or item.get("ticker")
-            or item.get("insCode")
-        )
+        symbol = item.get("lVal18AFC")
+        name = item.get("lVal30")
+        code = item.get("insCode")
 
-        name = (
-            item.get("lVal30")
-            or item.get("name")
-            or item.get("instrumentName")
-            or symbol
-        )
-
-        if symbol is None:
+        if not symbol or not code:
             return None
 
         symbol = str(symbol).strip()
-        name = str(name).strip()
+        name = str(name or symbol).strip()
+        code = str(code).strip()
 
-        if not symbol or not name:
+        if not symbol or not code or not name:
+            return None
+
+        if not code.isdigit():
             return None
 
         if len(symbol) > 100 or len(name) > 250:
@@ -153,6 +153,7 @@ class SymbolManager:
             return None
 
         return {
+            "instrument_code": code,
             "symbol": symbol,
             "name": name
         }
@@ -160,8 +161,16 @@ class SymbolManager:
     def validate_symbols(self, data):
         rows = self.extract_rows(data)
 
+        if not rows:
+            return {
+                "success": False,
+                "error": "unexpected_data_structure",
+                "message": "ساختار پاسخ API قابل شناسایی نیست."
+            }
+
         valid = []
         rejected = 0
+        duplicates = 0
         seen = set()
 
         for item in rows:
@@ -171,19 +180,22 @@ class SymbolManager:
                 rejected += 1
                 continue
 
-            key = normalized["symbol"]
+            code = normalized["instrument_code"]
 
-            if key in seen:
+            if code in seen:
+                duplicates += 1
                 continue
 
-            seen.add(key)
+            seen.add(code)
             valid.append(normalized)
 
         return {
             "success": True,
+            "source": "TSETMC",
             "total_received": len(rows),
             "valid_count": len(valid),
             "rejected_count": rejected,
+            "duplicate_count": duplicates,
             "symbols": valid,
             "checked_at": datetime.now(
                 timezone.utc
@@ -201,11 +213,10 @@ class SymbolManager:
 
 if __name__ == "__main__":
     manager = SymbolManager()
-    result = manager.get_symbols()
 
     print(json.dumps(
-        result,
+        manager.get_symbols(),
         ensure_ascii=False,
         indent=2
     ))
-      
+                    
