@@ -187,6 +187,38 @@ class SymbolManager:
             )
         }
 
+        # گزارش دسته‌بندی اولیه ابزارهای بازار
+        classification_report = {}
+
+        for item in rows:
+            if not isinstance(item, dict):
+                continue
+
+            yval = str(item.get("yVal", "نامشخص"))
+            flow = str(item.get("flow", "نامشخص"))
+
+            if yval not in classification_report:
+                classification_report[yval] = {
+                    "count": 0,
+                    "flow_counts": {},
+                    "samples": []
+                }
+
+            group = classification_report[yval]
+            group["count"] += 1
+
+            group["flow_counts"][flow] = (
+                group["flow_counts"].get(flow, 0) + 1
+            )
+
+            if len(group["samples"]) < 3:
+                group["samples"].append({
+                    "symbol": item.get("lva"),
+                    "name": item.get("lvc"),
+                    "instrument_code": item.get("insCode")
+                })
+
+        # اعتبارسنجی نمادها
         valid = []
         rejected = 0
         duplicates = 0
@@ -217,6 +249,7 @@ class SymbolManager:
             "duplicate_count": duplicates,
             "symbols": valid,
             "debug": debug,
+            "classification_report": classification_report,
             "checked_at": datetime.now(
                 timezone.utc
             ).isoformat()
@@ -239,4 +272,4 @@ if __name__ == "__main__":
         ensure_ascii=False,
         indent=2
     ))
-        
+                
