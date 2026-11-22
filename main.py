@@ -146,6 +146,7 @@ class Handler(BaseHTTPRequestHandler):
                 "rejected_count": result["rejected_count"],
                 "duplicate_count": result["duplicate_count"],
                 "preview": result["symbols"][:10],
+                "debug": result.get("debug"),
                 "checked_at": result["checked_at"]
             })
 
