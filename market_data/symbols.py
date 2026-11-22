@@ -125,8 +125,8 @@ class SymbolManager:
         if not isinstance(item, dict):
             return None
 
-        symbol = item.get("lVal18AFC")
-        name = item.get("lVal30")
+        symbol = item.get("lVal18AFC") or item.get("lva")
+        name = item.get("lVal30") or item.get("lvc")
         code = item.get("insCode")
 
         if not symbol or not code:
@@ -239,4 +239,4 @@ if __name__ == "__main__":
         ensure_ascii=False,
         indent=2
     ))
-    
+        
