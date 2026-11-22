@@ -8,7 +8,7 @@ from urllib.parse import urlencode
 
 
 class SymbolManager:
-    """دریافت و اعتبارسنجی فهرست ابزارهای بازار از TSETMC."""
+    """دریافت، اعتبارسنجی و طبقه‌بندی ابزارهای بازار TSETMC."""
 
     BASE_URL = (
         "https://cdn.tsetmc.com/api/"
@@ -16,6 +16,168 @@ class SymbolManager:
     )
 
     MAX_RESPONSE_SIZE = 10 * 1024 * 1024
+
+    # طبقه‌بندی اولیه بر اساس کدها و نمونه‌های مشاهده‌شده
+    INSTRUMENT_TYPES = {
+        "300": {
+            "category": "سهام عادی",
+            "is_common_stock": True,
+            "status": "initial"
+        },
+        "303": {
+            "category": "سهام عادی",
+            "is_common_stock": True,
+            "status": "initial"
+        },
+        "309": {
+            "category": "سهام عادی",
+            "is_common_stock": True,
+            "status": "initial"
+        },
+        "313": {
+            "category": "سهام عادی",
+            "is_common_stock": True,
+            "status": "initial"
+        },
+
+        "311": {
+            "category": "اختیار خرید",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "320": {
+            "category": "اختیار خرید",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "312": {
+            "category": "اختیار فروش",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "321": {
+            "category": "اختیار فروش",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "305": {
+            "category": "صندوق سرمایه‌گذاری",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "315": {
+            "category": "صندوق سرمایه‌گذاری",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "380": {
+            "category": "صندوق کالایی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "306": {
+            "category": "اوراق مرابحه",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "706": {
+            "category": "اوراق مرابحه دولتی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "208": {
+            "category": "صکوک",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "206": {
+            "category": "اوراق و اسناد مالی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "301": {
+            "category": "اوراق مشارکت",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "304": {
+            "category": "قرارداد آتی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "308": {
+            "category": "سلف استاندارد",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "200": {
+            "category": "سلف موازی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "307": {
+            "category": "امتیاز تسهیلات مسکن",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "701": {
+            "category": "گواهی کالایی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "400": {
+            "category": "حق تقدم یا ابزار مرتبط",
+            "is_common_stock": False,
+            "status": "needs_review"
+        },
+        "403": {
+            "category": "حق تقدم یا ابزار مرتبط",
+            "is_common_stock": False,
+            "status": "needs_review"
+        },
+        "404": {
+            "category": "ابزار بیمه‌ای یا ناشناخته",
+            "is_common_stock": False,
+            "status": "needs_review"
+        },
+
+        "201": {
+            "category": "گواهی ظرفیت",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "210": {
+            "category": "گواهی صرفه‌جویی انرژی",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+
+        "801": {
+            "category": "ابزار بازار برق",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "802": {
+            "category": "ابزار بازار برق",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "803": {
+            "category": "ابزار بازار برق",
+            "is_common_stock": False,
+            "status": "initial"
+        },
+        "804": {
+            "category": "ابزار بازار برق",
+            "is_common_stock": False,
+            "status": "initial"
+        }
+    }
 
     def __init__(self, timeout=25):
         self.timeout = timeout
@@ -72,7 +234,10 @@ class SymbolManager:
 
                 try:
                     data = json.loads(raw.decode("utf-8"))
-                except (UnicodeDecodeError, json.JSONDecodeError):
+                except (
+                    UnicodeDecodeError,
+                    json.JSONDecodeError
+                ):
                     return {
                         "success": False,
                         "error": "invalid_json_response"
@@ -121,6 +286,30 @@ class SymbolManager:
 
         return []
 
+    def classify_instrument(self, item):
+        """تعیین گروه اولیه ابزار بر اساس yVal."""
+
+        yval = str(item.get("yVal", "")).strip()
+
+        instrument_type = self.INSTRUMENT_TYPES.get(yval)
+
+        if instrument_type is None:
+            return {
+                "yVal": yval or "نامشخص",
+                "flow": str(item.get("flow", "نامشخص")),
+                "category": "سایر ابزارها - نیازمند بررسی",
+                "is_common_stock": None,
+                "classification_status": "unknown"
+            }
+
+        return {
+            "yVal": yval,
+            "flow": str(item.get("flow", "نامشخص")),
+            "category": instrument_type["category"],
+            "is_common_stock": instrument_type["is_common_stock"],
+            "classification_status": instrument_type["status"]
+        }
+
     def normalize_symbol(self, item):
         if not isinstance(item, dict):
             return None
@@ -152,10 +341,13 @@ class SymbolManager:
         ):
             return None
 
+        classification = self.classify_instrument(item)
+
         return {
             "instrument_code": code,
             "symbol": symbol,
-            "name": name
+            "name": name,
+            **classification
         }
 
     def validate_symbols(self, data):
@@ -187,44 +379,49 @@ class SymbolManager:
             )
         }
 
-        # گزارش دسته‌بندی اولیه ابزارهای بازار
+        # گزارش تفصیلی بر اساس کد اصلی yVal
         classification_report = {}
 
-        for item in rows:
-            if not isinstance(item, dict):
-                continue
+        # گزارش تجمیعی بر اساس دسته‌بندی
+        category_report = {}
 
-            yval = str(item.get("yVal", "نامشخص"))
-            flow = str(item.get("flow", "نامشخص"))
-
-            if yval not in classification_report:
-                classification_report[yval] = {
-                    "count": 0,
-                    "flow_counts": {},
-                    "samples": []
-                }
-
-            group = classification_report[yval]
-            group["count"] += 1
-
-            group["flow_counts"][flow] = (
-                group["flow_counts"].get(flow, 0) + 1
-            )
-
-            if len(group["samples"]) < 3:
-                group["samples"].append({
-                    "symbol": item.get("lva"),
-                    "name": item.get("lvc"),
-                    "instrument_code": item.get("insCode")
-                })
-
-        # اعتبارسنجی نمادها
         valid = []
         rejected = 0
         duplicates = 0
         seen = set()
 
         for item in rows:
+
+            if isinstance(item, dict):
+                yval = str(
+                    item.get("yVal", "نامشخص")
+                ).strip()
+
+                flow = str(
+                    item.get("flow", "نامشخص")
+                ).strip()
+
+                if yval not in classification_report:
+                    classification_report[yval] = {
+                        "count": 0,
+                        "flow_counts": {},
+                        "samples": []
+                    }
+
+                group = classification_report[yval]
+                group["count"] += 1
+
+                group["flow_counts"][flow] = (
+                    group["flow_counts"].get(flow, 0) + 1
+                )
+
+                if len(group["samples"]) < 3:
+                    group["samples"].append({
+                        "symbol": item.get("lva"),
+                        "name": item.get("lvc"),
+                        "instrument_code": item.get("insCode")
+                    })
+
             normalized = self.normalize_symbol(item)
 
             if normalized is None:
@@ -240,16 +437,83 @@ class SymbolManager:
             seen.add(code)
             valid.append(normalized)
 
+            # ساخت گزارش گروهی از نمادهای معتبر
+            category = normalized["category"]
+
+            if category not in category_report:
+                category_report[category] = {
+                    "count": 0,
+                    "yVal_codes": [],
+                    "flow_counts": {},
+                    "samples": []
+                }
+
+            category_group = category_report[category]
+            category_group["count"] += 1
+
+            if normalized["yVal"] not in category_group["yVal_codes"]:
+                category_group["yVal_codes"].append(
+                    normalized["yVal"]
+                )
+
+            flow = normalized["flow"]
+
+            category_group["flow_counts"][flow] = (
+                category_group["flow_counts"].get(flow, 0) + 1
+            )
+
+            if len(category_group["samples"]) < 3:
+                category_group["samples"].append({
+                    "symbol": normalized["symbol"],
+                    "name": normalized["name"],
+                    "instrument_code": code
+                })
+
+        # مرتب‌سازی گروه‌ها بر اساس تعداد
+        category_report = dict(
+            sorted(
+                category_report.items(),
+                key=lambda item: item[1]["count"],
+                reverse=True
+            )
+        )
+
+        # شمارش سهام عادی و ابزارهای ناشناخته
+        common_stock_count = sum(
+            1 for item in valid
+            if item["is_common_stock"] is True
+        )
+
+        unknown_count = sum(
+            1 for item in valid
+            if item["classification_status"] == "unknown"
+        )
+
+        needs_review_count = sum(
+            1 for item in valid
+            if item["classification_status"] == "needs_review"
+        )
+
         return {
             "success": True,
             "source": "TSETMC",
+
             "total_received": len(rows),
             "valid_count": len(valid),
             "rejected_count": rejected,
             "duplicate_count": duplicates,
+
+            "common_stock_count": common_stock_count,
+            "unknown_count": unknown_count,
+            "needs_review_count": needs_review_count,
+
             "symbols": valid,
-            "debug": debug,
+
+            "category_report": category_report,
             "classification_report": classification_report,
+
+            "debug": debug,
+
             "checked_at": datetime.now(
                 timezone.utc
             ).isoformat()
@@ -272,4 +536,4 @@ if __name__ == "__main__":
         ensure_ascii=False,
         indent=2
     ))
-                
+    
