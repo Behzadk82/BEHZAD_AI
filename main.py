@@ -102,7 +102,18 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = unquote(urlparse(self.path).path)
-
+        
+        if path == "/api/market/connection":
+            result = TSETMCClient(timeout=15).check_connection()
+            return self.send_json(
+                200 if result["success"] else 502,
+                {
+                    "ok": result["success"],
+                    "market_source": "TSETMC",
+                    "connection": result
+                }
+            )
+            
         if path == "/api/health":
             with DB_LOCK, connect_db() as con:
                 count = con.execute("SELECT COUNT(*) FROM messages").fetchone()[0]
