@@ -17,166 +17,46 @@ class SymbolManager:
 
     MAX_RESPONSE_SIZE = 10 * 1024 * 1024
 
-    # طبقه‌بندی اولیه بر اساس کدها و نمونه‌های مشاهده‌شده
+    # طبقه‌بندی اولیه؛ نیازمند تطبیق نهایی با اطلاعات رسمی ابزارها
     INSTRUMENT_TYPES = {
-        "300": {
-            "category": "سهام عادی",
-            "is_common_stock": True,
-            "status": "initial"
-        },
-        "303": {
-            "category": "سهام عادی",
-            "is_common_stock": True,
-            "status": "initial"
-        },
-        "309": {
-            "category": "سهام عادی",
-            "is_common_stock": True,
-            "status": "initial"
-        },
-        "313": {
-            "category": "سهام عادی",
-            "is_common_stock": True,
-            "status": "initial"
-        },
+        "300": ("سهام عادی", True, "initial"),
+        "303": ("سهام عادی", True, "initial"),
+        "309": ("سهام عادی", True, "initial"),
+        "313": ("سهام عادی", True, "initial"),
 
-        "311": {
-            "category": "اختیار خرید",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "320": {
-            "category": "اختیار خرید",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "312": {
-            "category": "اختیار فروش",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "321": {
-            "category": "اختیار فروش",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "311": ("اختیار خرید", False, "initial"),
+        "320": ("اختیار خرید", False, "initial"),
+        "312": ("اختیار فروش", False, "initial"),
+        "321": ("اختیار فروش", False, "initial"),
 
-        "305": {
-            "category": "صندوق سرمایه‌گذاری",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "315": {
-            "category": "صندوق سرمایه‌گذاری",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "380": {
-            "category": "صندوق کالایی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "305": ("صندوق سرمایه‌گذاری", False, "initial"),
+        "315": ("صندوق سرمایه‌گذاری", False, "initial"),
+        "380": ("صندوق کالایی", False, "initial"),
 
-        "306": {
-            "category": "اوراق مرابحه",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "706": {
-            "category": "اوراق مرابحه دولتی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "208": {
-            "category": "صکوک",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "206": {
-            "category": "اوراق و اسناد مالی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "301": {
-            "category": "اوراق مشارکت",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "306": ("اوراق مرابحه", False, "initial"),
+        "706": ("اوراق مرابحه دولتی", False, "initial"),
+        "208": ("صکوک", False, "initial"),
+        "206": ("اوراق و اسناد مالی", False, "initial"),
+        "301": ("اوراق مشارکت", False, "initial"),
 
-        "304": {
-            "category": "قرارداد آتی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "308": {
-            "category": "سلف استاندارد",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "200": {
-            "category": "سلف موازی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "304": ("قرارداد آتی", False, "initial"),
+        "308": ("سلف استاندارد", False, "initial"),
+        "200": ("سلف موازی", False, "initial"),
 
-        "307": {
-            "category": "امتیاز تسهیلات مسکن",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "701": {
-            "category": "گواهی کالایی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "307": ("امتیاز تسهیلات مسکن", False, "initial"),
+        "701": ("گواهی کالایی", False, "initial"),
 
-        "400": {
-            "category": "حق تقدم یا ابزار مرتبط",
-            "is_common_stock": False,
-            "status": "needs_review"
-        },
-        "403": {
-            "category": "حق تقدم یا ابزار مرتبط",
-            "is_common_stock": False,
-            "status": "needs_review"
-        },
-        "404": {
-            "category": "ابزار بیمه‌ای یا ناشناخته",
-            "is_common_stock": False,
-            "status": "needs_review"
-        },
+        "400": ("حق تقدم یا ابزار مرتبط", False, "needs_review"),
+        "403": ("حق تقدم یا ابزار مرتبط", False, "needs_review"),
+        "404": ("ابزار بیمه‌ای یا ناشناخته", False, "needs_review"),
 
-        "201": {
-            "category": "گواهی ظرفیت",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "210": {
-            "category": "گواهی صرفه‌جویی انرژی",
-            "is_common_stock": False,
-            "status": "initial"
-        },
+        "201": ("گواهی ظرفیت", False, "initial"),
+        "210": ("گواهی صرفه‌جویی انرژی", False, "initial"),
 
-        "801": {
-            "category": "ابزار بازار برق",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "802": {
-            "category": "ابزار بازار برق",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "803": {
-            "category": "ابزار بازار برق",
-            "is_common_stock": False,
-            "status": "initial"
-        },
-        "804": {
-            "category": "ابزار بازار برق",
-            "is_common_stock": False,
-            "status": "initial"
-        }
+        "801": ("ابزار بازار برق", False, "initial"),
+        "802": ("ابزار بازار برق", False, "initial"),
+        "803": ("ابزار بازار برق", False, "initial"),
+        "804": ("ابزار بازار برق", False, "initial"),
     }
 
     def __init__(self, timeout=25):
@@ -302,12 +182,14 @@ class SymbolManager:
                 "classification_status": "unknown"
             }
 
+        category, is_common_stock, status = instrument_type
+
         return {
             "yVal": yval,
             "flow": str(item.get("flow", "نامشخص")),
-            "category": instrument_type["category"],
-            "is_common_stock": instrument_type["is_common_stock"],
-            "classification_status": instrument_type["status"]
+            "category": category,
+            "is_common_stock": is_common_stock,
+            "classification_status": status
         }
 
     def normalize_symbol(self, item):
@@ -350,6 +232,32 @@ class SymbolManager:
             **classification
         }
 
+    @staticmethod
+    def add_report_entry(report, key, normalized):
+        """افزودن یک نماد معتبر به گزارش."""
+
+        if key not in report:
+            report[key] = {
+                "count": 0,
+                "flow_counts": {},
+                "samples": []
+            }
+
+        group = report[key]
+        group["count"] += 1
+
+        flow = normalized["flow"]
+        group["flow_counts"][flow] = (
+            group["flow_counts"].get(flow, 0) + 1
+        )
+
+        if len(group["samples"]) < 3:
+            group["samples"].append({
+                "symbol": normalized["symbol"],
+                "name": normalized["name"],
+                "instrument_code": normalized["instrument_code"]
+            })
+
     def validate_symbols(self, data):
         rows = self.extract_rows(data)
 
@@ -379,48 +287,16 @@ class SymbolManager:
             )
         }
 
-        # گزارش تفصیلی بر اساس کد اصلی yVal
-        classification_report = {}
-
-        # گزارش تجمیعی بر اساس دسته‌بندی
-        category_report = {}
-
         valid = []
         rejected = 0
         duplicates = 0
         seen = set()
 
+        # هر دو گزارش فقط از نمادهای معتبر و یکتا ساخته می‌شوند.
+        classification_report = {}
+        category_report = {}
+
         for item in rows:
-
-            if isinstance(item, dict):
-                yval = str(
-                    item.get("yVal", "نامشخص")
-                ).strip()
-
-                flow = str(
-                    item.get("flow", "نامشخص")
-                ).strip()
-
-                if yval not in classification_report:
-                    classification_report[yval] = {
-                        "count": 0,
-                        "flow_counts": {},
-                        "samples": []
-                    }
-
-                group = classification_report[yval]
-                group["count"] += 1
-
-                group["flow_counts"][flow] = (
-                    group["flow_counts"].get(flow, 0) + 1
-                )
-
-                if len(group["samples"]) < 3:
-                    group["samples"].append({
-                        "symbol": item.get("lva"),
-                        "name": item.get("lvc"),
-                        "instrument_code": item.get("insCode")
-                    })
 
             normalized = self.normalize_symbol(item)
 
@@ -430,6 +306,7 @@ class SymbolManager:
 
             code = normalized["instrument_code"]
 
+            # حذف شناسه‌های تکراری
             if code in seen:
                 duplicates += 1
                 continue
@@ -437,39 +314,42 @@ class SymbolManager:
             seen.add(code)
             valid.append(normalized)
 
-            # ساخت گزارش گروهی از نمادهای معتبر
-            category = normalized["category"]
+            # گزارش بر اساس کد اصلی yVal
+            yval = normalized["yVal"]
 
-            if category not in category_report:
-                category_report[category] = {
-                    "count": 0,
-                    "yVal_codes": [],
-                    "flow_counts": {},
-                    "samples": []
-                }
-
-            category_group = category_report[category]
-            category_group["count"] += 1
-
-            if normalized["yVal"] not in category_group["yVal_codes"]:
-                category_group["yVal_codes"].append(
-                    normalized["yVal"]
-                )
-
-            flow = normalized["flow"]
-
-            category_group["flow_counts"][flow] = (
-                category_group["flow_counts"].get(flow, 0) + 1
+            self.add_report_entry(
+                classification_report,
+                yval,
+                normalized
             )
 
-            if len(category_group["samples"]) < 3:
-                category_group["samples"].append({
-                    "symbol": normalized["symbol"],
-                    "name": normalized["name"],
-                    "instrument_code": code
-                })
+            # گزارش بر اساس گروه ابزار
+            category = normalized["category"]
 
-        # مرتب‌سازی گروه‌ها بر اساس تعداد
+            self.add_report_entry(
+                category_report,
+                category,
+                normalized
+            )
+
+            # ثبت کدهای yVal در گزارش گروهی
+            category_group = category_report[category]
+
+            if "yVal_codes" not in category_group:
+                category_group["yVal_codes"] = []
+
+            if yval not in category_group["yVal_codes"]:
+                category_group["yVal_codes"].append(yval)
+
+        # مرتب‌سازی گزارش‌ها بر اساس تعداد
+        classification_report = dict(
+            sorted(
+                classification_report.items(),
+                key=lambda item: item[1]["count"],
+                reverse=True
+            )
+        )
+
         category_report = dict(
             sorted(
                 category_report.items(),
@@ -478,7 +358,7 @@ class SymbolManager:
             )
         )
 
-        # شمارش سهام عادی و ابزارهای ناشناخته
+        # شمارش وضعیت طبقه‌بندی
         common_stock_count = sum(
             1 for item in valid
             if item["is_common_stock"] is True
@@ -494,6 +374,22 @@ class SymbolManager:
             if item["classification_status"] == "needs_review"
         )
 
+        # کنترل صحت مجموع گزارش‌ها
+        classification_total = sum(
+            group["count"]
+            for group in classification_report.values()
+        )
+
+        category_total = sum(
+            group["count"]
+            for group in category_report.values()
+        )
+
+        reports_consistent = (
+            classification_total == len(valid)
+            and category_total == len(valid)
+        )
+
         return {
             "success": True,
             "source": "TSETMC",
@@ -506,6 +402,10 @@ class SymbolManager:
             "common_stock_count": common_stock_count,
             "unknown_count": unknown_count,
             "needs_review_count": needs_review_count,
+
+            "classification_total": classification_total,
+            "category_total": category_total,
+            "reports_consistent": reports_consistent,
 
             "symbols": valid,
 
@@ -536,4 +436,4 @@ if __name__ == "__main__":
         ensure_ascii=False,
         indent=2
     ))
-    
+            
