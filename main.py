@@ -1,7 +1,7 @@
 
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
-from urllib.parse import urlparse, unquote
+from urllib.parse import urlparse, unquote, parse_qs
 from datetime import datetime, timezone
 import json
 import mimetypes
@@ -11,6 +11,7 @@ import threading
 
 from market_data.tsetmc import TSETMCClient
 from market_data.symbols import SymbolManager
+from market_data.history import HistoryManager
 
 
 BASE = Path(__file__).resolve().parent
@@ -25,11 +26,13 @@ BACKUPS.mkdir(exist_ok=True)
 DB_LOCK = threading.RLock()
 MAX_BODY = 20000
 MAX_MESSAGE = 4000
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 
 
 def now_iso():
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(timezone.utc).isoformat(
+        timespec="seconds"
+    )
 
 
 def connect_db():
@@ -40,10 +43,12 @@ def connect_db():
 
 def init_db():
     with DB_LOCK, connect_db() as con:
+
         con.execute("""
             CREATE TABLE IF NOT EXISTS messages (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                role TEXT NOT NULL CHECK(role IN ('user','assistant')),
+                role TEXT NOT NULL
+                    CHECK(role IN ('user','assistant')),
                 content TEXT NOT NULL,
                 created_at TEXT NOT NULL
             )
@@ -57,6 +62,58 @@ def init_db():
             )
         """)
 
+        # فهرست نمادهای دریافت‌شده از TSETMC
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS market_symbols (
+                instrument_code TEXT PRIMARY KEY,
+                symbol TEXT NOT NULL,
+                name TEXT NOT NULL,
+                yval TEXT,
+                flow TEXT,
+                category TEXT,
+                is_common_stock INTEGER,
+                classification_status TEXT,
+                updated_at TEXT NOT NULL
+            )
+        """)
+
+        # تاریخچه روزانه قیمت
+        con.execute("""
+            CREATE TABLE IF NOT EXISTS history_prices (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                instrument_code TEXT NOT NULL,
+                trade_date TEXT NOT NULL,
+
+                closing_price REAL,
+                last_price REAL,
+                min_price REAL,
+                max_price REAL,
+                yesterday_price REAL,
+                first_price REAL,
+
+                trade_count REAL,
+                q_tot_tran_5j REAL,
+                total_value REAL,
+
+                raw_json TEXT,
+                fetched_at TEXT NOT NULL,
+
+                UNIQUE(instrument_code, trade_date),
+
+                FOREIGN KEY(instrument_code)
+                REFERENCES market_symbols(instrument_code)
+            )
+        """)
+
+        con.execute("""
+            CREATE INDEX IF NOT EXISTS
+            idx_history_code_date
+            ON history_prices(
+                instrument_code,
+                trade_date
+            )
+        """)
+
         con.execute("PRAGMA journal_mode=WAL")
         con.commit()
 
@@ -64,10 +121,138 @@ def init_db():
 def save_message(role, content):
     with DB_LOCK, connect_db() as con:
         con.execute(
-            "INSERT INTO messages(role, content, created_at) VALUES(?,?,?)",
+            """
+            INSERT INTO messages(role, content, created_at)
+            VALUES(?,?,?)
+            """,
             (role, content, now_iso())
         )
         con.commit()
+
+
+def save_symbols(symbols):
+    """ذخیره یا به‌روزرسانی فهرست ابزارهای بازار."""
+
+    stamp = now_iso()
+
+    with DB_LOCK, connect_db() as con:
+
+        for item in symbols:
+
+            is_common = item.get("is_common_stock")
+
+            if is_common is True:
+                is_common = 1
+            elif is_common is False:
+                is_common = 0
+            else:
+                is_common = None
+
+            con.execute("""
+                INSERT INTO market_symbols (
+                    instrument_code,
+                    symbol,
+                    name,
+                    yval,
+                    flow,
+                    category,
+                    is_common_stock,
+                    classification_status,
+                    updated_at
+                )
+                VALUES (?,?,?,?,?,?,?,?,?)
+
+                ON CONFLICT(instrument_code)
+                DO UPDATE SET
+                    symbol=excluded.symbol,
+                    name=excluded.name,
+                    yval=excluded.yval,
+                    flow=excluded.flow,
+                    category=excluded.category,
+                    is_common_stock=excluded.is_common_stock,
+                    classification_status=
+                        excluded.classification_status,
+                    updated_at=excluded.updated_at
+            """, (
+                item.get("instrument_code"),
+                item.get("symbol"),
+                item.get("name"),
+                item.get("yVal"),
+                item.get("flow"),
+                item.get("category"),
+                is_common,
+                item.get("classification_status"),
+                stamp
+            ))
+
+        con.commit()
+
+
+def save_history_records(ins_code, records):
+    """ذخیره تاریخچه با جلوگیری از ثبت رکورد تکراری."""
+
+    inserted = 0
+    updated = 0
+
+    with DB_LOCK, connect_db() as con:
+
+        for item in records:
+
+            cursor = con.execute("""
+                INSERT INTO history_prices (
+                    instrument_code,
+                    trade_date,
+                    closing_price,
+                    last_price,
+                    min_price,
+                    max_price,
+                    yesterday_price,
+                    first_price,
+                    trade_count,
+                    q_tot_tran_5j,
+                    total_value,
+                    raw_json,
+                    fetched_at
+                )
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+
+                ON CONFLICT(instrument_code, trade_date)
+                DO UPDATE SET
+                    closing_price=excluded.closing_price,
+                    last_price=excluded.last_price,
+                    min_price=excluded.min_price,
+                    max_price=excluded.max_price,
+                    yesterday_price=excluded.yesterday_price,
+                    first_price=excluded.first_price,
+                    trade_count=excluded.trade_count,
+                    q_tot_tran_5j=excluded.q_tot_tran_5j,
+                    total_value=excluded.total_value,
+                    raw_json=excluded.raw_json,
+                    fetched_at=excluded.fetched_at
+            """, (
+                ins_code,
+                item["trade_date"],
+                item.get("closing_price"),
+                item.get("last_price"),
+                item.get("min_price"),
+                item.get("max_price"),
+                item.get("yesterday_price"),
+                item.get("first_price"),
+                item.get("trade_count"),
+                item.get("q_tot_tran_5j"),
+                item.get("total_value"),
+                item.get("raw_json"),
+                now_iso()
+            ))
+
+            if cursor.rowcount:
+                # SQLite در UPSERT مقدار rowcount را 1 برمی‌گرداند.
+                # برای آمار دقیق، بعداً از تعداد کل رکوردها استفاده می‌کنیم.
+                inserted += 1
+
+        con.commit()
+
+    return inserted
 
 
 def make_backup():
@@ -76,6 +261,7 @@ def make_backup():
 
     with DB_LOCK:
         source = connect_db()
+
         try:
             dest = sqlite3.connect(target)
             source.backup(dest)
@@ -123,11 +309,17 @@ class Handler(BaseHTTPRequestHandler):
         )
 
     def do_GET(self):
-        path = unquote(urlparse(self.path).path)
 
-        # دریافت و بررسی فهرست نمادهای بورس
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        query = parse_qs(parsed.query)
+
+        # دریافت و ذخیره فهرست نمادهای بازار
         if path == "/api/market/symbols":
-            result = SymbolManager(timeout=25).get_symbols()
+
+            result = SymbolManager(
+                timeout=25
+            ).get_symbols()
 
             if not result.get("success"):
                 return self.send_json(502, {
@@ -136,17 +328,27 @@ class Handler(BaseHTTPRequestHandler):
                     "result": result
                 })
 
+            symbols = result.get("symbols", [])
+
+            save_symbols(symbols)
+
             return self.send_json(200, {
                 "ok": True,
                 "market_source": "TSETMC",
 
-                # آمار دریافت و اعتبارسنجی
-                "total_received": result.get("total_received", 0),
-                "valid_count": result.get("valid_count", 0),
-                "rejected_count": result.get("rejected_count", 0),
-                "duplicate_count": result.get("duplicate_count", 0),
+                "total_received": result.get(
+                    "total_received", 0
+                ),
+                "valid_count": result.get(
+                    "valid_count", 0
+                ),
+                "rejected_count": result.get(
+                    "rejected_count", 0
+                ),
+                "duplicate_count": result.get(
+                    "duplicate_count", 0
+                ),
 
-                # آمار طبقه‌بندی ابزارهای بازار
                 "common_stock_count": result.get(
                     "common_stock_count", 0
                 ),
@@ -157,27 +359,31 @@ class Handler(BaseHTTPRequestHandler):
                     "needs_review_count", 0
                 ),
 
-                # گزارش تعداد هر دسته
+                "classification_total": result.get(
+                    "classification_total", 0
+                ),
+                "category_total": result.get(
+                    "category_total", 0
+                ),
+                "reports_consistent": result.get(
+                    "reports_consistent", False
+                ),
+
                 "category_report": result.get(
                     "category_report", {}
                 ),
-
-                # گزارش کدهای شناسایی‌شده
                 "classification_report": result.get(
                     "classification_report", {}
                 ),
 
-                # نمونه‌ای از نمادهای دریافتی
-                "preview": result.get("symbols", [])[:10],
-
-                # اطلاعات عیب‌یابی
+                "preview": symbols[:10],
                 "debug": result.get("debug"),
-
                 "checked_at": result.get("checked_at")
             })
 
-        # بررسی ارتباط با منبع اطلاعات بازار
+        # بررسی ارتباط با TSETMC
         if path == "/api/market/connection":
+
             result = TSETMCClient(
                 timeout=15
             ).check_connection()
@@ -191,11 +397,109 @@ class Handler(BaseHTTPRequestHandler):
                 }
             )
 
-        # بررسی سلامت سامانه
-        if path == "/api/health":
+        # وضعیت موتور تاریخچه
+        if path == "/api/market/history/status":
+
             with DB_LOCK, connect_db() as con:
+
+                symbol_count = con.execute("""
+                    SELECT COUNT(*)
+                    FROM market_symbols
+                    WHERE is_common_stock = 1
+                """).fetchone()[0]
+
+                history_symbols = con.execute("""
+                    SELECT COUNT(DISTINCT instrument_code)
+                    FROM history_prices
+                """).fetchone()[0]
+
+                history_count = con.execute("""
+                    SELECT COUNT(*)
+                    FROM history_prices
+                """).fetchone()[0]
+
+                latest = con.execute("""
+                    SELECT MAX(trade_date)
+                    FROM history_prices
+                """).fetchone()[0]
+
+            return self.send_json(200, {
+                "ok": True,
+                "common_stock_symbols": symbol_count,
+                "symbols_with_history": history_symbols,
+                "total_history_records": history_count,
+                "latest_trade_date": latest,
+                "storage": "sqlite"
+            })
+
+        # مشاهده تاریخچه قیمت یک نماد
+        if path == "/api/history/prices":
+
+            ins_code = str(
+                query.get("ins_code", [""])[0]
+            ).strip()
+
+            if not ins_code.isdigit():
+                return self.send_json(400, {
+                    "ok": False,
+                    "error": "کد نماد نامعتبر است."
+                })
+
+            try:
+                limit = int(
+                    query.get("limit", ["500"])[0]
+                )
+            except ValueError:
+                limit = 500
+
+            limit = max(1, min(limit, 5000))
+
+            with DB_LOCK, connect_db() as con:
+
+                symbol = con.execute("""
+                    SELECT symbol, name, category
+                    FROM market_symbols
+                    WHERE instrument_code = ?
+                """, (ins_code,)).fetchone()
+
+                rows = con.execute("""
+                    SELECT
+                        trade_date,
+                        closing_price,
+                        last_price,
+                        min_price,
+                        max_price,
+                        yesterday_price,
+                        first_price,
+                        trade_count,
+                        q_tot_tran_5j,
+                        total_value,
+                        fetched_at
+                    FROM history_prices
+                    WHERE instrument_code = ?
+                    ORDER BY trade_date DESC
+                    LIMIT ?
+                """, (ins_code, limit)).fetchall()
+
+            return self.send_json(200, {
+                "ok": True,
+                "instrument_code": ins_code,
+                "symbol": dict(symbol) if symbol else None,
+                "count": len(rows),
+                "records": [dict(row) for row in rows]
+            })
+
+        # سلامت سامانه
+        if path == "/api/health":
+
+            with DB_LOCK, connect_db() as con:
+
                 count = con.execute(
                     "SELECT COUNT(*) FROM messages"
+                ).fetchone()[0]
+
+                price_count = con.execute(
+                    "SELECT COUNT(*) FROM history_prices"
                 ).fetchone()[0]
 
             return self.send_json(200, {
@@ -203,24 +507,28 @@ class Handler(BaseHTTPRequestHandler):
                 "app": "BEHZAD AI",
                 "version": VERSION,
                 "storage": "sqlite",
-                "saved_messages": count
+                "saved_messages": count,
+                "saved_price_records": price_count
             })
 
         # تاریخچه پیام‌ها
         if path == "/api/history":
+
             with DB_LOCK, connect_db() as con:
-                rows = con.execute(
-                    "SELECT id, role, content, created_at "
-                    "FROM messages ORDER BY id ASC"
-                ).fetchall()
+                rows = con.execute("""
+                    SELECT id, role, content, created_at
+                    FROM messages
+                    ORDER BY id ASC
+                """).fetchall()
 
             return self.send_json(200, {
                 "ok": True,
-                "messages": [dict(r) for r in rows]
+                "messages": [dict(row) for row in rows]
             })
 
         # تنظیمات
         if path == "/api/settings":
+
             with DB_LOCK, connect_db() as con:
                 rows = con.execute(
                     "SELECT key, value FROM settings"
@@ -229,12 +537,14 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(200, {
                 "ok": True,
                 "settings": {
-                    r["key"]: r["value"] for r in rows
+                    row["key"]: row["value"]
+                    for row in rows
                 }
             })
 
         # فهرست پشتیبان‌ها
         if path == "/api/backups":
+
             items = []
 
             for p in sorted(
@@ -251,7 +561,7 @@ class Handler(BaseHTTPRequestHandler):
                 "backups": items
             })
 
-        # نمایش فایل‌های رابط کاربری
+        # فایل‌های رابط کاربری
         relative = (
             "index.html"
             if path == "/"
@@ -265,7 +575,10 @@ class Handler(BaseHTTPRequestHandler):
 
         target = (STATIC / relative).resolve()
 
-        if not target.is_relative_to(STATIC) or not target.is_file():
+        if (
+            not target.is_relative_to(STATIC)
+            or not target.is_file()
+        ):
             return self.send_error(404)
 
         data = target.read_bytes()
@@ -284,190 +597,86 @@ class Handler(BaseHTTPRequestHandler):
         return self.send_data(200, data, kind)
 
     def do_POST(self):
+
         path = urlparse(self.path).path
 
         try:
             payload = self.read_json()
 
-            # دریافت پیام آزمایشی
-            if path == "/api/chat":
-                message = str(
-                    payload.get("message", "")
+            # دریافت و ذخیره تاریخچه یک نماد
+            if path == "/api/market/history/fetch":
+
+                ins_code = str(
+                    payload.get("ins_code", "")
                 ).strip()
 
-                if not message or len(message) > MAX_MESSAGE:
-                    return self.send_json(400, {
-                        "ok": False,
-                        "error": "متن پیام نامعتبر است."
-                    })
-
-                save_message("user", message)
-
-                reply = (
-                    "پیام شما با موفقیت در سرور BEHZAD AI "
-                    "دریافت و ذخیره شد.\n\n"
-                    "این پاسخ هنوز آزمایشی است و از مدل "
-                    "هوش مصنوعی زنده تولید نشده است."
-                )
-
-                save_message("assistant", reply)
-
-                return self.send_json(200, {
-                    "ok": True,
-                    "mode": "local-test",
-                    "reply": reply
-                })
-
-            # ایجاد نسخه پشتیبان
-            if path == "/api/backup":
-                target = make_backup()
-
-                return self.send_json(200, {
-                    "ok": True,
-                    "name": target.name,
-                    "size": target.stat().st_size
-                })
-
-            # بازیابی نسخه پشتیبان
-            if path == "/api/restore":
-                name = str(payload.get("name", ""))
-
                 if (
-                    not name
-                    or Path(name).name != name
-                    or not name.endswith(".sqlite3")
+                    not ins_code.isdigit()
+                    or not 5 <= len(ins_code) <= 25
                 ):
                     return self.send_json(400, {
                         "ok": False,
-                        "error": "نام فایل پشتیبان نامعتبر است."
+                        "error": "کد شناسایی نماد نامعتبر است."
                     })
 
-                source = (BACKUPS / name).resolve()
+                # نماد باید قبلاً از فهرست بازار دریافت شده باشد.
+                with DB_LOCK, connect_db() as con:
 
-                if (
-                    not source.is_relative_to(BACKUPS.resolve())
-                    or not source.is_file()
-                ):
+                    symbol = con.execute("""
+                        SELECT *
+                        FROM market_symbols
+                        WHERE instrument_code = ?
+                    """, (ins_code,)).fetchone()
+
+                if symbol is None:
                     return self.send_json(404, {
                         "ok": False,
-                        "error": "فایل پشتیبان پیدا نشد."
+                        "error": (
+                            "نماد در فهرست ذخیره‌شده وجود ندارد. "
+                            "ابتدا فهرست نمادهای بازار را دریافت کنید."
+                        )
                     })
 
-                # ایجاد نسخه ایمنی پیش از بازیابی
-                make_backup()
+                if symbol["is_common_stock"] != 1:
+                    return self.send_json(409, {
+                        "ok": False,
+                        "error": (
+                            "این ابزار در طبقه سهام عادی "
+                            "قرار ندارد."
+                        ),
+                        "category": symbol["category"]
+                    })
 
-                check = sqlite3.connect(source)
+                result = HistoryManager(
+                    timeout=30
+                ).fetch(ins_code)
 
-                try:
-                    result = check.execute(
-                        "SELECT name FROM sqlite_master "
-                        "WHERE type='table' "
-                        "AND name IN ('messages','settings')"
-                    ).fetchall()
+                if not result.get("success"):
+                    return self.send_json(502, {
+                        "ok": False,
+                        "market_source": "TSETMC",
+                        "error": result.get("error"),
+                        "ins_code": ins_code
+                    })
 
-                    tables = {r[0] for r in result}
+                records = result.get("records", [])
 
-                    if not {
-                        "messages",
-                        "settings"
-                    }.issubset(tables):
-                        return self.send_json(400, {
-                            "ok": False,
-                            "error": "ساختار فایل پشتیبان معتبر نیست."
-                        })
-
-                finally:
-                    check.close()
-
-                with DB_LOCK:
-                    live = connect_db()
-                    backup_db = sqlite3.connect(source)
-
-                    try:
-                        backup_db.backup(live)
-
-                    finally:
-                        backup_db.close()
-                        live.close()
-
-                return self.send_json(200, {
-                    "ok": True,
-                    "message": "بازیابی اطلاعات انجام شد."
-                })
-
-            # ذخیره تنظیمات پروژه
-            if path == "/api/settings":
-                note = str(
-                    payload.get("project_note", "")
+                save_history_records(
+                    ins_code,
+                    records
                 )
 
-                if len(note) > 5000:
-                    return self.send_json(400, {
-                        "ok": False,
-                        "error": "یادداشت بیش از حد طولانی است."
-                    })
-
                 with DB_LOCK, connect_db() as con:
-                    con.execute(
-                        "INSERT INTO settings(key,value,updated_at) "
-                        "VALUES('project_note',?,?) "
-                        "ON CONFLICT(key) DO UPDATE SET "
-                        "value=excluded.value, "
-                        "updated_at=excluded.updated_at",
-                        (note, now_iso())
-                    )
+                    total = con.execute("""
+                        SELECT COUNT(*)
+                        FROM history_prices
+                        WHERE instrument_code = ?
+                    """, (ins_code,)).fetchone()[0]
 
-                    con.commit()
+                    latest = con.execute("""
+                        SELECT MAX(trade_date)
+                        FROM history_prices
+                        WHERE instrument_code = ?
+                    """, (ins_code,)).fetchone()[0]
 
-                return self.send_json(200, {
-                    "ok": True,
-                    "saved_at": now_iso()
-                })
-
-            return self.send_error(404)
-
-        except (
-            ValueError,
-            UnicodeDecodeError,
-            json.JSONDecodeError
-        ):
-            return self.send_json(400, {
-                "ok": False,
-                "error": "درخواست نامعتبر است."
-            })
-
-        except sqlite3.Error:
-            return self.send_json(500, {
-                "ok": False,
-                "error": "خطا در ذخیره‌سازی پایگاه داده."
-            })
-
-    def log_message(self, fmt, *args):
-        print("[BEHZAD_AI]", fmt % args)
-
-
-# راه‌اندازی پایگاه داده
-init_db()
-
-# ایجاد نسخه پشتیبان هنگام راه‌اندازی
-if DB_PATH.exists() and DB_PATH.stat().st_size > 0:
-    try:
-        make_backup()
-    except sqlite3.Error:
-        pass
-
-
-# اجرای سرور
-host = "0.0.0.0"
-port = int(os.environ.get("PORT", "10000"))
-
-server = ThreadingHTTPServer(
-    (host, port),
-    Handler
-)
-
-print(f"BEHZAD AI v{VERSION} SERVER STARTED")
-print(f"Open: http://{host}:{port}")
-
-server.serve_forever()
-    
+                return self.send_json(200, 
