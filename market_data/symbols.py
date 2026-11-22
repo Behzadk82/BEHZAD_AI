@@ -168,6 +168,25 @@ class SymbolManager:
                 "message": "ساختار پاسخ API قابل شناسایی نیست."
             }
 
+        first = rows[0]
+
+        debug = {
+            "first_row_type": type(first).__name__,
+            "first_row_keys": (
+                list(first.keys())[:50]
+                if isinstance(first, dict)
+                else []
+            ),
+            "first_row_sample": (
+                {
+                    str(k): str(v)[:80]
+                    for k, v in list(first.items())[:12]
+                }
+                if isinstance(first, dict)
+                else str(first)[:200]
+            )
+        }
+
         valid = []
         rejected = 0
         duplicates = 0
@@ -197,6 +216,7 @@ class SymbolManager:
             "rejected_count": rejected,
             "duplicate_count": duplicates,
             "symbols": valid,
+            "debug": debug,
             "checked_at": datetime.now(
                 timezone.utc
             ).isoformat()
@@ -219,4 +239,4 @@ if __name__ == "__main__":
         ensure_ascii=False,
         indent=2
     ))
-                    
+    
