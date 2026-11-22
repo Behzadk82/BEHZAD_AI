@@ -6,10 +6,8 @@ from datetime import datetime, timezone
 import json
 import mimetypes
 import os
-import shutil
 import sqlite3
 import threading
-import zipfile
 
 from market_data.tsetmc import TSETMCClient
 from market_data.symbols import SymbolManager
@@ -141,19 +139,41 @@ class Handler(BaseHTTPRequestHandler):
             return self.send_json(200, {
                 "ok": True,
                 "market_source": "TSETMC",
-                "total_received": result["total_received"],
-                "valid_count": result["valid_count"],
-                "rejected_count": result["rejected_count"],
-                "duplicate_count": result["duplicate_count"],
-                "preview": result["symbols"][:10],
-                "debug": result.get("debug"),
 
-                # گزارش دسته‌بندی انواع ابزارهای بازار
+                # آمار دریافت و اعتبارسنجی
+                "total_received": result.get("total_received", 0),
+                "valid_count": result.get("valid_count", 0),
+                "rejected_count": result.get("rejected_count", 0),
+                "duplicate_count": result.get("duplicate_count", 0),
+
+                # آمار طبقه‌بندی ابزارهای بازار
+                "common_stock_count": result.get(
+                    "common_stock_count", 0
+                ),
+                "unknown_count": result.get(
+                    "unknown_count", 0
+                ),
+                "needs_review_count": result.get(
+                    "needs_review_count", 0
+                ),
+
+                # گزارش تعداد هر دسته
+                "category_report": result.get(
+                    "category_report", {}
+                ),
+
+                # گزارش کدهای شناسایی‌شده
                 "classification_report": result.get(
                     "classification_report", {}
                 ),
 
-                "checked_at": result["checked_at"]
+                # نمونه‌ای از نمادهای دریافتی
+                "preview": result.get("symbols", [])[:10],
+
+                # اطلاعات عیب‌یابی
+                "debug": result.get("debug"),
+
+                "checked_at": result.get("checked_at")
             })
 
         # بررسی ارتباط با منبع اطلاعات بازار
@@ -450,3 +470,4 @@ print(f"BEHZAD AI v{VERSION} SERVER STARTED")
 print(f"Open: http://{host}:{port}")
 
 server.serve_forever()
+    
