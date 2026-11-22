@@ -222,8 +222,8 @@ if DB_PATH.exists() and DB_PATH.stat().st_size > 0:
     except sqlite3.Error:
         pass
 
-host = os.environ.get("HOST", "127.0.0.1")
-port = int(os.environ.get("PORT", "8000"))
+host = "0.0.0.0"
+port = int(os.environ.get("PORT", "10000"))
 server = ThreadingHTTPServer((host, port), Handler)
 print(f"BEHZAD AI v{VERSION} SERVER STARTED")
 print(f"Open: http://{host}:{port}")
