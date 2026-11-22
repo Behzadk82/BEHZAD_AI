@@ -103,7 +103,26 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = unquote(urlparse(self.path).path)
-        
+                if path == "/api/market/symbols":
+            result = SymbolManager(timeout=25).get_symbols()
+
+            if not result.get("success"):
+                return self.send_json(502, {
+                    "ok": False,
+                    "market_source": "TSETMC",
+                    "result": result
+                })
+
+            return self.send_json(200, {
+                "ok": True,
+                "market_source": "TSETMC",
+                "total_received": result["total_received"],
+                "valid_count": result["valid_count"],
+                "rejected_count": result["rejected_count"],
+                "duplicate_count": result["duplicate_count"],
+                "preview": result["symbols"][:10],
+                "checked_at": result["checked_at"]
+            })
         if path == "/api/market/connection":
             result = TSETMCClient(timeout=15).check_connection()
             return self.send_json(
