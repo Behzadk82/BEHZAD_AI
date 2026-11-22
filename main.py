@@ -147,6 +147,12 @@ class Handler(BaseHTTPRequestHandler):
                 "duplicate_count": result["duplicate_count"],
                 "preview": result["symbols"][:10],
                 "debug": result.get("debug"),
+
+                # گزارش دسته‌بندی انواع ابزارهای بازار
+                "classification_report": result.get(
+                    "classification_report", {}
+                ),
+
                 "checked_at": result["checked_at"]
             })
 
@@ -444,4 +450,3 @@ print(f"BEHZAD AI v{VERSION} SERVER STARTED")
 print(f"Open: http://{host}:{port}")
 
 server.serve_forever()
-        
