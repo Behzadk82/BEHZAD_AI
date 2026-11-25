@@ -222,3 +222,25 @@ footer {
 .setup-table th { padding: 10px 8px; text-align: right; color: var(--gold); border-bottom: 1px solid var(--border); }
 .setup-table td { padding: 8px; border-bottom: 1px solid var(--border); }
 .setup-table tr:hover { background: var(--bg-hover); }
+
+/* گروه‌بندی اندیکاتورها */
+.indicator-group {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+.indicator-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.indicator-group h3 {
+    color: var(--gold);
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border);
+}
+.setup-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.setup-table th { padding: 10px 8px; text-align: right; color: var(--gold); border-bottom: 1px solid var(--border); }
+.setup-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+.setup-table tr:hover { background: var(--bg-hover); }

@@ -8,7 +8,6 @@ const statusText = document.getElementById("status-text");
 const latestCard = document.getElementById("latest-card");
 const indicatorsCard = document.getElementById("indicators-card");
 const chartCard = document.getElementById("chart-card");
-
 let priceChart = null;
 let allSymbols = [];
 
@@ -63,24 +62,137 @@ async function loadSymbol(insCode) {
         changeEl.textContent = (change >= 0 ? "+" : "") + fmt(change);
         changeEl.className = "value " + (change > 0 ? "positive" : change < 0 ? "negative" : "neutral");
 
+        // ==========================================
+        // نمایش همه ۳۳ اندیکاتور
+        // ==========================================
         if (data.latest_indicators) {
-            indicatorsCard.style.display = "block";
             const ind = data.latest_indicators;
-            const setVal = (id, val, cls = "") => {
-                const el = document.getElementById(id);
-                el.textContent = fmt(val, 2);
-                el.className = "value " + cls;
-            };
-            setVal("ma5", ind.ma5); setVal("ma10", ind.ma10); setVal("ma20", ind.ma20); setVal("ma50", ind.ma50);
-            const rsiClass = ind.rsi14 > 70 ? "negative" : ind.rsi14 < 30 ? "positive" : "neutral";
-            setVal("rsi14", ind.rsi14, rsiClass);
-            setVal("macd", ind.macd); setVal("macd-signal", ind.macd_signal); setVal("bb-upper", ind.bb_upper); setVal("bb-lower", ind.bb_lower);
+            renderIndicators(ind);
         }
 
         await renderChart(insCode);
         setStatus(`✅ ${data.symbol.symbol} بارگذاری شد`, "ok");
     } catch (e) { setStatus(`❌ خطا: ${e.message}`, "error"); }
     finally { loadBtn.disabled = false; }
+}
+
+function renderIndicators(ind) {
+    // بخش اصلی
+    indicatorsCard.style.display = "block";
+    
+    // گروه‌بندی اندیکاتورها
+    const groups = {
+        "میانگین‌های متحرک": [
+            { label: "MA5", value: ind.ma5, decimals: 2 },
+            { label: "MA10", value: ind.ma10, decimals: 2 },
+            { label: "MA20", value: ind.ma20, decimals: 2 },
+            { label: "MA50", value: ind.ma50, decimals: 2 },
+        ],
+        "مومنتوم": [
+            { label: "RSI14", value: ind.rsi14, decimals: 1, classify: "rsi" },
+            { label: "Stoch %K", value: ind.stoch_k, decimals: 1, classify: "stoch" },
+            { label: "Stoch %D", value: ind.stoch_d, decimals: 1, classify: "stoch" },
+            { label: "Williams %R", value: ind.williams_r, decimals: 1 },
+            { label: "ROC12", value: ind.roc12, decimals: 2 },
+        ],
+        "MACD": [
+            { label: "MACD", value: ind.macd, decimals: 2 },
+            { label: "Signal", value: ind.macd_signal, decimals: 2 },
+            { label: "Histogram", value: ind.macd_histogram, decimals: 2, classify: "hist" },
+        ],
+        "بولینگر": [
+            { label: "BB Upper", value: ind.bb_upper, decimals: 0 },
+            { label: "BB Middle", value: ind.bb_middle, decimals: 0 },
+            { label: "BB Lower", value: ind.bb_lower, decimals: 0 },
+        ],
+        "نوسان و روند": [
+            { label: "ATR14", value: ind.atr14, decimals: 2 },
+            { label: "ADX14", value: ind.adx14, decimals: 1, classify: "adx" },
+            { label: "+DI", value: ind.plus_di, decimals: 1 },
+            { label: "-DI", value: ind.minus_di, decimals: 1 },
+            { label: "PSAR", value: ind.psar, decimals: 0 },
+        ],
+        "حجم": [
+            { label: "OBV", value: ind.obv, decimals: 0 },
+            { label: "VWAP", value: ind.vwap, decimals: 0 },
+            { label: "MFI14", value: ind.mfi14, decimals: 1, classify: "mfi" },
+        ],
+        "CCI": [
+            { label: "CCI20", value: ind.cci20, decimals: 1, classify: "cci" },
+        ],
+        "Ichimoku": [
+            { label: "Tenkan", value: ind.ichimoku_tenkan, decimals: 0 },
+            { label: "Kijun", value: ind.ichimoku_kijun, decimals: 0 },
+            { label: "Senkou A", value: ind.ichimoku_senkou_a, decimals: 0 },
+            { label: "Senkou B", value: ind.ichimoku_senkou_b, decimals: 0 },
+        ],
+        "فیبوناچی": [
+            { label: "Fib 23.6%", value: ind.fib_236, decimals: 0 },
+            { label: "Fib 38.2%", value: ind.fib_382, decimals: 0 },
+            { label: "Fib 50.0%", value: ind.fib_500, decimals: 0 },
+            { label: "Fib 61.8%", value: ind.fib_618, decimals: 0 },
+            { label: "Fib 78.6%", value: ind.fib_786, decimals: 0 },
+        ],
+    };
+
+    // روند
+    const trendDiv = document.getElementById("trend-info");
+    if (trendDiv) {
+        const dir = ind.trend_direction || "SIDEWAYS";
+        const str = ind.trend_strength || "WEAK";
+        const dirFa = { UP: "صعودی", DOWN: "نزولی", SIDEWAYS: "خنثی" }[dir] || dir;
+        const strFa = { STRONG: "قوی", MEDIUM: "متوسط", WEAK: "ضعیف" }[str] || str;
+        const cls = dir === "UP" ? "positive" : dir === "DOWN" ? "negative" : "neutral";
+        trendDiv.innerHTML = `<span class="label">روند:</span> <span class="value ${cls}">${dirFa}</span> | <span class="label">قدرت:</span> <span class="value">${strFa}</span>`;
+    }
+
+    // رندر گروه‌ها
+    const container = document.getElementById("indicator-groups");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    for (const [groupName, items] of Object.entries(groups)) {
+        const groupDiv = document.createElement("div");
+        groupDiv.className = "indicator-group";
+        groupDiv.innerHTML = `<h3>${groupName}</h3>`;
+        
+        const grid = document.createElement("div");
+        grid.className = "info-grid";
+        
+        items.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "info-item";
+            
+            let cls = "";
+            if (item.classify === "rsi" && item.value !== null) {
+                if (item.value > 70) cls = "negative";
+                else if (item.value < 30) cls = "positive";
+            } else if (item.classify === "stoch" && item.value !== null) {
+                if (item.value > 80) cls = "negative";
+                else if (item.value < 20) cls = "positive";
+            } else if (item.classify === "hist" && item.value !== null) {
+                cls = item.value > 0 ? "positive" : "negative";
+            } else if (item.classify === "adx" && item.value !== null) {
+                if (item.value > 25) cls = "positive";
+                else if (item.value < 20) cls = "neutral";
+            } else if (item.classify === "mfi" && item.value !== null) {
+                if (item.value > 80) cls = "negative";
+                else if (item.value < 20) cls = "positive";
+            } else if (item.classify === "cci" && item.value !== null) {
+                if (item.value > 100) cls = "negative";
+                else if (item.value < -100) cls = "positive";
+            }
+            
+            div.innerHTML = `
+                <span class="label">${item.label}</span>
+                <span class="value ${cls}">${fmt(item.value, item.decimals)}</span>
+            `;
+            grid.appendChild(div);
+        });
+        
+        groupDiv.appendChild(grid);
+        container.appendChild(groupDiv);
+    }
 }
 
 async function renderChart(insCode) {
@@ -122,7 +234,7 @@ symbolSelect.addEventListener("change", () => { if (symbolSelect.value) loadSymb
 const smartBtn = document.getElementById("smart-btn");
 if (smartBtn) {
     smartBtn.addEventListener("click", async () => {
-        setStatus("⏳ در حال اسکن کل بازار (ممکن است چند ثانیه طول بکشد)...");
+        setStatus("⏳ در حال اسکن کل بازار...");
         smartBtn.disabled = true;
         smartBtn.textContent = "⏳ در حال اسکن...";
         try {

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><h1>📊 BEHZAD_AI</h1><p class="subtitle">داشبورد تحلیل بورس</p></header>
+<header><h1>📊 BEHZAD_AI</h1><p class="subtitle">داشبورد تحلیل حرفه‌ای بورس</p></header>
 <main>
   <section class="controls">
     <div class="control-group">
@@ -21,76 +21,10 @@
     <button id="load-btn">📈 بارگذاری</button>
   </section>
 
-  <!-- بخش موتور هوشمند -->
   <section class="card">
     <h2>🧠 موتور جستجوی هوشمند</h2>
-    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">
-      با یک کلیک، تمام ۵۰۰ نماد بازار بررسی و بهترین‌ها با ترکیب چند اندیکاتور پیدا می‌شوند.
-    </p>
     <button id="smart-btn" style="width: 100%;">🚀 اسکن کل بازار</button>
     <div id="smart-results" style="margin-top: 16px;"></div>
-  </section>
-
-  <!-- بخش لیست ترکیب اندیکاتورها -->
-  <section class="card">
-    <h2>📋 راهنمای ترکیب اندیکاتورها (استراتژی‌های ما)</h2>
-    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 12px;">
-      این جدول نشان می‌دهد ما در اسکنر از چه ترکیب‌هایی با چه متغیرهایی استفاده می‌کنیم تا نقاط ورود دقیق‌تر پیدا شوند.
-    </p>
-    <table class="setup-table" style="font-size: 12px;">
-      <thead>
-        <tr>
-          <th>استراتژی / ترکیب</th>
-          <th>متغیرها (پارامترهای دقیق)</th>
-          <th>سیگنال خرید (ورود)</th>
-          <th>سیگنال فروش (خروج)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><b>مومنتوم ترکیبی</b></td>
-          <td>RSI(14), MACD(12,26,9)</td>
-          <td>RSI < 35 <b>و</b> MACD > Signal</td>
-          <td>RSI > 70 <b>یا</b> MACD < Signal</td>
-        </tr>
-        <tr>
-          <td><b>روند صعودی قوی</b></td>
-          <td>MA(20), MA(50), قیمت</td>
-          <td>قیمت > MA20 <b>و</b> MA20 > MA50</td>
-          <td>قیمت < MA50</td>
-        </tr>
-        <tr>
-          <td><b>انفجار قیمتی (اسکوییز)</b></td>
-          <td>Bollinger(20,2), حجم(20 روزه)</td>
-          <td>پهنای باند < 15% <b>و</b> حجم > 1.5x میانگین</td>
-          <td>قیمت به باند بالایی برسد</td>
-        </tr>
-        <tr>
-          <td><b>برگشت از حمایت</b></td>
-          <td>Bollinger(20,2), RSI(14)</td>
-          <td>قیمت نزدیک باند پایین (2%) <b>و</b> RSI < 40</td>
-          <td>RSI > 60</td>
-        </tr>
-        <tr>
-          <td><b>کراس طلایی MACD</b></td>
-          <td>MACD(12,26,9)</td>
-          <td>MACD دیروز < Signal <b>و</b> MACD امروز > Signal</td>
-          <td>MACD < Signal</td>
-        </tr>
-        <tr>
-          <td><b>کراس MA</b></td>
-          <td>MA(5), MA(20)</td>
-          <td>MA5 دیروز < MA20 <b>و</b> MA5 امروز > MA20</td>
-          <td>MA5 < MA20</td>
-        </tr>
-        <tr>
-          <td><b>حجم غیرعادی</b></td>
-          <td>حجم امروز vs میانگین 20 روزه</td>
-          <td>حجم > 2x میانگین</td>
-          <td>-</td>
-        </tr>
-      </tbody>
-    </table>
   </section>
 
   <section class="card" id="latest-card" style="display:none;">
@@ -101,31 +35,22 @@
       <div class="info-item"><span class="label">حجم</span><span class="value" id="volume">-</span></div>
       <div class="info-item"><span class="label">تعداد معاملات</span><span class="value" id="trades">-</span></div>
     </div>
+    <div id="trend-info" style="margin-top: 16px; padding: 12px; background: #0a1a2c; border-radius: 10px;"></div>
   </section>
 
   <section class="card" id="indicators-card" style="display:none;">
-    <h2>اندیکاتورهای تکنیکال</h2>
-    <div class="info-grid">
-      <div class="info-item"><span class="label">MA5</span><span class="value" id="ma5">-</span></div>
-      <div class="info-item"><span class="label">MA10</span><span class="value" id="ma10">-</span></div>
-      <div class="info-item"><span class="label">MA20</span><span class="value" id="ma20">-</span></div>
-      <div class="info-item"><span class="label">MA50</span><span class="value" id="ma50">-</span></div>
-      <div class="info-item"><span class="label">RSI14</span><span class="value" id="rsi14">-</span></div>
-      <div class="info-item"><span class="label">MACD</span><span class="value" id="macd">-</span></div>
-      <div class="info-item"><span class="label">MACD Signal</span><span class="value" id="macd-signal">-</span></div>
-      <div class="info-item"><span class="label">BB Upper</span><span class="value" id="bb-upper">-</span></div>
-      <div class="info-item"><span class="label">BB Lower</span><span class="value" id="bb-lower">-</span></div>
-    </div>
+    <h2>📊 اندیکاتورهای پیشرفته</h2>
+    <div id="indicator-groups"></div>
   </section>
 
   <section class="card" id="chart-card" style="display:none;">
-    <h2>نمودار قیمت (آخرین ۱۰۰ روز)</h2>
+    <h2>📈 نمودار قیمت (آخرین ۱۰۰ روز)</h2>
     <div class="chart-container"><canvas id="price-chart"></canvas></div>
   </section>
 
   <section class="status" id="status"><span id="status-text">آماده</span></section>
 </main>
-<footer><p>BEHZAD_AI · نسخه 0.6.0 · داشبورد</p></footer>
+<footer><p>BEHZAD_AI · نسخه 0.9.0 · داشبورد حرفه‌ای</p></footer>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="app.js"></script>
 </body>

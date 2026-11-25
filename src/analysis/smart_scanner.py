@@ -1,9 +1,8 @@
 # src/analysis/smart_scanner.py
-# موتور جستجوی خودکار و امتیازدهی ترکیبی - نسخه نهایی
+# موتور جستجوی خودکار با ۷ استراتژی + ۴ فیلتر محافظ (Risk Filters)
 
 import sqlite3
 import sys
-import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
@@ -15,111 +14,150 @@ class SmartScanner:
         self.con.row_factory = sqlite3.Row
 
     def close(self):
-        if self.con:
-            self.con.close()
+        if self.con: self.con.close()
 
     def _get_all_codes(self):
-        rows = self.con.execute("SELECT DISTINCT ins_code FROM indicators").fetchall()
-        return [r["ins_code"] for r in rows]
+        return [r["ins_code"] for r in self.con.execute("SELECT DISTINCT ins_code FROM indicators").fetchall()]
 
-    def _get_latest(self, ins_code):
-        row = self.con.execute("""
+    def _get_history(self, ins_code, limit=260):
+        # ۲۶۰ روز معاملاتی حدوداً معادل یک سال است (برای محاسبه سقف سالانه)
+        rows = self.con.execute("""
             SELECT p.date, p.price_close, p.volume,
                    i.ma5, i.ma20, i.ma50, i.rsi14,
-                   i.macd, i.macd_signal, i.macd_histogram,
-                   i.bb_upper, i.bb_middle, i.bb_lower
+                   i.macd, i.macd_signal, i.bb_upper, i.bb_lower
             FROM price_history p
             JOIN indicators i ON p.ins_code = i.ins_code AND p.date = i.date
             WHERE p.ins_code = ?
-            ORDER BY p.date DESC LIMIT 1
-        """, (ins_code,)).fetchone()
+            ORDER BY p.date DESC LIMIT ?
+        """, (ins_code, limit)).fetchall()
         
         sym = self.con.execute("SELECT symbol, name FROM symbols WHERE ins_code = ?", (ins_code,)).fetchone()
-        
-        if not row or not sym: return None
+        if not rows or not sym: return None
         
         return {
-            "ins_code": ins_code, "symbol": sym["symbol"], "name": sym["name"], "date": row["date"],
-            "close": row["price_close"], "volume": row["volume"],
-            "ma5": row["ma5"], "ma20": row["ma20"], "ma50": row["ma50"], "rsi14": row["rsi14"],
-            "macd": row["macd"], "macd_signal": row["macd_signal"], "macd_hist": row["macd_histogram"],
-            "bb_upper": row["bb_upper"], "bb_middle": row["bb_middle"], "bb_lower": row["bb_lower"],
+            "symbol": sym["symbol"], 
+            "name": sym["name"],
+            "rows": [dict(r) for r in reversed(rows)]
         }
 
-    def _get_volume_avg(self, ins_code, days=20):
-        rows = self.con.execute("SELECT volume FROM price_history WHERE ins_code = ? ORDER BY date DESC LIMIT ?", (ins_code, days)).fetchall()
-        if not rows: return 0
-        return sum([r["volume"] for r in rows]) / len(rows)
-
-    def scan(self, min_score=40, limit=50):
-        """اسکن خودکار کل بازار و برگرداندن بهترین‌ها"""
+    def scan(self, min_score=30):
         codes = self._get_all_codes()
         results = []
         
         for code in codes:
-            d = self._get_latest(code)
-            if not d: continue
+            data = self._get_history(code)
+            if not data or len(data["rows"]) < 30: continue
+            
+            rows = data["rows"]
+            last = rows[-1]
+            prev = rows[-2]
+            
+            # --- بررسی اینکه قیمت چقدر از سقف یک ساله فاصله داره ---
+            year_high = max(r["price_close"] for r in rows)
+            price_near_high = (last["price_close"] / year_high) >= 0.95 if year_high else False
             
             score = 0
             reasons = []
-            rsi = d["rsi14"]
             
-            # --- ۱. ترکیب RSI و MACD (تشخیص واگرایی و مومنتوم) ---
-            if rsi is not None and d["macd"] is not None and d["macd_signal"] is not None:
-                if rsi < 35 and d["macd"] > d["macd_signal"]:
-                    score += 35
-                    reasons.append(f"RSI={rsi:.1f} + MACD صعودی (سیگنال قوی)")
-                elif rsi < 45 and d["macd"] > d["macd_signal"]:
-                    score += 20
-                    reasons.append(f"RSI={rsi:.1f} + MACD صعودی")
-                elif rsi > 70:
-                    score -= 20
-                    reasons.append(f"RSI={rsi:.1f} (اشباع خرید)")
+            # ==========================================
+            # بخش اول: امتیازهای مثبت (استراتژی‌ها)
+            # ==========================================
+            
+            # ۱. مومنتوم ترکیبی
+            if last["rsi14"] and last["macd"] and last["macd_signal"]:
+                if last["rsi14"] < 35 and last["macd"] > last["macd_signal"]:
+                    score += 30
+                    reasons.append(f"RSI({last['rsi14']:.0f}) + MACD صعودی")
+                elif last["rsi14"] < 45 and last["macd"] > last["macd_signal"]:
+                    score += 15
+                    reasons.append(f"RSI({last['rsi14']:.0f}) + MACD صعودی")
 
-            # --- ۲. ترکیب MA و قیمت (روند) ---
-            if d["ma20"] and d["ma50"]:
-                if d["close"] > d["ma20"] > d["ma50"]:
+            # ۲. روند صعودی
+            if last["ma20"] and last["ma50"]:
+                if last["price_close"] > last["ma20"] > last["ma50"]:
                     score += 25
-                    reasons.append("روند صعودی کامل (MA20 > MA50)")
-                elif d["close"] > d["ma50"]:
+                    reasons.append("روند کامل (MA20 > MA50)")
+                elif last["price_close"] > last["ma50"]:
                     score += 10
                     reasons.append("بالای MA50")
 
-            # --- ۳. ترکیب بولینگر و حجم (انفجار قیمتی) ---
-            vol_avg = self._get_volume_avg(code)
-            if vol_avg > 0 and d["bb_upper"] and d["bb_lower"]:
-                bb_width = (d["bb_upper"] - d["bb_lower"]) / d["bb_middle"] if d["bb_middle"] else 0
-                if bb_width < 0.15 and d["volume"] > vol_avg * 1.5:
+            # ۳. انفجار قیمتی
+            if last["bb_upper"] and last["bb_lower"]:
+                bb_width = (last["bb_upper"] - last["bb_lower"]) / last["price_close"]
+                avg_vol = sum(r["volume"] for r in rows[-20:]) / 20
+                if bb_width < 0.15 and last["volume"] > avg_vol * 1.5:
                     score += 20
-                    reasons.append("فشردگی بولینگر + حجم بالا (آماده انفجار)")
-                elif d["close"] <= d["bb_lower"] * 1.02:
-                    score += 10
-                    reasons.append("نزدیک کف بولینگر")
+                    reasons.append("فشردگی بولینگر + حجم")
 
-            # محدود کردن امتیاز
-            score = max(0, min(100, score))
+            # ۴. برگشت از حمایت
+            if last["bb_lower"] and last["rsi14"]:
+                if last["price_close"] <= last["bb_lower"] * 1.02 and last["rsi14"] < 40:
+                    score += 20
+                    reasons.append("برگشت از حمایت (نزدیک کف)")
+
+            # ۵. کراس طلایی MACD
+            if last["macd"] and last["macd_signal"] and prev["macd"] and prev["macd_signal"]:
+                if prev["macd"] <= prev["macd_signal"] and last["macd"] > last["macd_signal"]:
+                    score += 25
+                    reasons.append("کراس طلایی MACD")
+
+            # ۶. کراس MA
+            if last["ma5"] and last["ma20"] and prev["ma5"] and prev["ma20"]:
+                if prev["ma5"] <= prev["ma20"] and last["ma5"] > last["ma20"]:
+                    score += 25
+                    reasons.append("کراس طلایی MA5/MA20")
+
+            # ۷. حجم غیرعادی
+            avg_vol_19 = sum(r["volume"] for r in rows[-20:-1]) / 19
+            if avg_vol_19 > 0 and last["volume"] > avg_vol_19 * 2:
+                score += 15
+                reasons.append(f"حجم {last['volume']/avg_vol_19:.1f}x")
+
+            # ==========================================
+            # بخش دوم: فیلترهای محافظ (Risk Filters)
+            # ==========================================
             
+            # فیلتر ۱: نزدیک سقف یک ساله (خطر اصلاح)
+            if price_near_high:
+                score -= 30
+                reasons.append("⚠️ نزدیک سقف سالانه")
+
+            # فیلتر ۲: RSI خیلی بالا (اشباع خرید)
+            if last["rsi14"] and last["rsi14"] > 75:
+                score -= 25
+                reasons.append("⚠️ RSI اشباع خرید")
+            elif last["rsi14"] and last["rsi14"] > 70:
+                score -= 15
+                reasons.append("⚠️ RSI بالا")
+
+            # فیلتر ۳: رشد بیش از حد در ۲۰ روز
+            if len(rows) >= 20:
+                price_20d_ago = rows[-20]["price_close"]
+                if price_20d_ago > 0:
+                    growth = (last["price_close"] - price_20d_ago) / price_20d_ago * 100
+                    if growth > 40:
+                        score -= 25
+                        reasons.append(f"⚠️ رشد {growth:.0f}% در ۲۰ روز")
+
+            # فیلتر ۴: فاصله از MA20
+            if last["ma20"] and last["price_close"]:
+                gap = (last["price_close"] - last["ma20"]) / last["ma20"] * 100
+                if gap > 25:
+                    score -= 20
+                    reasons.append(f"⚠️ {gap:.0f}% بالای MA20")
+
+            score = max(0, min(100, score))
+
             if score >= min_score:
                 results.append({
-                    "ins_code": code, "symbol": d["symbol"], "name": d["name"], "close": d["close"],
-                    "score": score, "reasons": reasons, "rsi": round(rsi, 1) if rsi else None,
-                    "volume_ratio": round(d["volume"] / vol_avg, 2) if vol_avg else None,
+                    "ins_code": code,
+                    "symbol": data["symbol"],
+                    "name": data["name"],
+                    "close": last["price_close"],
+                    "score": score,
+                    "reasons": reasons,
+                    "rsi": round(last["rsi14"], 1) if last["rsi14"] else None,
                 })
 
         results.sort(key=lambda x: x["score"], reverse=True)
-        return results[:limit]
-
-if __name__ == "__main__":
-    print("=" * 70)
-    print("SMART SCANNER - موتور جستجوی خودکار")
-    print("=" * 70)
-    scanner = SmartScanner()
-    results = scanner.scan(min_score=40, limit=30)
-    scanner.close()
-    
-    print(f"تعداد {len(results)} نماد مستعد پیدا شد:\n")
-    print(f"{'#':>3} | {'نماد':12s} | {'امتیاز':>5s} | {'RSI':>6s} | دلایل")
-    print("-" * 90)
-    for i, r in enumerate(results, 1):
-        reasons = ", ".join(r["reasons"][:2])
-        print(f"{i:>3} | {r['symbol'][:12]:12s} | {r['score']:>5d} | {str(r['rsi']):>6s} | {reasons}")
+        return results

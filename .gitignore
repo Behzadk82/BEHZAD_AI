@@ -1,21 +1,32 @@
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 .venv/
 venv/
 
-# Database (local only)
+# Database files (do not commit)
 data/*.db
+data/*.db-shm
+data/*.db-wal
 data/*.sqlite3
+data/*.sqlite3-shm
+data/*.sqlite3-wal
 
-# Large raw files
+# Large raw data (too many files)
+data/raw/
 data/market_watch_raw.json
 data/history_*_raw.json
 
-# Keep these useful files
+# Keep useful data
 !data/.gitkeep
 !data/symbols.json
-!data/history_FOLAD.json
+!data/top_setups.json
+!data/market_breakdown.json
+
+# Logs
+*.log
+data/downloader.log
 
 # IDE
 .vscode/
@@ -29,7 +40,3 @@ Thumbs.db
 # Backups
 *.bak
 *.backup
-
-# Cache and logs
-data/cache/
-data/logs/
