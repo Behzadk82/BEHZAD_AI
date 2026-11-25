@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEHZAD_AI Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>📊 BEHZAD_AI</h1>
+  <p class="subtitle">داشبورد تحلیل بورس</p>
+</header>
+
+<main>
+  <!-- Search + Symbol Selection -->
+  <section class="controls">
+    <div class="control-group">
+      <label>جستجوی نماد:</label>
+      <input type="text" id="search-input" placeholder="مثلاً فولاد، خودرو، شپنا...">
+    </div>
+    <div class="control-group">
+      <label>انتخاب نماد:</label>
+      <select id="symbol-select">
+        <option value="">-- انتخاب --</option>
+      </select>
+    </div>
+    <button id="load-btn">📈 بارگذاری</button>
+  </section>
+
+  <!-- Latest Info Card -->
+  <section class="card" id="latest-card" style="display:none;">
+    <h2 id="symbol-title">-</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <span class="label">قیمت پایانی</span>
+        <span class="value" id="price-close">-</span>
+      </div>
+      <div class="info-item">
+        <span class="label">تغییر</span>
+        <span class="value" id="price-change">-</span>
+      </div>
+      <div class="info-item">
+        <span class="label">حجم</span>
+        <span class="value" id="volume">-</span>
+      </div>
+      <div class="info-item">
+        <span class="label">تعداد معاملات</span>
+        <span class="value" id="trades">-</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Indicators Card -->
+  <section class="card" id="indicators-card" style="display:none;">
+    <h2>اندیکاتورهای تکنیکال</h2>
+    <div class="info-grid">
+      <div class="info-item"><span class="label">MA5</span><span class="value" id="ma5">-</span></div>
+      <div class="info-item"><span class="label">MA10</span><span class="value" id="ma10">-</span></div>
+      <div class="info-item"><span class="label">MA20</span><span class="value" id="ma20">-</span></div>
+      <div class="info-item"><span class="label">MA50</span><span class="value" id="ma50">-</span></div>
+      <div class="info-item"><span class="label">RSI14</span><span class="value" id="rsi14">-</span></div>
+      <div class="info-item"><span class="label">MACD</span><span class="value" id="macd">-</span></div>
+      <div class="info-item"><span class="label">MACD Signal</span><span class="value" id="macd-signal">-</span></div>
+      <div class="info-item"><span class="label">BB Upper</span><span class="value" id="bb-upper">-</span></div>
+      <div class="info-item"><span class="label">BB Lower</span><span class="value" id="bb-lower">-</span></div>
+    </div>
+  </section>
+
+  <!-- Chart Card -->
+  <section class="card" id="chart-card" style="display:none;">
+    <h2>نمودار قیمت (آخرین ۱۰۰ روز)</h2>
+    <div class="chart-container">
+      <canvas id="price-chart"></canvas>
+    </div>
+  </section>
+
+  <!-- Status -->
+  <section class="status" id="status">
+    <span id="status-text">آماده</span>
+  </section>
+</main>
+
+<footer>
+  <p>BEHZAD_AI · نسخه 0.4.0 · داشبورد</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
