@@ -4,19 +4,32 @@ __pycache__/
 .venv/
 venv/
 
-data/*.json
+# Database (local only)
 data/*.db
 data/*.sqlite3
 
+# Large raw files
+data/market_watch_raw.json
+data/history_*_raw.json
+
+# Keep these useful files
 !data/.gitkeep
 !data/symbols.json
+!data/history_FOLAD.json
 
+# IDE
 .vscode/
 .idea/
 *.swp
 
+# OS
 .DS_Store
 Thumbs.db
 
+# Backups
 *.bak
 *.backup
+
+# Cache and logs
+data/cache/
+data/logs/
