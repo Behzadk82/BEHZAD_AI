@@ -217,3 +217,8 @@ footer {
   .chart-container { height: 280px; }
   .info-item .value { font-size: 15px; }
 }
+
+.setup-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+.setup-table th { padding: 10px 8px; text-align: right; color: var(--gold); border-bottom: 1px solid var(--border); }
+.setup-table td { padding: 8px; border-bottom: 1px solid var(--border); }
+.setup-table tr:hover { background: var(--bg-hover); }

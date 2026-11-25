@@ -1,0 +1,537 @@
+[
+  {
+    "ins_code": "15521712617204216",
+    "symbol": "سفارس",
+    "name": "سيمان فارس و خوزستان",
+    "date": 20261124,
+    "close": 34810.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.5x avg",
+      "BB squeeze"
+    ],
+    "rsi": 59.0,
+    "macd": 134.2,
+    "volume_ratio": 2.47
+  },
+  {
+    "ins_code": "32469128621155736",
+    "symbol": "مثقال",
+    "name": "صندوق س.كالاي آگاه",
+    "date": 20261124,
+    "close": 204139.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.5x avg",
+      "BB squeeze"
+    ],
+    "rsi": 58.3,
+    "macd": -2209.3,
+    "volume_ratio": 1.51
+  },
+  {
+    "ins_code": "34144395039913458",
+    "symbol": "عيار",
+    "name": "صندوق طلاي عيار مفيد",
+    "date": 20261124,
+    "close": 701646.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.2x avg",
+      "BB squeeze"
+    ],
+    "rsi": 58.1,
+    "macd": -8174.71,
+    "volume_ratio": 2.19
+  },
+  {
+    "ins_code": "38544104313215500",
+    "symbol": "جواهر",
+    "name": "صندوق س.كالاي دناي زاگرس",
+    "date": 20261124,
+    "close": 94061.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.1x avg",
+      "BB squeeze"
+    ],
+    "rsi": 58.7,
+    "macd": -971.96,
+    "volume_ratio": 2.12
+  },
+  {
+    "ins_code": "53633583359422860",
+    "symbol": "ميراث",
+    "name": "صندوق س.كالاي كوروش",
+    "date": 20261124,
+    "close": 15358.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 3.9x avg",
+      "BB squeeze"
+    ],
+    "rsi": 59.9,
+    "macd": -172.62,
+    "volume_ratio": 3.94
+  },
+  {
+    "ins_code": "58514988269776425",
+    "symbol": "گنج",
+    "name": "صندوق س. سيماي كاردان",
+    "date": 20261124,
+    "close": 216508.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.7x avg",
+      "BB squeeze"
+    ],
+    "rsi": 57.3,
+    "macd": -2462.72,
+    "volume_ratio": 1.68
+  },
+  {
+    "ins_code": "64795751499397128",
+    "symbol": "زمرد",
+    "name": "صندوق س.كالاي زمرد بيدار",
+    "date": 20261124,
+    "close": 34759.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 3.1x avg",
+      "BB squeeze"
+    ],
+    "rsi": 57.4,
+    "macd": -386.8,
+    "volume_ratio": 3.14
+  },
+  {
+    "ins_code": "71595553356620707",
+    "symbol": "كاخ",
+    "name": "صندوق س كاخ-املاك",
+    "date": 20261124,
+    "close": 13229.0,
+    "score": 75,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 3.1x avg",
+      "BB squeeze"
+    ],
+    "rsi": 59.7,
+    "macd": 53.84,
+    "volume_ratio": 3.05
+  },
+  {
+    "ins_code": "10568944722570445",
+    "symbol": "سصفها",
+    "name": "سيمان‌اصفهان‌",
+    "date": 20261124,
+    "close": 1855.0,
+    "score": 70,
+    "reasons": [
+      "RSI=15.1 (oversold)",
+      "MACD > Signal",
+      "Price > MA20",
+      "BB squeeze"
+    ],
+    "rsi": 15.1,
+    "macd": -1514.32,
+    "volume_ratio": 1.0
+  },
+  {
+    "ins_code": "12390706505809150",
+    "symbol": "گوهر",
+    "name": "صندوق س.كالاي كيان",
+    "date": 20261124,
+    "close": 15077.0,
+    "score": 70,
+    "reasons": [
+      "RSI=12.4 (oversold)",
+      "MACD > Signal",
+      "Price > MA20",
+      "BB squeeze"
+    ],
+    "rsi": 12.4,
+    "macd": -41241.42,
+    "volume_ratio": 1.12
+  },
+  {
+    "ins_code": "34718633636164421",
+    "symbol": "كمند",
+    "name": "صندوق س. با درآمد ثابت كمند",
+    "date": 20261124,
+    "close": 10167.0,
+    "score": 70,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "BB squeeze",
+      "Near BB lower"
+    ],
+    "rsi": 57.4,
+    "macd": -0.87,
+    "volume_ratio": 0.73
+  },
+  {
+    "ins_code": "14230681955555738",
+    "symbol": "آرام",
+    "name": "صندوق س شاخصي آرام مفيد",
+    "date": 20261124,
+    "close": 54364.0,
+    "score": 65,
+    "reasons": [
+      "RSI=63.7 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 3.4x avg",
+      "BB squeeze"
+    ],
+    "rsi": 63.7,
+    "macd": 835.45,
+    "volume_ratio": 3.38
+  },
+  {
+    "ins_code": "17038760170440118",
+    "symbol": "سمهريز",
+    "name": "صنعتي معدني سيمان تجارت مهريز",
+    "date": 20261124,
+    "close": 27190.0,
+    "score": 65,
+    "reasons": [
+      "RSI=62.9 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.5x avg",
+      "BB squeeze"
+    ],
+    "rsi": 62.9,
+    "macd": 232.43,
+    "volume_ratio": 1.55
+  },
+  {
+    "ins_code": "31116454489395198",
+    "symbol": "تاديكو",
+    "name": "س.كشت ودام صنايع لبني تامين",
+    "date": 20261124,
+    "close": 9520.0,
+    "score": 65,
+    "reasons": [
+      "RSI=65.3 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.7x avg",
+      "BB squeeze"
+    ],
+    "rsi": 65.3,
+    "macd": 294.71,
+    "volume_ratio": 2.72
+  },
+  {
+    "ins_code": "35331248532537562",
+    "symbol": "اردستان",
+    "name": "سيمان اردستان",
+    "date": 20261124,
+    "close": 35250.0,
+    "score": 65,
+    "reasons": [
+      "RSI=63.3 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.7x avg",
+      "BB squeeze"
+    ],
+    "rsi": 63.3,
+    "macd": 347.37,
+    "volume_ratio": 2.73
+  },
+  {
+    "ins_code": "40505767672724777",
+    "symbol": "رانفور",
+    "name": "خدمات‌انفورماتيك‌",
+    "date": 20261124,
+    "close": 5500.0,
+    "score": 65,
+    "reasons": [
+      "RSI=68.7 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 5.4x avg",
+      "BB squeeze"
+    ],
+    "rsi": 68.7,
+    "macd": 86.18,
+    "volume_ratio": 5.38
+  },
+  {
+    "ins_code": "41529644566373651",
+    "symbol": "هانيكو",
+    "name": "هامون نايزه",
+    "date": 20261124,
+    "close": 10040.0,
+    "score": 65,
+    "reasons": [
+      "RSI=65.1 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.3x avg",
+      "BB squeeze"
+    ],
+    "rsi": 65.1,
+    "macd": 320.88,
+    "volume_ratio": 2.33
+  },
+  {
+    "ins_code": "41625340598198551",
+    "symbol": "بساما",
+    "name": "بيمه سامان",
+    "date": 20261124,
+    "close": 11340.0,
+    "score": 65,
+    "reasons": [
+      "RSI=36.1 (near oversold)",
+      "MACD > Signal",
+      "Volume 4.6x avg",
+      "BB squeeze"
+    ],
+    "rsi": 36.1,
+    "macd": -360.49,
+    "volume_ratio": 4.61
+  },
+  {
+    "ins_code": "46700660505281786",
+    "symbol": "طلا",
+    "name": "صندوق س. كالاي پارسيان",
+    "date": 20261124,
+    "close": 179785.0,
+    "score": 65,
+    "reasons": [
+      "RSI=10.3 (oversold)",
+      "MACD > Signal",
+      "Volume 2.4x avg"
+    ],
+    "rsi": 10.3,
+    "macd": -342457.08,
+    "volume_ratio": 2.42
+  },
+  {
+    "ins_code": "50002340308486819",
+    "symbol": "تاپكيش",
+    "name": "تجارت الكترونيك پارسيان كيش",
+    "date": 20261124,
+    "close": 2864.0,
+    "score": 65,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 3.1x avg"
+    ],
+    "rsi": 58.2,
+    "macd": 60.41,
+    "volume_ratio": 3.06
+  },
+  {
+    "ins_code": "51200575796028449",
+    "symbol": "سافرون",
+    "name": "صندوق س.كالاي گنجينه زمين",
+    "date": 20261124,
+    "close": 72639.0,
+    "score": 65,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA20",
+      "Volume 4.0x avg",
+      "BB squeeze"
+    ],
+    "rsi": 45.7,
+    "macd": -2112.14,
+    "volume_ratio": 3.99
+  },
+  {
+    "ins_code": "52232388263291380",
+    "symbol": "واميد",
+    "name": "گروه مديريت سرمايه گذاري اميد",
+    "date": 20261124,
+    "close": 6550.0,
+    "score": 65,
+    "reasons": [
+      "RSI=64.2 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.0x avg",
+      "BB squeeze"
+    ],
+    "rsi": 64.2,
+    "macd": 67.07,
+    "volume_ratio": 1.97
+  },
+  {
+    "ins_code": "54419429862704331",
+    "symbol": "فروس",
+    "name": "فروسيليس‌ ايران‌",
+    "date": 20261124,
+    "close": 1640.0,
+    "score": 65,
+    "reasons": [
+      "RSI=33.0 (near oversold)",
+      "MACD > Signal",
+      "Price > MA20",
+      "Volume 1.9x avg"
+    ],
+    "rsi": 33.0,
+    "macd": -364.64,
+    "volume_ratio": 1.86
+  },
+  {
+    "ins_code": "55376739611383226",
+    "symbol": "خوشه",
+    "name": "ص.س.صندوق در صندوق خوشه گندم",
+    "date": 20261124,
+    "close": 34525.0,
+    "score": 65,
+    "reasons": [
+      "RSI=63.5 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.8x avg",
+      "BB squeeze"
+    ],
+    "rsi": 63.5,
+    "macd": 103.29,
+    "volume_ratio": 1.76
+  },
+  {
+    "ins_code": "59486059679335017",
+    "symbol": "وپترو",
+    "name": "سرمايه‌گذاري صنايع پتروشيمي‌",
+    "date": 20261124,
+    "close": 76960.0,
+    "score": 65,
+    "reasons": [
+      "RSI=61.0 (getting hot)",
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.0x avg",
+      "BB squeeze"
+    ],
+    "rsi": 61.0,
+    "macd": 111.81,
+    "volume_ratio": 2.0
+  },
+  {
+    "ins_code": "64358061873294912",
+    "symbol": "چفيبر",
+    "name": "توليد فيبر ايران‌",
+    "date": 20261124,
+    "close": 8070.0,
+    "score": 65,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.8x avg"
+    ],
+    "rsi": 55.5,
+    "macd": 110.22,
+    "volume_ratio": 1.8
+  },
+  {
+    "ins_code": "6905737326614124",
+    "symbol": "رپويا",
+    "name": "پويا",
+    "date": 20261124,
+    "close": 5740.0,
+    "score": 65,
+    "reasons": [
+      "RSI=15.0 (oversold)",
+      "MACD > Signal",
+      "Volume 4.3x avg"
+    ],
+    "rsi": 15.0,
+    "macd": -12854.43,
+    "volume_ratio": 4.27
+  },
+  {
+    "ins_code": "71758511001096824",
+    "symbol": "غصينو",
+    "name": "صنعتي مينو",
+    "date": 20261124,
+    "close": 6240.0,
+    "score": 65,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 2.0x avg"
+    ],
+    "rsi": 57.2,
+    "macd": -21.5,
+    "volume_ratio": 2.01
+  },
+  {
+    "ins_code": "778253364357513",
+    "symbol": "وبملت",
+    "name": "بانك ملت",
+    "date": 20261124,
+    "close": 1538.0,
+    "score": 65,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "Volume 1.7x avg"
+    ],
+    "rsi": 58.5,
+    "macd": 10.5,
+    "volume_ratio": 1.74
+  },
+  {
+    "ins_code": "14800142337291217",
+    "symbol": "فولاي",
+    "name": "صنايع فولاد آلياژي يزد",
+    "date": 20261124,
+    "close": 5730.0,
+    "score": 60,
+    "reasons": [
+      "MACD > Signal",
+      "Price > MA50",
+      "Price > MA20",
+      "BB squeeze"
+    ],
+    "rsi": 59.0,
+    "macd": 29.36,
+    "volume_ratio": 0.8
+  }
+]
