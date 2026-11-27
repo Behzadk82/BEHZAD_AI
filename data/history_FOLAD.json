@@ -60968,5 +60968,18 @@
     "volume": 1229163887.0,
     "value": 6472190059130.0,
     "trades": 13181.0
+  },
+  {
+    "date": 20261125,
+    "price_close": 5420.0,
+    "price_last": 5420.0,
+    "price_min": 5340.0,
+    "price_max": 5420.0,
+    "price_first": 5380.0,
+    "price_yesterday": 5270.0,
+    "price_change": 150.0,
+    "volume": 1160510213.0,
+    "value": 6285533272870.0,
+    "trades": 11213.0
   }
 ]

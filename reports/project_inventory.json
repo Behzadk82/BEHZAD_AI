@@ -1,0 +1,6332 @@
+{
+  "generated_at": "2026-11-27T00:19:32",
+  "root": "/storage/emulated/0/BEHZAD_AI",
+  "file_count": 1566,
+  "python_count": 42,
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 497
+    },
+    {
+      "path": "README.md",
+      "bytes": 442
+    },
+    {
+      "path": "README_FA.md",
+      "bytes": 2013
+    },
+    {
+      "path": "ROADMAP.md",
+      "bytes": 14067
+    },
+    {
+      "path": "ROADMAP_V2.md",
+      "bytes": 1993
+    },
+    {
+      "path": "dashboard/app.js",
+      "bytes": 6477
+    },
+    {
+      "path": "dashboard/index.html",
+      "bytes": 2522
+    },
+    {
+      "path": "dashboard/style.css",
+      "bytes": 4772
+    },
+    {
+      "path": "data/.gitkeep",
+      "bytes": 0
+    },
+    {
+      "path": "data/batch_checkpoint.json",
+      "bytes": 37363
+    },
+    {
+      "path": "data/behzad_ai.db",
+      "bytes": 1953595392
+    },
+    {
+      "path": "data/behzad_ai.sqlite3",
+      "bytes": 131072
+    },
+    {
+      "path": "data/downloader.log",
+      "bytes": 437
+    },
+    {
+      "path": "data/history_FOLAD.json",
+      "bytes": 1367065
+    },
+    {
+      "path": "data/history_FOLAD_raw.json",
+      "bytes": 1629291
+    },
+    {
+      "path": "data/market_breakdown.json",
+      "bytes": 1328
+    },
+    {
+      "path": "data/market_watch_raw.json",
+      "bytes": 3833871
+    },
+    {
+      "path": "data/raw/10024128313803797.json",
+      "bytes": 869955
+    },
+    {
+      "path": "data/raw/10063040211859748.json",
+      "bytes": 159873
+    },
+    {
+      "path": "data/raw/10098482000925815.json",
+      "bytes": 39852
+    },
+    {
+      "path": "data/raw/10120557300120078.json",
+      "bytes": 1885121
+    },
+    {
+      "path": "data/raw/10138686402267043.json",
+      "bytes": 3996
+    },
+    {
+      "path": "data/raw/10171945867136336.json",
+      "bytes": 541699
+    },
+    {
+      "path": "data/raw/10174386380040655.json",
+      "bytes": 24774
+    },
+    {
+      "path": "data/raw/10236455588057352.json",
+      "bytes": 449742
+    },
+    {
+      "path": "data/raw/10411249540376641.json",
+      "bytes": 366185
+    },
+    {
+      "path": "data/raw/10414047745064283.json",
+      "bytes": 18352
+    },
+    {
+      "path": "data/raw/10458396610199724.json",
+      "bytes": 259755
+    },
+    {
+      "path": "data/raw/10535841469368706.json",
+      "bytes": 99426
+    },
+    {
+      "path": "data/raw/10553433097056151.json",
+      "bytes": 8944
+    },
+    {
+      "path": "data/raw/10568944722570445.json",
+      "bytes": 1602433
+    },
+    {
+      "path": "data/raw/10627702606465419.json",
+      "bytes": 12288
+    },
+    {
+      "path": "data/raw/10654052153538617.json",
+      "bytes": 1128691
+    },
+    {
+      "path": "data/raw/10712607014123911.json",
+      "bytes": 193744
+    },
+    {
+      "path": "data/raw/1077437802997900.json",
+      "bytes": 4645
+    },
+    {
+      "path": "data/raw/10795723506538053.json",
+      "bytes": 757064
+    },
+    {
+      "path": "data/raw/10869855467299545.json",
+      "bytes": 174037
+    },
+    {
+      "path": "data/raw/10979459081222858.json",
+      "bytes": 132562
+    },
+    {
+      "path": "data/raw/11129387075131725.json",
+      "bytes": 557948
+    },
+    {
+      "path": "data/raw/11258722998911897.json",
+      "bytes": 1099740
+    },
+    {
+      "path": "data/raw/11285885633824855.json",
+      "bytes": 339043
+    },
+    {
+      "path": "data/raw/11326461864120062.json",
+      "bytes": 218411
+    },
+    {
+      "path": "data/raw/11403770140000603.json",
+      "bytes": 902260
+    },
+    {
+      "path": "data/raw/11427387039523955.json",
+      "bytes": 255414
+    },
+    {
+      "path": "data/raw/11427939669935844.json",
+      "bytes": 1095644
+    },
+    {
+      "path": "data/raw/114312662654155.json",
+      "bytes": 514317
+    },
+    {
+      "path": "data/raw/11432067920374603.json",
+      "bytes": 1807218
+    },
+    {
+      "path": "data/raw/11540236653207133.json",
+      "bytes": 147428
+    },
+    {
+      "path": "data/raw/1155806316021163.json",
+      "bytes": 3056
+    },
+    {
+      "path": "data/raw/11560002870991149.json",
+      "bytes": 735580
+    },
+    {
+      "path": "data/raw/11622051128546106.json",
+      "bytes": 1959607
+    },
+    {
+      "path": "data/raw/1169855882201639.json",
+      "bytes": 17508
+    },
+    {
+      "path": "data/raw/11731629977819447.json",
+      "bytes": 86107
+    },
+    {
+      "path": "data/raw/11773403764702778.json",
+      "bytes": 1894935
+    },
+    {
+      "path": "data/raw/11786546204100821.json",
+      "bytes": 17589
+    },
+    {
+      "path": "data/raw/118005828419984.json",
+      "bytes": 151711
+    },
+    {
+      "path": "data/raw/11964419322927535.json",
+      "bytes": 1834616
+    },
+    {
+      "path": "data/raw/11996454048142959.json",
+      "bytes": 144074
+    },
+    {
+      "path": "data/raw/12041217376571987.json",
+      "bytes": 1373672
+    },
+    {
+      "path": "data/raw/12080092165422516.json",
+      "bytes": 486011
+    },
+    {
+      "path": "data/raw/12082148685985823.json",
+      "bytes": 13189
+    },
+    {
+      "path": "data/raw/12099854399524813.json",
+      "bytes": 10024
+    },
+    {
+      "path": "data/raw/12303918642491681.json",
+      "bytes": 1245419
+    },
+    {
+      "path": "data/raw/12329519546621752.json",
+      "bytes": 798234
+    },
+    {
+      "path": "data/raw/12340282106016678.json",
+      "bytes": 3093
+    },
+    {
+      "path": "data/raw/12387472624849835.json",
+      "bytes": 1941443
+    },
+    {
+      "path": "data/raw/12390706505809150.json",
+      "bytes": 767832
+    },
+    {
+      "path": "data/raw/1241998328504490.json",
+      "bytes": 382803
+    },
+    {
+      "path": "data/raw/12490072956930435.json",
+      "bytes": 470021
+    },
+    {
+      "path": "data/raw/12550164775167178.json",
+      "bytes": 26789
+    },
+    {
+      "path": "data/raw/12590355983583239.json",
+      "bytes": 54240
+    },
+    {
+      "path": "data/raw/12629673694762396.json",
+      "bytes": 200664
+    },
+    {
+      "path": "data/raw/12638840758449459.json",
+      "bytes": 1146450
+    },
+    {
+      "path": "data/raw/12656026382252667.json",
+      "bytes": 66627
+    },
+    {
+      "path": "data/raw/12706275425255386.json",
+      "bytes": 28150
+    },
+    {
+      "path": "data/raw/12746730665870442.json",
+      "bytes": 817960
+    },
+    {
+      "path": "data/raw/12752224677923341.json",
+      "bytes": 1717862
+    },
+    {
+      "path": "data/raw/12777578088653944.json",
+      "bytes": 741900
+    },
+    {
+      "path": "data/raw/12840158707161274.json",
+      "bytes": 126658
+    },
+    {
+      "path": "data/raw/12874072841236826.json",
+      "bytes": 640342
+    },
+    {
+      "path": "data/raw/12888311549176009.json",
+      "bytes": 12955
+    },
+    {
+      "path": "data/raw/12901875871456398.json",
+      "bytes": 1174534
+    },
+    {
+      "path": "data/raw/12913156843322499.json",
+      "bytes": 500196
+    },
+    {
+      "path": "data/raw/12965822877128721.json",
+      "bytes": 1104114
+    },
+    {
+      "path": "data/raw/13117618204212939.json",
+      "bytes": 42557
+    },
+    {
+      "path": "data/raw/13140135188919199.json",
+      "bytes": 87743
+    },
+    {
+      "path": "data/raw/13227300125161435.json",
+      "bytes": 1774214
+    },
+    {
+      "path": "data/raw/13235547361447092.json",
+      "bytes": 1307226
+    },
+    {
+      "path": "data/raw/13243992182070788.json",
+      "bytes": 630522
+    },
+    {
+      "path": "data/raw/13281937213456378.json",
+      "bytes": 838127
+    },
+    {
+      "path": "data/raw/13286519531933238.json",
+      "bytes": 89250
+    },
+    {
+      "path": "data/raw/13308854503358443.json",
+      "bytes": 6976
+    },
+    {
+      "path": "data/raw/13320974429396087.json",
+      "bytes": 16268
+    },
+    {
+      "path": "data/raw/13386281759834677.json",
+      "bytes": 83146
+    },
+    {
+      "path": "data/raw/13400737477884122.json",
+      "bytes": 3826
+    },
+    {
+      "path": "data/raw/1357082281519089.json",
+      "bytes": 11711
+    },
+    {
+      "path": "data/raw/1358190916156744.json",
+      "bytes": 1659639
+    },
+    {
+      "path": "data/raw/13611044044646901.json",
+      "bytes": 1199886
+    },
+    {
+      "path": "data/raw/13666407494621646.json",
+      "bytes": 482212
+    },
+    {
+      "path": "data/raw/1377590712995332.json",
+      "bytes": 9904
+    },
+    {
+      "path": "data/raw/13827277908791664.json",
+      "bytes": 13813
+    },
+    {
+      "path": "data/raw/13869259092326636.json",
+      "bytes": 27631
+    },
+    {
+      "path": "data/raw/13937270451301973.json",
+      "bytes": 2021517
+    },
+    {
+      "path": "data/raw/14031158866706953.json",
+      "bytes": 287744
+    },
+    {
+      "path": "data/raw/14035144070182412.json",
+      "bytes": 105631
+    },
+    {
+      "path": "data/raw/14073782708315535.json",
+      "bytes": 1983049
+    },
+    {
+      "path": "data/raw/14079693677610396.json",
+      "bytes": 728558
+    },
+    {
+      "path": "data/raw/14175484201183111.json",
+      "bytes": 12125
+    },
+    {
+      "path": "data/raw/14180001151225582.json",
+      "bytes": 774403
+    },
+    {
+      "path": "data/raw/14230681955555738.json",
+      "bytes": 398670
+    },
+    {
+      "path": "data/raw/14231831499205396.json",
+      "bytes": 1494762
+    },
+    {
+      "path": "data/raw/14258394084745667.json",
+      "bytes": 110304
+    },
+    {
+      "path": "data/raw/14312030900097668.json",
+      "bytes": 859674
+    },
+    {
+      "path": "data/raw/1438514795814416.json",
+      "bytes": 570505
+    },
+    {
+      "path": "data/raw/14395124172545855.json",
+      "bytes": 13395
+    },
+    {
+      "path": "data/raw/14398278072324784.json",
+      "bytes": 1593843
+    },
+    {
+      "path": "data/raw/14408206616484337.json",
+      "bytes": 6254
+    },
+    {
+      "path": "data/raw/14452861554717094.json",
+      "bytes": 21780
+    },
+    {
+      "path": "data/raw/14457271578207787.json",
+      "bytes": 10284
+    },
+    {
+      "path": "data/raw/14617104402836487.json",
+      "bytes": 1564896
+    },
+    {
+      "path": "data/raw/14733915547136628.json",
+      "bytes": 17034
+    },
+    {
+      "path": "data/raw/14744445176220774.json",
+      "bytes": 527391
+    },
+    {
+      "path": "data/raw/14800142337291217.json",
+      "bytes": 1313352
+    },
+    {
+      "path": "data/raw/14811662998444150.json",
+      "bytes": 18062
+    },
+    {
+      "path": "data/raw/14825677919842501.json",
+      "bytes": 162818
+    },
+    {
+      "path": "data/raw/14886507586508567.json",
+      "bytes": 42553
+    },
+    {
+      "path": "data/raw/14892991166285061.json",
+      "bytes": 21561
+    },
+    {
+      "path": "data/raw/14916489896692147.json",
+      "bytes": 527783
+    },
+    {
+      "path": "data/raw/14949021410481624.json",
+      "bytes": 17390
+    },
+    {
+      "path": "data/raw/14957056743925737.json",
+      "bytes": 1698626
+    },
+    {
+      "path": "data/raw/14974895920751466.json",
+      "bytes": 9308
+    },
+    {
+      "path": "data/raw/15001802434062073.json",
+      "bytes": 180286
+    },
+    {
+      "path": "data/raw/15039949673085566.json",
+      "bytes": 1533350
+    },
+    {
+      "path": "data/raw/15172331428265517.json",
+      "bytes": 17426
+    },
+    {
+      "path": "data/raw/15254261324071820.json",
+      "bytes": 10353
+    },
+    {
+      "path": "data/raw/15259343650667588.json",
+      "bytes": 1617068
+    },
+    {
+      "path": "data/raw/15282093177363578.json",
+      "bytes": 696754
+    },
+    {
+      "path": "data/raw/15374483986949695.json",
+      "bytes": 1196616
+    },
+    {
+      "path": "data/raw/15395217608228230.json",
+      "bytes": 1380963
+    },
+    {
+      "path": "data/raw/15420554853151242.json",
+      "bytes": 106949
+    },
+    {
+      "path": "data/raw/15437111449299444.json",
+      "bytes": 67835
+    },
+    {
+      "path": "data/raw/15451317146134956.json",
+      "bytes": 729472
+    },
+    {
+      "path": "data/raw/15472396110662150.json",
+      "bytes": 1818271
+    },
+    {
+      "path": "data/raw/15494954332657697.json",
+      "bytes": 459930
+    },
+    {
+      "path": "data/raw/15521712617204216.json",
+      "bytes": 1992969
+    },
+    {
+      "path": "data/raw/15726796686853780.json",
+      "bytes": 1344839
+    },
+    {
+      "path": "data/raw/15770893497354321.json",
+      "bytes": 27612
+    },
+    {
+      "path": "data/raw/15917865009187760.json",
+      "bytes": 710268
+    },
+    {
+      "path": "data/raw/15930821245168534.json",
+      "bytes": 730475
+    },
+    {
+      "path": "data/raw/15949743338644220.json",
+      "bytes": 1735323
+    },
+    {
+      "path": "data/raw/15967781583549332.json",
+      "bytes": 17153
+    },
+    {
+      "path": "data/raw/16040900750729921.json",
+      "bytes": 459615
+    },
+    {
+      "path": "data/raw/16056283141617755.json",
+      "bytes": 498309
+    },
+    {
+      "path": "data/raw/16160428999603144.json",
+      "bytes": 27106
+    },
+    {
+      "path": "data/raw/1622165953214595.json",
+      "bytes": 20161
+    },
+    {
+      "path": "data/raw/16240668736729756.json",
+      "bytes": 24484
+    },
+    {
+      "path": "data/raw/1625149423498289.json",
+      "bytes": 1116065
+    },
+    {
+      "path": "data/raw/16275009840546748.json",
+      "bytes": 34020
+    },
+    {
+      "path": "data/raw/16369313804633525.json",
+      "bytes": 1664388
+    },
+    {
+      "path": "data/raw/16383091566030431.json",
+      "bytes": 71351
+    },
+    {
+      "path": "data/raw/16405556680571453.json",
+      "bytes": 1580051
+    },
+    {
+      "path": "data/raw/16410724132711490.json",
+      "bytes": 1005236
+    },
+    {
+      "path": "data/raw/16422980660132735.json",
+      "bytes": 472922
+    },
+    {
+      "path": "data/raw/16553062355259729.json",
+      "bytes": 1220241
+    },
+    {
+      "path": "data/raw/16567465928886309.json",
+      "bytes": 432899
+    },
+    {
+      "path": "data/raw/16578517055478811.json",
+      "bytes": 263844
+    },
+    {
+      "path": "data/raw/16582961426722208.json",
+      "bytes": 177493
+    },
+    {
+      "path": "data/raw/16673205196919832.json",
+      "bytes": 652263
+    },
+    {
+      "path": "data/raw/16693610252404739.json",
+      "bytes": 892985
+    },
+    {
+      "path": "data/raw/16697812875985850.json",
+      "bytes": 219596
+    },
+    {
+      "path": "data/raw/16777570760181431.json",
+      "bytes": 1229976
+    },
+    {
+      "path": "data/raw/16817885126368964.json",
+      "bytes": 106743
+    },
+    {
+      "path": "data/raw/16898801408277874.json",
+      "bytes": 12931
+    },
+    {
+      "path": "data/raw/16912848594834608.json",
+      "bytes": 18493
+    },
+    {
+      "path": "data/raw/16959429956899455.json",
+      "bytes": 1670180
+    },
+    {
+      "path": "data/raw/17038760170440118.json",
+      "bytes": 78541
+    },
+    {
+      "path": "data/raw/17058021010616568.json",
+      "bytes": 9959
+    },
+    {
+      "path": "data/raw/17059960254855208.json",
+      "bytes": 1745144
+    },
+    {
+      "path": "data/raw/17226661368470120.json",
+      "bytes": 539502
+    },
+    {
+      "path": "data/raw/17244733069907210.json",
+      "bytes": 97506
+    },
+    {
+      "path": "data/raw/17248898258246807.json",
+      "bytes": 110112
+    },
+    {
+      "path": "data/raw/17256671865959496.json",
+      "bytes": 11159
+    },
+    {
+      "path": "data/raw/17284166795866794.json",
+      "bytes": 1185481
+    },
+    {
+      "path": "data/raw/17330546482145553.json",
+      "bytes": 1745879
+    },
+    {
+      "path": "data/raw/17372162356531136.json",
+      "bytes": 102952
+    },
+    {
+      "path": "data/raw/17403065366457237.json",
+      "bytes": 12191
+    },
+    {
+      "path": "data/raw/17528249960294496.json",
+      "bytes": 1694534
+    },
+    {
+      "path": "data/raw/17617474823279712.json",
+      "bytes": 1282098
+    },
+    {
+      "path": "data/raw/17800036702302776.json",
+      "bytes": 1588906
+    },
+    {
+      "path": "data/raw/17802352521411336.json",
+      "bytes": 39049
+    },
+    {
+      "path": "data/raw/17805801742135377.json",
+      "bytes": 148767
+    },
+    {
+      "path": "data/raw/17834623106317041.json",
+      "bytes": 1574938
+    },
+    {
+      "path": "data/raw/17863722168942253.json",
+      "bytes": 2070
+    },
+    {
+      "path": "data/raw/17870201018518890.json",
+      "bytes": 20018
+    },
+    {
+      "path": "data/raw/17914401175772326.json",
+      "bytes": 421391
+    },
+    {
+      "path": "data/raw/17939384202383793.json",
+      "bytes": 1162504
+    },
+    {
+      "path": "data/raw/18004480270695404.json",
+      "bytes": 1524957
+    },
+    {
+      "path": "data/raw/18007109712724189.json",
+      "bytes": 532573
+    },
+    {
+      "path": "data/raw/18027801615184692.json",
+      "bytes": 1855866
+    },
+    {
+      "path": "data/raw/180608939495255.json",
+      "bytes": 8924
+    },
+    {
+      "path": "data/raw/18062346300365761.json",
+      "bytes": 13418
+    },
+    {
+      "path": "data/raw/18063426072758458.json",
+      "bytes": 1729009
+    },
+    {
+      "path": "data/raw/18092687666565282.json",
+      "bytes": 1379498
+    },
+    {
+      "path": "data/raw/18093681647131179.json",
+      "bytes": 1127026
+    },
+    {
+      "path": "data/raw/18156575395080321.json",
+      "bytes": 79506
+    },
+    {
+      "path": "data/raw/1822787329898392.json",
+      "bytes": 580981
+    },
+    {
+      "path": "data/raw/1825060609227181.json",
+      "bytes": 231939
+    },
+    {
+      "path": "data/raw/18303237082155264.json",
+      "bytes": 1655061
+    },
+    {
+      "path": "data/raw/18320128145045368.json",
+      "bytes": 75264
+    },
+    {
+      "path": "data/raw/18377845653697190.json",
+      "bytes": 92445
+    },
+    {
+      "path": "data/raw/18401147983387689.json",
+      "bytes": 1725461
+    },
+    {
+      "path": "data/raw/18568733593280948.json",
+      "bytes": 521352
+    },
+    {
+      "path": "data/raw/18599703143458101.json",
+      "bytes": 805902
+    },
+    {
+      "path": "data/raw/18650546575861744.json",
+      "bytes": 20399
+    },
+    {
+      "path": "data/raw/18661507395759423.json",
+      "bytes": 375959
+    },
+    {
+      "path": "data/raw/18757639286384873.json",
+      "bytes": 236097
+    },
+    {
+      "path": "data/raw/18865325633315847.json",
+      "bytes": 514293
+    },
+    {
+      "path": "data/raw/18883380772506226.json",
+      "bytes": 1048690
+    },
+    {
+      "path": "data/raw/19040514831923530.json",
+      "bytes": 681188
+    },
+    {
+      "path": "data/raw/19060410060488876.json",
+      "bytes": 284258
+    },
+    {
+      "path": "data/raw/19074684560939209.json",
+      "bytes": 411268
+    },
+    {
+      "path": "data/raw/19096138402374647.json",
+      "bytes": 17420
+    },
+    {
+      "path": "data/raw/1910559175389217.json",
+      "bytes": 16982
+    },
+    {
+      "path": "data/raw/19135771253028747.json",
+      "bytes": 109048
+    },
+    {
+      "path": "data/raw/19239905145688600.json",
+      "bytes": 69012
+    },
+    {
+      "path": "data/raw/19257295292088310.json",
+      "bytes": 1660166
+    },
+    {
+      "path": "data/raw/19262304347711355.json",
+      "bytes": 27701
+    },
+    {
+      "path": "data/raw/19298748452450329.json",
+      "bytes": 1929291
+    },
+    {
+      "path": "data/raw/19303164345026093.json",
+      "bytes": 3210
+    },
+    {
+      "path": "data/raw/19310456400689867.json",
+      "bytes": 608081
+    },
+    {
+      "path": "data/raw/19348717261145458.json",
+      "bytes": 458576
+    },
+    {
+      "path": "data/raw/19362905444618753.json",
+      "bytes": 47957
+    },
+    {
+      "path": "data/raw/19422557949258041.json",
+      "bytes": 321187
+    },
+    {
+      "path": "data/raw/19492025284339283.json",
+      "bytes": 71335
+    },
+    {
+      "path": "data/raw/19693832241143005.json",
+      "bytes": 9026
+    },
+    {
+      "path": "data/raw/19828734979381742.json",
+      "bytes": 288859
+    },
+    {
+      "path": "data/raw/19947457661744461.json",
+      "bytes": 10217
+    },
+    {
+      "path": "data/raw/20024911381434086.json",
+      "bytes": 1976673
+    },
+    {
+      "path": "data/raw/20087021000677031.json",
+      "bytes": 3942
+    },
+    {
+      "path": "data/raw/20092044608974663.json",
+      "bytes": 206222
+    },
+    {
+      "path": "data/raw/20094084957096995.json",
+      "bytes": 3539
+    },
+    {
+      "path": "data/raw/20119181940051841.json",
+      "bytes": 129220
+    },
+    {
+      "path": "data/raw/20146844644454650.json",
+      "bytes": 13070
+    },
+    {
+      "path": "data/raw/2019449432639594.json",
+      "bytes": 274578
+    },
+    {
+      "path": "data/raw/20244389840999638.json",
+      "bytes": 125447
+    },
+    {
+      "path": "data/raw/20292922178776915.json",
+      "bytes": 80743
+    },
+    {
+      "path": "data/raw/20328060081343955.json",
+      "bytes": 20209
+    },
+    {
+      "path": "data/raw/20355845340893717.json",
+      "bytes": 3788
+    },
+    {
+      "path": "data/raw/204092872752957.json",
+      "bytes": 600533
+    },
+    {
+      "path": "data/raw/20411759370751096.json",
+      "bytes": 1048693
+    },
+    {
+      "path": "data/raw/20453559648564964.json",
+      "bytes": 138190
+    },
+    {
+      "path": "data/raw/20453828618330936.json",
+      "bytes": 1786306
+    },
+    {
+      "path": "data/raw/20487994977117557.json",
+      "bytes": 1944743
+    },
+    {
+      "path": "data/raw/20552106440334207.json",
+      "bytes": 6292
+    },
+    {
+      "path": "data/raw/20560887114747719.json",
+      "bytes": 1636748
+    },
+    {
+      "path": "data/raw/20562694899904339.json",
+      "bytes": 1272406
+    },
+    {
+      "path": "data/raw/20582583275482928.json",
+      "bytes": 18554
+    },
+    {
+      "path": "data/raw/20611778787745873.json",
+      "bytes": 40015
+    },
+    {
+      "path": "data/raw/20648792901314949.json",
+      "bytes": 13995
+    },
+    {
+      "path": "data/raw/20651561102278685.json",
+      "bytes": 21257
+    },
+    {
+      "path": "data/raw/20652241232631918.json",
+      "bytes": 359118
+    },
+    {
+      "path": "data/raw/20699477516569964.json",
+      "bytes": 19988
+    },
+    {
+      "path": "data/raw/20789606562681728.json",
+      "bytes": 135993
+    },
+    {
+      "path": "data/raw/20794271200498593.json",
+      "bytes": 19688
+    },
+    {
+      "path": "data/raw/20865316761157979.json",
+      "bytes": 1758356
+    },
+    {
+      "path": "data/raw/20925343211872511.json",
+      "bytes": 18367
+    },
+    {
+      "path": "data/raw/20926459161497908.json",
+      "bytes": 1258523
+    },
+    {
+      "path": "data/raw/20966291817819448.json",
+      "bytes": 1149829
+    },
+    {
+      "path": "data/raw/21003176534704369.json",
+      "bytes": 80374
+    },
+    {
+      "path": "data/raw/21019771423444642.json",
+      "bytes": 13712
+    },
+    {
+      "path": "data/raw/21061472926590963.json",
+      "bytes": 18801
+    },
+    {
+      "path": "data/raw/21077182490095731.json",
+      "bytes": 318387
+    },
+    {
+      "path": "data/raw/21096748051392414.json",
+      "bytes": 474129
+    },
+    {
+      "path": "data/raw/21267070154446799.json",
+      "bytes": 17636
+    },
+    {
+      "path": "data/raw/21334155996394219.json",
+      "bytes": 61509
+    },
+    {
+      "path": "data/raw/21385303564311864.json",
+      "bytes": 9048
+    },
+    {
+      "path": "data/raw/21426277483799140.json",
+      "bytes": 731215
+    },
+    {
+      "path": "data/raw/21432551703060846.json",
+      "bytes": 473313
+    },
+    {
+      "path": "data/raw/21501758781665781.json",
+      "bytes": 287399
+    },
+    {
+      "path": "data/raw/2160777579058191.json",
+      "bytes": 49671
+    },
+    {
+      "path": "data/raw/2161110547458064.json",
+      "bytes": 480657
+    },
+    {
+      "path": "data/raw/21731820344041381.json",
+      "bytes": 29849
+    },
+    {
+      "path": "data/raw/21794636381809675.json",
+      "bytes": 16692
+    },
+    {
+      "path": "data/raw/21919936744759835.json",
+      "bytes": 19972
+    },
+    {
+      "path": "data/raw/2195347845023805.json",
+      "bytes": 18760
+    },
+    {
+      "path": "data/raw/22086876724551482.json",
+      "bytes": 1955435
+    },
+    {
+      "path": "data/raw/22087269603540841.json",
+      "bytes": 1331963
+    },
+    {
+      "path": "data/raw/22094468707473892.json",
+      "bytes": 17317
+    },
+    {
+      "path": "data/raw/22101648992074661.json",
+      "bytes": 8681
+    },
+    {
+      "path": "data/raw/22255783119783047.json",
+      "bytes": 1994044
+    },
+    {
+      "path": "data/raw/22259718159702272.json",
+      "bytes": 377994
+    },
+    {
+      "path": "data/raw/22260326095996531.json",
+      "bytes": 1728498
+    },
+    {
+      "path": "data/raw/22275596386264204.json",
+      "bytes": 936452
+    },
+    {
+      "path": "data/raw/22299894048845903.json",
+      "bytes": 1596872
+    },
+    {
+      "path": "data/raw/22308305646551497.json",
+      "bytes": 934364
+    },
+    {
+      "path": "data/raw/22312990497291517.json",
+      "bytes": 254554
+    },
+    {
+      "path": "data/raw/22382156782768756.json",
+      "bytes": 1735431
+    },
+    {
+      "path": "data/raw/22424135367941584.json",
+      "bytes": 438936
+    },
+    {
+      "path": "data/raw/22427720900616335.json",
+      "bytes": 1379916
+    },
+    {
+      "path": "data/raw/22490169030401337.json",
+      "bytes": 597384
+    },
+    {
+      "path": "data/raw/22501232035732859.json",
+      "bytes": 124030
+    },
+    {
+      "path": "data/raw/2254054929817435.json",
+      "bytes": 1674279
+    },
+    {
+      "path": "data/raw/22560050433388046.json",
+      "bytes": 1139733
+    },
+    {
+      "path": "data/raw/22571177829062242.json",
+      "bytes": 23798
+    },
+    {
+      "path": "data/raw/22645269567765904.json",
+      "bytes": 675228
+    },
+    {
+      "path": "data/raw/22667016906590506.json",
+      "bytes": 2028695
+    },
+    {
+      "path": "data/raw/22748255161474691.json",
+      "bytes": 27073
+    },
+    {
+      "path": "data/raw/22765113980913232.json",
+      "bytes": 13743
+    },
+    {
+      "path": "data/raw/22811176775480091.json",
+      "bytes": 1518151
+    },
+    {
+      "path": "data/raw/22826119556531041.json",
+      "bytes": 17506
+    },
+    {
+      "path": "data/raw/22839330962768817.json",
+      "bytes": 887378
+    },
+    {
+      "path": "data/raw/22843648821239232.json",
+      "bytes": 28301
+    },
+    {
+      "path": "data/raw/22884367962978943.json",
+      "bytes": 12751
+    },
+    {
+      "path": "data/raw/22903901709044823.json",
+      "bytes": 1801828
+    },
+    {
+      "path": "data/raw/22941065011246116.json",
+      "bytes": 984744
+    },
+    {
+      "path": "data/raw/22950683624908253.json",
+      "bytes": 988084
+    },
+    {
+      "path": "data/raw/22956708386610464.json",
+      "bytes": 986070
+    },
+    {
+      "path": "data/raw/22974529700655465.json",
+      "bytes": 8182
+    },
+    {
+      "path": "data/raw/23049019886587905.json",
+      "bytes": 947477
+    },
+    {
+      "path": "data/raw/23086515493897579.json",
+      "bytes": 1705327
+    },
+    {
+      "path": "data/raw/23163370927660164.json",
+      "bytes": 117826
+    },
+    {
+      "path": "data/raw/23175320865252772.json",
+      "bytes": 1114314
+    },
+    {
+      "path": "data/raw/2318736941376687.json",
+      "bytes": 1158016
+    },
+    {
+      "path": "data/raw/23214828924506640.json",
+      "bytes": 1662388
+    },
+    {
+      "path": "data/raw/2328862017676109.json",
+      "bytes": 2027232
+    },
+    {
+      "path": "data/raw/23293437377896568.json",
+      "bytes": 642626
+    },
+    {
+      "path": "data/raw/23353689102956991.json",
+      "bytes": 1973872
+    },
+    {
+      "path": "data/raw/23374429962331387.json",
+      "bytes": 432525
+    },
+    {
+      "path": "data/raw/23441366113375722.json",
+      "bytes": 1245783
+    },
+    {
+      "path": "data/raw/23498719713662118.json",
+      "bytes": 279879
+    },
+    {
+      "path": "data/raw/23533144249885485.json",
+      "bytes": 17420
+    },
+    {
+      "path": "data/raw/23557166059925779.json",
+      "bytes": 319784
+    },
+    {
+      "path": "data/raw/23583214776361500.json",
+      "bytes": 5961
+    },
+    {
+      "path": "data/raw/23600798892801694.json",
+      "bytes": 1173477
+    },
+    {
+      "path": "data/raw/23609214278467198.json",
+      "bytes": 224726
+    },
+    {
+      "path": "data/raw/23784047282724741.json",
+      "bytes": 5934
+    },
+    {
+      "path": "data/raw/23837844039713715.json",
+      "bytes": 1563025
+    },
+    {
+      "path": "data/raw/23842604089739254.json",
+      "bytes": 20403
+    },
+    {
+      "path": "data/raw/23891830829322971.json",
+      "bytes": 1133593
+    },
+    {
+      "path": "data/raw/23936607891892333.json",
+      "bytes": 1802952
+    },
+    {
+      "path": "data/raw/2400322364771558.json",
+      "bytes": 553196
+    },
+    {
+      "path": "data/raw/24079409192818584.json",
+      "bytes": 1718877
+    },
+    {
+      "path": "data/raw/24085906177899789.json",
+      "bytes": 1745223
+    },
+    {
+      "path": "data/raw/24104191079493386.json",
+      "bytes": 19770
+    },
+    {
+      "path": "data/raw/24130026414356277.json",
+      "bytes": 11534
+    },
+    {
+      "path": "data/raw/24152669938930718.json",
+      "bytes": 520757
+    },
+    {
+      "path": "data/raw/24212636157410845.json",
+      "bytes": 1124869
+    },
+    {
+      "path": "data/raw/24253947487334809.json",
+      "bytes": 264464
+    },
+    {
+      "path": "data/raw/24254843881948059.json",
+      "bytes": 1794242
+    },
+    {
+      "path": "data/raw/24303422207378456.json",
+      "bytes": 1563764
+    },
+    {
+      "path": "data/raw/2434703913394836.json",
+      "bytes": 1677328
+    },
+    {
+      "path": "data/raw/24547926750427088.json",
+      "bytes": 6313
+    },
+    {
+      "path": "data/raw/24614462005491447.json",
+      "bytes": 6927
+    },
+    {
+      "path": "data/raw/24651394045981418.json",
+      "bytes": 399827
+    },
+    {
+      "path": "data/raw/24653108506137885.json",
+      "bytes": 180970
+    },
+    {
+      "path": "data/raw/24662567615903665.json",
+      "bytes": 1044123
+    },
+    {
+      "path": "data/raw/24696953498398744.json",
+      "bytes": 260384
+    },
+    {
+      "path": "data/raw/24744049494761785.json",
+      "bytes": 149373
+    },
+    {
+      "path": "data/raw/24785665268004766.json",
+      "bytes": 807718
+    },
+    {
+      "path": "data/raw/24865200855668752.json",
+      "bytes": 73438
+    },
+    {
+      "path": "data/raw/24874570116421877.json",
+      "bytes": 70411
+    },
+    {
+      "path": "data/raw/24907784641855842.json",
+      "bytes": 287049
+    },
+    {
+      "path": "data/raw/25001509088465005.json",
+      "bytes": 1705067
+    },
+    {
+      "path": "data/raw/25010489461183396.json",
+      "bytes": 136514
+    },
+    {
+      "path": "data/raw/25020657188512139.json",
+      "bytes": 302066
+    },
+    {
+      "path": "data/raw/25079426576214829.json",
+      "bytes": 234406
+    },
+    {
+      "path": "data/raw/25087550088673404.json",
+      "bytes": 20210
+    },
+    {
+      "path": "data/raw/25101183054905498.json",
+      "bytes": 94449
+    },
+    {
+      "path": "data/raw/25138573783817343.json",
+      "bytes": 10422
+    },
+    {
+      "path": "data/raw/25163849522701102.json",
+      "bytes": 63388
+    },
+    {
+      "path": "data/raw/25180702353416009.json",
+      "bytes": 690318
+    },
+    {
+      "path": "data/raw/25211433301660888.json",
+      "bytes": 327385
+    },
+    {
+      "path": "data/raw/25215182208950217.json",
+      "bytes": 945670
+    },
+    {
+      "path": "data/raw/25244329144808274.json",
+      "bytes": 1152297
+    },
+    {
+      "path": "data/raw/25286509736208688.json",
+      "bytes": 1746381
+    },
+    {
+      "path": "data/raw/2531320015411062.json",
+      "bytes": 8553
+    },
+    {
+      "path": "data/raw/25336820825905643.json",
+      "bytes": 2024427
+    },
+    {
+      "path": "data/raw/25357135030606405.json",
+      "bytes": 663251
+    },
+    {
+      "path": "data/raw/25402505872480393.json",
+      "bytes": 218124
+    },
+    {
+      "path": "data/raw/25417476013479486.json",
+      "bytes": 415158
+    },
+    {
+      "path": "data/raw/25422370845365439.json",
+      "bytes": 18810
+    },
+    {
+      "path": "data/raw/25514780181345713.json",
+      "bytes": 2049327
+    },
+    {
+      "path": "data/raw/25559236668122210.json",
+      "bytes": 460851
+    },
+    {
+      "path": "data/raw/25631699615003698.json",
+      "bytes": 653929
+    },
+    {
+      "path": "data/raw/25728853053886443.json",
+      "bytes": 79327
+    },
+    {
+      "path": "data/raw/25839275061658206.json",
+      "bytes": 6911
+    },
+    {
+      "path": "data/raw/25870247543929845.json",
+      "bytes": 13878
+    },
+    {
+      "path": "data/raw/25875940520349814.json",
+      "bytes": 865881
+    },
+    {
+      "path": "data/raw/2589887561569709.json",
+      "bytes": 1980305
+    },
+    {
+      "path": "data/raw/26014913469567886.json",
+      "bytes": 1979895
+    },
+    {
+      "path": "data/raw/26017146507446645.json",
+      "bytes": 12754
+    },
+    {
+      "path": "data/raw/26025177574491991.json",
+      "bytes": 618951
+    },
+    {
+      "path": "data/raw/26090464295830176.json",
+      "bytes": 1377658
+    },
+    {
+      "path": "data/raw/26096560470684587.json",
+      "bytes": 18555
+    },
+    {
+      "path": "data/raw/26169987969360402.json",
+      "bytes": 13455
+    },
+    {
+      "path": "data/raw/26259366519412975.json",
+      "bytes": 822278
+    },
+    {
+      "path": "data/raw/26272089978345700.json",
+      "bytes": 16434
+    },
+    {
+      "path": "data/raw/26316376625263940.json",
+      "bytes": 355406
+    },
+    {
+      "path": "data/raw/26351139613589387.json",
+      "bytes": 602690
+    },
+    {
+      "path": "data/raw/26393127587277568.json",
+      "bytes": 111002
+    },
+    {
+      "path": "data/raw/26458514535443899.json",
+      "bytes": 245541
+    },
+    {
+      "path": "data/raw/26492332204164836.json",
+      "bytes": 7019
+    },
+    {
+      "path": "data/raw/26543014712914772.json",
+      "bytes": 1235637
+    },
+    {
+      "path": "data/raw/26581180478947817.json",
+      "bytes": 34643
+    },
+    {
+      "path": "data/raw/26780282166315918.json",
+      "bytes": 445491
+    },
+    {
+      "path": "data/raw/26824673819862694.json",
+      "bytes": 2033415
+    },
+    {
+      "path": "data/raw/26882843763780650.json",
+      "bytes": 510942
+    },
+    {
+      "path": "data/raw/2698346485365864.json",
+      "bytes": 16919
+    },
+    {
+      "path": "data/raw/26997316501080743.json",
+      "bytes": 1938400
+    },
+    {
+      "path": "data/raw/27000326841257664.json",
+      "bytes": 1474081
+    },
+    {
+      "path": "data/raw/27096851668435724.json",
+      "bytes": 653659
+    },
+    {
+      "path": "data/raw/27148572013604038.json",
+      "bytes": 605111
+    },
+    {
+      "path": "data/raw/27181945356214752.json",
+      "bytes": 22808
+    },
+    {
+      "path": "data/raw/27218386411183410.json",
+      "bytes": 1666735
+    },
+    {
+      "path": "data/raw/27276541005386425.json",
+      "bytes": 261497
+    },
+    {
+      "path": "data/raw/27308217070238237.json",
+      "bytes": 1991574
+    },
+    {
+      "path": "data/raw/27405735172634593.json",
+      "bytes": 434944
+    },
+    {
+      "path": "data/raw/27639047710974505.json",
+      "bytes": 217842
+    },
+    {
+      "path": "data/raw/27701423628016748.json",
+      "bytes": 1381331
+    },
+    {
+      "path": "data/raw/27797446447955609.json",
+      "bytes": 369506
+    },
+    {
+      "path": "data/raw/27832551228672645.json",
+      "bytes": 101754
+    },
+    {
+      "path": "data/raw/27922860956133067.json",
+      "bytes": 982461
+    },
+    {
+      "path": "data/raw/27929640568087771.json",
+      "bytes": 10876
+    },
+    {
+      "path": "data/raw/27952969918967492.json",
+      "bytes": 1228491
+    },
+    {
+      "path": "data/raw/28033133021443774.json",
+      "bytes": 1762327
+    },
+    {
+      "path": "data/raw/28147934478934110.json",
+      "bytes": 432701
+    },
+    {
+      "path": "data/raw/28230238564334914.json",
+      "bytes": 1152632
+    },
+    {
+      "path": "data/raw/28251956446987982.json",
+      "bytes": 729886
+    },
+    {
+      "path": "data/raw/28253678449273505.json",
+      "bytes": 1067886
+    },
+    {
+      "path": "data/raw/28255729477187163.json",
+      "bytes": 169255
+    },
+    {
+      "path": "data/raw/28280189352163772.json",
+      "bytes": 129526
+    },
+    {
+      "path": "data/raw/28291104595448527.json",
+      "bytes": 494412
+    },
+    {
+      "path": "data/raw/28320293733348826.json",
+      "bytes": 1441565
+    },
+    {
+      "path": "data/raw/28325731560106431.json",
+      "bytes": 1623351
+    },
+    {
+      "path": "data/raw/28328083629154916.json",
+      "bytes": 278755
+    },
+    {
+      "path": "data/raw/28328710198554144.json",
+      "bytes": 1774198
+    },
+    {
+      "path": "data/raw/28374437855144739.json",
+      "bytes": 311856
+    },
+    {
+      "path": "data/raw/28431095903407567.json",
+      "bytes": 1040830
+    },
+    {
+      "path": "data/raw/28450080638096732.json",
+      "bytes": 661291
+    },
+    {
+      "path": "data/raw/28519886510885556.json",
+      "bytes": 28887
+    },
+    {
+      "path": "data/raw/28551661889797217.json",
+      "bytes": 432456
+    },
+    {
+      "path": "data/raw/28672095850798501.json",
+      "bytes": 1540594
+    },
+    {
+      "path": "data/raw/28786664935172699.json",
+      "bytes": 1346883
+    },
+    {
+      "path": "data/raw/28788598290160782.json",
+      "bytes": 1020201
+    },
+    {
+      "path": "data/raw/28802119297902069.json",
+      "bytes": 26980
+    },
+    {
+      "path": "data/raw/28809886765682162.json",
+      "bytes": 1444179
+    },
+    {
+      "path": "data/raw/28831671250688665.json",
+      "bytes": 16264
+    },
+    {
+      "path": "data/raw/28845264556937486.json",
+      "bytes": 728500
+    },
+    {
+      "path": "data/raw/28854105556435129.json",
+      "bytes": 989936
+    },
+    {
+      "path": "data/raw/28854935814625231.json",
+      "bytes": 654372
+    },
+    {
+      "path": "data/raw/28864540805361867.json",
+      "bytes": 1593646
+    },
+    {
+      "path": "data/raw/28957320033282870.json",
+      "bytes": 529177
+    },
+    {
+      "path": "data/raw/28980819574502421.json",
+      "bytes": 17045
+    },
+    {
+      "path": "data/raw/29047922475141455.json",
+      "bytes": 13488
+    },
+    {
+      "path": "data/raw/29103246659575384.json",
+      "bytes": 21732
+    },
+    {
+      "path": "data/raw/29122854902865456.json",
+      "bytes": 1651009
+    },
+    {
+      "path": "data/raw/29175318589037916.json",
+      "bytes": 9905
+    },
+    {
+      "path": "data/raw/29228199283809267.json",
+      "bytes": 13316
+    },
+    {
+      "path": "data/raw/29247915161590165.json",
+      "bytes": 1826293
+    },
+    {
+      "path": "data/raw/29316948750916349.json",
+      "bytes": 1112546
+    },
+    {
+      "path": "data/raw/29360484026030338.json",
+      "bytes": 404293
+    },
+    {
+      "path": "data/raw/2940067189559429.json",
+      "bytes": 3781
+    },
+    {
+      "path": "data/raw/29424233513003823.json",
+      "bytes": 8896
+    },
+    {
+      "path": "data/raw/2944500421562364.json",
+      "bytes": 1996247
+    },
+    {
+      "path": "data/raw/2946359739697734.json",
+      "bytes": 28037
+    },
+    {
+      "path": "data/raw/29481688371731182.json",
+      "bytes": 1383577
+    },
+    {
+      "path": "data/raw/29533952369848076.json",
+      "bytes": 588868
+    },
+    {
+      "path": "data/raw/29590002988360984.json",
+      "bytes": 508424
+    },
+    {
+      "path": "data/raw/29712227786531574.json",
+      "bytes": 11986
+    },
+    {
+      "path": "data/raw/29747059672582491.json",
+      "bytes": 1562592
+    },
+    {
+      "path": "data/raw/29758477602878557.json",
+      "bytes": 1082978
+    },
+    {
+      "path": "data/raw/29833953891226346.json",
+      "bytes": 25909
+    },
+    {
+      "path": "data/raw/29860265627578401.json",
+      "bytes": 967445
+    },
+    {
+      "path": "data/raw/29875801858560476.json",
+      "bytes": 170472
+    },
+    {
+      "path": "data/raw/29882244560576007.json",
+      "bytes": 664393
+    },
+    {
+      "path": "data/raw/29974853866926823.json",
+      "bytes": 589482
+    },
+    {
+      "path": "data/raw/30142978069109535.json",
+      "bytes": 13759
+    },
+    {
+      "path": "data/raw/30150802188959856.json",
+      "bytes": 21883
+    },
+    {
+      "path": "data/raw/30199169309221443.json",
+      "bytes": 17209
+    },
+    {
+      "path": "data/raw/30199365830132996.json",
+      "bytes": 143514
+    },
+    {
+      "path": "data/raw/30215634246748564.json",
+      "bytes": 419871
+    },
+    {
+      "path": "data/raw/30231789123900526.json",
+      "bytes": 1739715
+    },
+    {
+      "path": "data/raw/30282299500988269.json",
+      "bytes": 920968
+    },
+    {
+      "path": "data/raw/30447901674051381.json",
+      "bytes": 470694
+    },
+    {
+      "path": "data/raw/30478780967033891.json",
+      "bytes": 17528
+    },
+    {
+      "path": "data/raw/3050342257199174.json",
+      "bytes": 672881
+    },
+    {
+      "path": "data/raw/30507152381699953.json",
+      "bytes": 1140074
+    },
+    {
+      "path": "data/raw/30507739597192201.json",
+      "bytes": 228074
+    },
+    {
+      "path": "data/raw/30582275818828857.json",
+      "bytes": 333911
+    },
+    {
+      "path": "data/raw/30650426998863332.json",
+      "bytes": 1713040
+    },
+    {
+      "path": "data/raw/30703140537034664.json",
+      "bytes": 675001
+    },
+    {
+      "path": "data/raw/30714151942396396.json",
+      "bytes": 27857
+    },
+    {
+      "path": "data/raw/30714541738317499.json",
+      "bytes": 47807
+    },
+    {
+      "path": "data/raw/30719054967088301.json",
+      "bytes": 1769898
+    },
+    {
+      "path": "data/raw/30726009511312842.json",
+      "bytes": 18083
+    },
+    {
+      "path": "data/raw/30765727085936322.json",
+      "bytes": 1685377
+    },
+    {
+      "path": "data/raw/30797211585081891.json",
+      "bytes": 20397
+    },
+    {
+      "path": "data/raw/30829203706095076.json",
+      "bytes": 2000250
+    },
+    {
+      "path": "data/raw/30847688311740268.json",
+      "bytes": 20280
+    },
+    {
+      "path": "data/raw/30852391633490755.json",
+      "bytes": 1738999
+    },
+    {
+      "path": "data/raw/30895446582685604.json",
+      "bytes": 147776
+    },
+    {
+      "path": "data/raw/30935444563500782.json",
+      "bytes": 21138
+    },
+    {
+      "path": "data/raw/30974710508383145.json",
+      "bytes": 1702326
+    },
+    {
+      "path": "data/raw/31024260997481994.json",
+      "bytes": 1643379
+    },
+    {
+      "path": "data/raw/31039212000825988.json",
+      "bytes": 374690
+    },
+    {
+      "path": "data/raw/31078457170311964.json",
+      "bytes": 784129
+    },
+    {
+      "path": "data/raw/31116454489395198.json",
+      "bytes": 166737
+    },
+    {
+      "path": "data/raw/31188566503248753.json",
+      "bytes": 315770
+    },
+    {
+      "path": "data/raw/31230051169165044.json",
+      "bytes": 124687
+    },
+    {
+      "path": "data/raw/31248540252187559.json",
+      "bytes": 392098
+    },
+    {
+      "path": "data/raw/31253774350964911.json",
+      "bytes": 47620
+    },
+    {
+      "path": "data/raw/31255776686311176.json",
+      "bytes": 9790
+    },
+    {
+      "path": "data/raw/31278515339080281.json",
+      "bytes": 80528
+    },
+    {
+      "path": "data/raw/31297932255064110.json",
+      "bytes": 13526
+    },
+    {
+      "path": "data/raw/31322101180753995.json",
+      "bytes": 11633
+    },
+    {
+      "path": "data/raw/31366347648583654.json",
+      "bytes": 600817
+    },
+    {
+      "path": "data/raw/31379272181300633.json",
+      "bytes": 167501
+    },
+    {
+      "path": "data/raw/31389079379596565.json",
+      "bytes": 143544
+    },
+    {
+      "path": "data/raw/31400839654504249.json",
+      "bytes": 122811
+    },
+    {
+      "path": "data/raw/31483960413680009.json",
+      "bytes": 28456
+    },
+    {
+      "path": "data/raw/31490745436590980.json",
+      "bytes": 18700
+    },
+    {
+      "path": "data/raw/3149396562827132.json",
+      "bytes": 1068514
+    },
+    {
+      "path": "data/raw/31569200988534548.json",
+      "bytes": 363287
+    },
+    {
+      "path": "data/raw/3173544097113770.json",
+      "bytes": 1149908
+    },
+    {
+      "path": "data/raw/31765923007618205.json",
+      "bytes": 27159
+    },
+    {
+      "path": "data/raw/31787507070992420.json",
+      "bytes": 161579
+    },
+    {
+      "path": "data/raw/318005355896147.json",
+      "bytes": 1179616
+    },
+    {
+      "path": "data/raw/31805105784643255.json",
+      "bytes": 8954
+    },
+    {
+      "path": "data/raw/31879190587976736.json",
+      "bytes": 1890980
+    },
+    {
+      "path": "data/raw/31913287805282551.json",
+      "bytes": 455501
+    },
+    {
+      "path": "data/raw/31944282437880498.json",
+      "bytes": 6146
+    },
+    {
+      "path": "data/raw/31959715133485440.json",
+      "bytes": 462333
+    },
+    {
+      "path": "data/raw/32112121249636248.json",
+      "bytes": 337204
+    },
+    {
+      "path": "data/raw/3212106468768648.json",
+      "bytes": 20279
+    },
+    {
+      "path": "data/raw/32232147777592560.json",
+      "bytes": 19938
+    },
+    {
+      "path": "data/raw/32257753560585502.json",
+      "bytes": 1552735
+    },
+    {
+      "path": "data/raw/32347247706508046.json",
+      "bytes": 570084
+    },
+    {
+      "path": "data/raw/32357363984168442.json",
+      "bytes": 952919
+    },
+    {
+      "path": "data/raw/32469128621155736.json",
+      "bytes": 424267
+    },
+    {
+      "path": "data/raw/32525655729432562.json",
+      "bytes": 1708997
+    },
+    {
+      "path": "data/raw/32557908269133657.json",
+      "bytes": 14200
+    },
+    {
+      "path": "data/raw/32581999097828225.json",
+      "bytes": 13579
+    },
+    {
+      "path": "data/raw/32678431934327184.json",
+      "bytes": 1619653
+    },
+    {
+      "path": "data/raw/32784604551756178.json",
+      "bytes": 577168
+    },
+    {
+      "path": "data/raw/32821908911812078.json",
+      "bytes": 1615301
+    },
+    {
+      "path": "data/raw/32845891587040106.json",
+      "bytes": 1730036
+    },
+    {
+      "path": "data/raw/32941062994509455.json",
+      "bytes": 193704
+    },
+    {
+      "path": "data/raw/33015297618582406.json",
+      "bytes": 222604
+    },
+    {
+      "path": "data/raw/33121247877198378.json",
+      "bytes": 1339008
+    },
+    {
+      "path": "data/raw/33144542989832366.json",
+      "bytes": 383333
+    },
+    {
+      "path": "data/raw/33254899395816171.json",
+      "bytes": 779189
+    },
+    {
+      "path": "data/raw/33377506732461570.json",
+      "bytes": 12413
+    },
+    {
+      "path": "data/raw/33385563500220758.json",
+      "bytes": 1384762
+    },
+    {
+      "path": "data/raw/33400731879150699.json",
+      "bytes": 48739
+    },
+    {
+      "path": "data/raw/33406621820337161.json",
+      "bytes": 2014991
+    },
+    {
+      "path": "data/raw/33420285433308219.json",
+      "bytes": 717361
+    },
+    {
+      "path": "data/raw/33441514568901717.json",
+      "bytes": 448687
+    },
+    {
+      "path": "data/raw/33527290777160784.json",
+      "bytes": 325037
+    },
+    {
+      "path": "data/raw/33541897671561960.json",
+      "bytes": 1605689
+    },
+    {
+      "path": "data/raw/33574765499463325.json",
+      "bytes": 24434
+    },
+    {
+      "path": "data/raw/33603212156438463.json",
+      "bytes": 1705774
+    },
+    {
+      "path": "data/raw/33611155027418901.json",
+      "bytes": 822461
+    },
+    {
+      "path": "data/raw/33629260529503413.json",
+      "bytes": 619708
+    },
+    {
+      "path": "data/raw/33675347293193426.json",
+      "bytes": 3901
+    },
+    {
+      "path": "data/raw/33716211077781594.json",
+      "bytes": 259210
+    },
+    {
+      "path": "data/raw/33761569293467411.json",
+      "bytes": 79495
+    },
+    {
+      "path": "data/raw/33783140337377394.json",
+      "bytes": 1593293
+    },
+    {
+      "path": "data/raw/33808206014018431.json",
+      "bytes": 1546778
+    },
+    {
+      "path": "data/raw/33854964748757477.json",
+      "bytes": 628464
+    },
+    {
+      "path": "data/raw/33887145736684266.json",
+      "bytes": 933150
+    },
+    {
+      "path": "data/raw/33890474116030734.json",
+      "bytes": 19474
+    },
+    {
+      "path": "data/raw/33923925723818148.json",
+      "bytes": 1385333
+    },
+    {
+      "path": "data/raw/33923981945674722.json",
+      "bytes": 161615
+    },
+    {
+      "path": "data/raw/33931218652865616.json",
+      "bytes": 1841530
+    },
+    {
+      "path": "data/raw/33938004134399485.json",
+      "bytes": 245043
+    },
+    {
+      "path": "data/raw/34021965996608269.json",
+      "bytes": 12302
+    },
+    {
+      "path": "data/raw/3403844223171088.json",
+      "bytes": 6049
+    },
+    {
+      "path": "data/raw/34074071043606558.json",
+      "bytes": 168131
+    },
+    {
+      "path": "data/raw/3407806799514469.json",
+      "bytes": 533713
+    },
+    {
+      "path": "data/raw/34101489355036019.json",
+      "bytes": 13542
+    },
+    {
+      "path": "data/raw/34144395039913458.json",
+      "bytes": 729280
+    },
+    {
+      "path": "data/raw/34213522001938649.json",
+      "bytes": 384302
+    },
+    {
+      "path": "data/raw/34322849244939912.json",
+      "bytes": 129636
+    },
+    {
+      "path": "data/raw/34536282963162300.json",
+      "bytes": 9670
+    },
+    {
+      "path": "data/raw/34540569618314880.json",
+      "bytes": 1014807
+    },
+    {
+      "path": "data/raw/34552750623263639.json",
+      "bytes": 111272
+    },
+    {
+      "path": "data/raw/34557241988629814.json",
+      "bytes": 834592
+    },
+    {
+      "path": "data/raw/34581754264880199.json",
+      "bytes": 374783
+    },
+    {
+      "path": "data/raw/34641719089573667.json",
+      "bytes": 1631174
+    },
+    {
+      "path": "data/raw/34673681828119297.json",
+      "bytes": 1801721
+    },
+    {
+      "path": "data/raw/34718633636164421.json",
+      "bytes": 796466
+    },
+    {
+      "path": "data/raw/34721884030854211.json",
+      "bytes": 1150919
+    },
+    {
+      "path": "data/raw/34856765062083074.json",
+      "bytes": 335531
+    },
+    {
+      "path": "data/raw/34890845654517313.json",
+      "bytes": 1521522
+    },
+    {
+      "path": "data/raw/3492952121304423.json",
+      "bytes": 896880
+    },
+    {
+      "path": "data/raw/35026822153186010.json",
+      "bytes": 27245
+    },
+    {
+      "path": "data/raw/35158826900216508.json",
+      "bytes": 1600442
+    },
+    {
+      "path": "data/raw/35163287528816137.json",
+      "bytes": 335223
+    },
+    {
+      "path": "data/raw/35178706978554988.json",
+      "bytes": 1163579
+    },
+    {
+      "path": "data/raw/35314404574697714.json",
+      "bytes": 4033
+    },
+    {
+      "path": "data/raw/35331248532537562.json",
+      "bytes": 447968
+    },
+    {
+      "path": "data/raw/35366681030756042.json",
+      "bytes": 1220507
+    },
+    {
+      "path": "data/raw/35389487611786089.json",
+      "bytes": 95286
+    },
+    {
+      "path": "data/raw/35424116338766901.json",
+      "bytes": 1264878
+    },
+    {
+      "path": "data/raw/35425587644337450.json",
+      "bytes": 1634792
+    },
+    {
+      "path": "data/raw/3542690854557886.json",
+      "bytes": 515813
+    },
+    {
+      "path": "data/raw/35445515321658835.json",
+      "bytes": 706121
+    },
+    {
+      "path": "data/raw/35669480110084448.json",
+      "bytes": 1936967
+    },
+    {
+      "path": "data/raw/35700344742885862.json",
+      "bytes": 1763577
+    },
+    {
+      "path": "data/raw/35796086458096255.json",
+      "bytes": 1803721
+    },
+    {
+      "path": "data/raw/35821239894638794.json",
+      "bytes": 11485
+    },
+    {
+      "path": "data/raw/35831329532779850.json",
+      "bytes": 206336
+    },
+    {
+      "path": "data/raw/35875049744666675.json",
+      "bytes": 17725
+    },
+    {
+      "path": "data/raw/35940246179256292.json",
+      "bytes": 7577
+    },
+    {
+      "path": "data/raw/35948133957468680.json",
+      "bytes": 798421
+    },
+    {
+      "path": "data/raw/35964395659427029.json",
+      "bytes": 1671974
+    },
+    {
+      "path": "data/raw/36002472163498476.json",
+      "bytes": 87136
+    },
+    {
+      "path": "data/raw/36160702805508700.json",
+      "bytes": 6300
+    },
+    {
+      "path": "data/raw/36235343945196457.json",
+      "bytes": 292222
+    },
+    {
+      "path": "data/raw/36236701370110884.json",
+      "bytes": 147031
+    },
+    {
+      "path": "data/raw/3623921205367364.json",
+      "bytes": 1636916
+    },
+    {
+      "path": "data/raw/36248702773456944.json",
+      "bytes": 218401
+    },
+    {
+      "path": "data/raw/36255121262639515.json",
+      "bytes": 38654
+    },
+    {
+      "path": "data/raw/36282416082320053.json",
+      "bytes": 333333
+    },
+    {
+      "path": "data/raw/36408112396351116.json",
+      "bytes": 255294
+    },
+    {
+      "path": "data/raw/3654864906585643.json",
+      "bytes": 1712933
+    },
+    {
+      "path": "data/raw/36592972482259020.json",
+      "bytes": 1098295
+    },
+    {
+      "path": "data/raw/36671655475498480.json",
+      "bytes": 634803
+    },
+    {
+      "path": "data/raw/36696051921450401.json",
+      "bytes": 18747
+    },
+    {
+      "path": "data/raw/36732843099957739.json",
+      "bytes": 17477
+    },
+    {
+      "path": "data/raw/36773155987365094.json",
+      "bytes": 1056884
+    },
+    {
+      "path": "data/raw/36844527173896115.json",
+      "bytes": 423092
+    },
+    {
+      "path": "data/raw/36899214178084525.json",
+      "bytes": 765389
+    },
+    {
+      "path": "data/raw/36954414789212131.json",
+      "bytes": 59496
+    },
+    {
+      "path": "data/raw/36995197800118822.json",
+      "bytes": 1202348
+    },
+    {
+      "path": "data/raw/37028614515926436.json",
+      "bytes": 252094
+    },
+    {
+      "path": "data/raw/37073830945037165.json",
+      "bytes": 378921
+    },
+    {
+      "path": "data/raw/37089148943784077.json",
+      "bytes": 465909
+    },
+    {
+      "path": "data/raw/37118058361762279.json",
+      "bytes": 217146
+    },
+    {
+      "path": "data/raw/37120336886630649.json",
+      "bytes": 134043
+    },
+    {
+      "path": "data/raw/37204371816016200.json",
+      "bytes": 1922634
+    },
+    {
+      "path": "data/raw/3722699128879020.json",
+      "bytes": 1733806
+    },
+    {
+      "path": "data/raw/37281199178613855.json",
+      "bytes": 1008247
+    },
+    {
+      "path": "data/raw/37284308569715577.json",
+      "bytes": 460289
+    },
+    {
+      "path": "data/raw/37297472492769191.json",
+      "bytes": 203670
+    },
+    {
+      "path": "data/raw/37373827181901973.json",
+      "bytes": 11326
+    },
+    {
+      "path": "data/raw/37389789764168256.json",
+      "bytes": 1225212
+    },
+    {
+      "path": "data/raw/37546552210616368.json",
+      "bytes": 18211
+    },
+    {
+      "path": "data/raw/37614886280396031.json",
+      "bytes": 1600169
+    },
+    {
+      "path": "data/raw/37631109616997982.json",
+      "bytes": 1534803
+    },
+    {
+      "path": "data/raw/37661500521100963.json",
+      "bytes": 535216
+    },
+    {
+      "path": "data/raw/37828981835497620.json",
+      "bytes": 320970
+    },
+    {
+      "path": "data/raw/37842793167868642.json",
+      "bytes": 617607
+    },
+    {
+      "path": "data/raw/37920364612147195.json",
+      "bytes": 142194
+    },
+    {
+      "path": "data/raw/37949682634077588.json",
+      "bytes": 1383330
+    },
+    {
+      "path": "data/raw/38084304113529336.json",
+      "bytes": 965869
+    },
+    {
+      "path": "data/raw/38106662218250000.json",
+      "bytes": 3941
+    },
+    {
+      "path": "data/raw/38308293944404054.json",
+      "bytes": 13672
+    },
+    {
+      "path": "data/raw/383529400851043.json",
+      "bytes": 180450
+    },
+    {
+      "path": "data/raw/38356837895042988.json",
+      "bytes": 349104
+    },
+    {
+      "path": "data/raw/3839324986781871.json",
+      "bytes": 403171
+    },
+    {
+      "path": "data/raw/38428194580055973.json",
+      "bytes": 89955
+    },
+    {
+      "path": "data/raw/38437201078089290.json",
+      "bytes": 1264132
+    },
+    {
+      "path": "data/raw/3846143218462419.json",
+      "bytes": 574061
+    },
+    {
+      "path": "data/raw/38498691857065743.json",
+      "bytes": 6815
+    },
+    {
+      "path": "data/raw/38544104313215500.json",
+      "bytes": 263600
+    },
+    {
+      "path": "data/raw/38547060135156069.json",
+      "bytes": 1805655
+    },
+    {
+      "path": "data/raw/38555056423456635.json",
+      "bytes": 940835
+    },
+    {
+      "path": "data/raw/38568786927478796.json",
+      "bytes": 1595745
+    },
+    {
+      "path": "data/raw/38628771709301941.json",
+      "bytes": 151225
+    },
+    {
+      "path": "data/raw/3863538898378476.json",
+      "bytes": 1747769
+    },
+    {
+      "path": "data/raw/38698082531214554.json",
+      "bytes": 10886
+    },
+    {
+      "path": "data/raw/38713440086361985.json",
+      "bytes": 465390
+    },
+    {
+      "path": "data/raw/38714238429858938.json",
+      "bytes": 9777
+    },
+    {
+      "path": "data/raw/38738476064699383.json",
+      "bytes": 1175165
+    },
+    {
+      "path": "data/raw/38815167215602983.json",
+      "bytes": 8334
+    },
+    {
+      "path": "data/raw/38845574746937458.json",
+      "bytes": 169613
+    },
+    {
+      "path": "data/raw/39092664506765325.json",
+      "bytes": 18890
+    },
+    {
+      "path": "data/raw/39106806341791367.json",
+      "bytes": 5369
+    },
+    {
+      "path": "data/raw/39116664428676213.json",
+      "bytes": 1717525
+    },
+    {
+      "path": "data/raw/39120214435656534.json",
+      "bytes": 15829
+    },
+    {
+      "path": "data/raw/39138207971883105.json",
+      "bytes": 3225
+    },
+    {
+      "path": "data/raw/3927545069816217.json",
+      "bytes": 220380
+    },
+    {
+      "path": "data/raw/39436183727126211.json",
+      "bytes": 1954060
+    },
+    {
+      "path": "data/raw/39453972158399542.json",
+      "bytes": 980860
+    },
+    {
+      "path": "data/raw/39481233087768672.json",
+      "bytes": 1238903
+    },
+    {
+      "path": "data/raw/39485921411827022.json",
+      "bytes": 35367
+    },
+    {
+      "path": "data/raw/39549984459336635.json",
+      "bytes": 1127118
+    },
+    {
+      "path": "data/raw/3955332316338258.json",
+      "bytes": 438386
+    },
+    {
+      "path": "data/raw/39602125699379255.json",
+      "bytes": 19800
+    },
+    {
+      "path": "data/raw/39610074039667804.json",
+      "bytes": 571906
+    },
+    {
+      "path": "data/raw/39694804001673114.json",
+      "bytes": 3662
+    },
+    {
+      "path": "data/raw/39710474979238367.json",
+      "bytes": 96396
+    },
+    {
+      "path": "data/raw/39751275523025334.json",
+      "bytes": 985382
+    },
+    {
+      "path": "data/raw/39884565732277052.json",
+      "bytes": 479592
+    },
+    {
+      "path": "data/raw/39890577348717129.json",
+      "bytes": 1042
+    },
+    {
+      "path": "data/raw/40030273081894426.json",
+      "bytes": 71567
+    },
+    {
+      "path": "data/raw/40126421241992147.json",
+      "bytes": 151244
+    },
+    {
+      "path": "data/raw/40262275031537922.json",
+      "bytes": 1548916
+    },
+    {
+      "path": "data/raw/40374861063260484.json",
+      "bytes": 189911
+    },
+    {
+      "path": "data/raw/40411537531154482.json",
+      "bytes": 1743467
+    },
+    {
+      "path": "data/raw/40422084765096890.json",
+      "bytes": 234664
+    },
+    {
+      "path": "data/raw/40467386864240950.json",
+      "bytes": 73316
+    },
+    {
+      "path": "data/raw/40473515538481093.json",
+      "bytes": 272179
+    },
+    {
+      "path": "data/raw/40505767672724777.json",
+      "bytes": 1756998
+    },
+    {
+      "path": "data/raw/40553302624764543.json",
+      "bytes": 404136
+    },
+    {
+      "path": "data/raw/40582128123330360.json",
+      "bytes": 37676
+    },
+    {
+      "path": "data/raw/40611478183231802.json",
+      "bytes": 1685221
+    },
+    {
+      "path": "data/raw/40628828073328851.json",
+      "bytes": 17462
+    },
+    {
+      "path": "data/raw/40686081266073079.json",
+      "bytes": 20398
+    },
+    {
+      "path": "data/raw/40687945864403678.json",
+      "bytes": 9806
+    },
+    {
+      "path": "data/raw/40808043719554948.json",
+      "bytes": 1323503
+    },
+    {
+      "path": "data/raw/408934423224097.json",
+      "bytes": 1748661
+    },
+    {
+      "path": "data/raw/40912525017440979.json",
+      "bytes": 208134
+    },
+    {
+      "path": "data/raw/40971187120246219.json",
+      "bytes": 17764
+    },
+    {
+      "path": "data/raw/41048299027409941.json",
+      "bytes": 1267033
+    },
+    {
+      "path": "data/raw/41062682905925602.json",
+      "bytes": 13148
+    },
+    {
+      "path": "data/raw/41122066907413786.json",
+      "bytes": 516197
+    },
+    {
+      "path": "data/raw/41227201752535311.json",
+      "bytes": 1513919
+    },
+    {
+      "path": "data/raw/41250567677482189.json",
+      "bytes": 500106
+    },
+    {
+      "path": "data/raw/41284516796232939.json",
+      "bytes": 1692657
+    },
+    {
+      "path": "data/raw/41286608288791633.json",
+      "bytes": 483883
+    },
+    {
+      "path": "data/raw/41302553376174581.json",
+      "bytes": 1715325
+    },
+    {
+      "path": "data/raw/41350070322027412.json",
+      "bytes": 154837
+    },
+    {
+      "path": "data/raw/41377761729983737.json",
+      "bytes": 12989
+    },
+    {
+      "path": "data/raw/41379697187196382.json",
+      "bytes": 1118805
+    },
+    {
+      "path": "data/raw/41413746272614976.json",
+      "bytes": 10298
+    },
+    {
+      "path": "data/raw/4142914008323611.json",
+      "bytes": 29913
+    },
+    {
+      "path": "data/raw/41480981133648877.json",
+      "bytes": 45633
+    },
+    {
+      "path": "data/raw/41483334879559487.json",
+      "bytes": 74109
+    },
+    {
+      "path": "data/raw/41526556165532163.json",
+      "bytes": 1981
+    },
+    {
+      "path": "data/raw/41529644566373651.json",
+      "bytes": 132662
+    },
+    {
+      "path": "data/raw/41549354947422432.json",
+      "bytes": 197091
+    },
+    {
+      "path": "data/raw/4159532151694984.json",
+      "bytes": 982038
+    },
+    {
+      "path": "data/raw/41625340598198551.json",
+      "bytes": 1215215
+    },
+    {
+      "path": "data/raw/4170494561477386.json",
+      "bytes": 184710
+    },
+    {
+      "path": "data/raw/41713045190742691.json",
+      "bytes": 996739
+    },
+    {
+      "path": "data/raw/41746336706469006.json",
+      "bytes": 262917
+    },
+    {
+      "path": "data/raw/41781090739318251.json",
+      "bytes": 902056
+    },
+    {
+      "path": "data/raw/41788955054175494.json",
+      "bytes": 13943
+    },
+    {
+      "path": "data/raw/41796741644273824.json",
+      "bytes": 1563337
+    },
+    {
+      "path": "data/raw/41927452991671109.json",
+      "bytes": 346061
+    },
+    {
+      "path": "data/raw/41935584690956944.json",
+      "bytes": 1800252
+    },
+    {
+      "path": "data/raw/41941748231072053.json",
+      "bytes": 23678
+    },
+    {
+      "path": "data/raw/41963936424187357.json",
+      "bytes": 11836
+    },
+    {
+      "path": "data/raw/42049553761321495.json",
+      "bytes": 1046324
+    },
+    {
+      "path": "data/raw/42053657807681168.json",
+      "bytes": 21913
+    },
+    {
+      "path": "data/raw/42075223783409640.json",
+      "bytes": 1936415
+    },
+    {
+      "path": "data/raw/42087668448091861.json",
+      "bytes": 18837
+    },
+    {
+      "path": "data/raw/42137100448376631.json",
+      "bytes": 16810
+    },
+    {
+      "path": "data/raw/42139059906214637.json",
+      "bytes": 6883
+    },
+    {
+      "path": "data/raw/42150675055440502.json",
+      "bytes": 7323
+    },
+    {
+      "path": "data/raw/4216536645718658.json",
+      "bytes": 364026
+    },
+    {
+      "path": "data/raw/42387718866026650.json",
+      "bytes": 1910380
+    },
+    {
+      "path": "data/raw/42389510090849997.json",
+      "bytes": 20976
+    },
+    {
+      "path": "data/raw/42440323839870967.json",
+      "bytes": 16406
+    },
+    {
+      "path": "data/raw/42470251469508137.json",
+      "bytes": 1114968
+    },
+    {
+      "path": "data/raw/4247709727327181.json",
+      "bytes": 1091442
+    },
+    {
+      "path": "data/raw/42511156565416187.json",
+      "bytes": 8973
+    },
+    {
+      "path": "data/raw/4260037344198858.json",
+      "bytes": 22961
+    },
+    {
+      "path": "data/raw/42670427020727409.json",
+      "bytes": 352647
+    },
+    {
+      "path": "data/raw/4267564158935326.json",
+      "bytes": 1113795
+    },
+    {
+      "path": "data/raw/42680321661685261.json",
+      "bytes": 27173
+    },
+    {
+      "path": "data/raw/42690477960659940.json",
+      "bytes": 1228694
+    },
+    {
+      "path": "data/raw/42696242981550091.json",
+      "bytes": 1152339
+    },
+    {
+      "path": "data/raw/42711713063216333.json",
+      "bytes": 1382872
+    },
+    {
+      "path": "data/raw/42729883989221607.json",
+      "bytes": 19906
+    },
+    {
+      "path": "data/raw/42799209630949274.json",
+      "bytes": 270426
+    },
+    {
+      "path": "data/raw/43009306066217458.json",
+      "bytes": 262500
+    },
+    {
+      "path": "data/raw/43023243844297350.json",
+      "bytes": 1054833
+    },
+    {
+      "path": "data/raw/43062880954780884.json",
+      "bytes": 1701085
+    },
+    {
+      "path": "data/raw/43067568744644914.json",
+      "bytes": 15914
+    },
+    {
+      "path": "data/raw/43203863097260295.json",
+      "bytes": 9170
+    },
+    {
+      "path": "data/raw/43232988446781291.json",
+      "bytes": 25077
+    },
+    {
+      "path": "data/raw/43256212620530446.json",
+      "bytes": 1648824
+    },
+    {
+      "path": "data/raw/43267179898797137.json",
+      "bytes": 391899
+    },
+    {
+      "path": "data/raw/43283802997035462.json",
+      "bytes": 934048
+    },
+    {
+      "path": "data/raw/43291783149314349.json",
+      "bytes": 1045567
+    },
+    {
+      "path": "data/raw/43342306308122676.json",
+      "bytes": 1679469
+    },
+    {
+      "path": "data/raw/43358402418932595.json",
+      "bytes": 264760
+    },
+    {
+      "path": "data/raw/43362635835198978.json",
+      "bytes": 761780
+    },
+    {
+      "path": "data/raw/43374709930371268.json",
+      "bytes": 1157069
+    },
+    {
+      "path": "data/raw/4341085373810698.json",
+      "bytes": 185998
+    },
+    {
+      "path": "data/raw/43443105991896600.json",
+      "bytes": 545147
+    },
+    {
+      "path": "data/raw/43450146028916610.json",
+      "bytes": 227390
+    },
+    {
+      "path": "data/raw/43501047082635150.json",
+      "bytes": 952797
+    },
+    {
+      "path": "data/raw/43545527030854340.json",
+      "bytes": 599654
+    },
+    {
+      "path": "data/raw/43552974795606067.json",
+      "bytes": 664557
+    },
+    {
+      "path": "data/raw/43581497145262135.json",
+      "bytes": 3584
+    },
+    {
+      "path": "data/raw/43622578471330344.json",
+      "bytes": 1825795
+    },
+    {
+      "path": "data/raw/43646618461075007.json",
+      "bytes": 18348
+    },
+    {
+      "path": "data/raw/43664630566988630.json",
+      "bytes": 265506
+    },
+    {
+      "path": "data/raw/4369934250728330.json",
+      "bytes": 541439
+    },
+    {
+      "path": "data/raw/43716452378323683.json",
+      "bytes": 1181839
+    },
+    {
+      "path": "data/raw/4373573287489723.json",
+      "bytes": 261497
+    },
+    {
+      "path": "data/raw/43781018754867729.json",
+      "bytes": 1674754
+    },
+    {
+      "path": "data/raw/4384288570322406.json",
+      "bytes": 1777553
+    },
+    {
+      "path": "data/raw/43913530989262989.json",
+      "bytes": 665283
+    },
+    {
+      "path": "data/raw/43951910415124966.json",
+      "bytes": 1320173
+    },
+    {
+      "path": "data/raw/43966385447049549.json",
+      "bytes": 1411356
+    },
+    {
+      "path": "data/raw/44013656953678055.json",
+      "bytes": 1164093
+    },
+    {
+      "path": "data/raw/44076968694352242.json",
+      "bytes": 18458
+    },
+    {
+      "path": "data/raw/44140127009704624.json",
+      "bytes": 13015
+    },
+    {
+      "path": "data/raw/44153164692325703.json",
+      "bytes": 1873226
+    },
+    {
+      "path": "data/raw/44198316396949566.json",
+      "bytes": 6946
+    },
+    {
+      "path": "data/raw/44384450315448120.json",
+      "bytes": 477187
+    },
+    {
+      "path": "data/raw/44482873343227567.json",
+      "bytes": 16822
+    },
+    {
+      "path": "data/raw/44525502780633801.json",
+      "bytes": 13355
+    },
+    {
+      "path": "data/raw/44549439964296944.json",
+      "bytes": 658496
+    },
+    {
+      "path": "data/raw/44558786393585356.json",
+      "bytes": 271273
+    },
+    {
+      "path": "data/raw/44602042009921765.json",
+      "bytes": 739458
+    },
+    {
+      "path": "data/raw/44604318643489231.json",
+      "bytes": 206562
+    },
+    {
+      "path": "data/raw/44625249840480397.json",
+      "bytes": 794614
+    },
+    {
+      "path": "data/raw/44649731018346245.json",
+      "bytes": 70803
+    },
+    {
+      "path": "data/raw/44665761767777759.json",
+      "bytes": 1150792
+    },
+    {
+      "path": "data/raw/4470657233334072.json",
+      "bytes": 1623447
+    },
+    {
+      "path": "data/raw/447502040159260.json",
+      "bytes": 1039064
+    },
+    {
+      "path": "data/raw/44846320603450383.json",
+      "bytes": 467038
+    },
+    {
+      "path": "data/raw/44850033148208596.json",
+      "bytes": 1560870
+    },
+    {
+      "path": "data/raw/44891482026867833.json",
+      "bytes": 2019621
+    },
+    {
+      "path": "data/raw/44967158778304588.json",
+      "bytes": 1709565
+    },
+    {
+      "path": "data/raw/45030241165310579.json",
+      "bytes": 8502
+    },
+    {
+      "path": "data/raw/45050389997905274.json",
+      "bytes": 1580840
+    },
+    {
+      "path": "data/raw/45066064863062755.json",
+      "bytes": 1163790
+    },
+    {
+      "path": "data/raw/45088067148320823.json",
+      "bytes": 14333
+    },
+    {
+      "path": "data/raw/45174198424472334.json",
+      "bytes": 1682741
+    },
+    {
+      "path": "data/raw/45199303090518741.json",
+      "bytes": 287018
+    },
+    {
+      "path": "data/raw/45205530868811305.json",
+      "bytes": 964012
+    },
+    {
+      "path": "data/raw/45225332156835809.json",
+      "bytes": 24014
+    },
+    {
+      "path": "data/raw/4523009251964699.json",
+      "bytes": 278224
+    },
+    {
+      "path": "data/raw/4526677786911636.json",
+      "bytes": 6619
+    },
+    {
+      "path": "data/raw/45284811973404357.json",
+      "bytes": 409507
+    },
+    {
+      "path": "data/raw/4528607775462304.json",
+      "bytes": 1418462
+    },
+    {
+      "path": "data/raw/45292762906823004.json",
+      "bytes": 186014
+    },
+    {
+      "path": "data/raw/45322746365575278.json",
+      "bytes": 8513
+    },
+    {
+      "path": "data/raw/45353845483523901.json",
+      "bytes": 402319
+    },
+    {
+      "path": "data/raw/45381850756793927.json",
+      "bytes": 18581
+    },
+    {
+      "path": "data/raw/453846336644235.json",
+      "bytes": 6157
+    },
+    {
+      "path": "data/raw/45411759322575764.json",
+      "bytes": 7194
+    },
+    {
+      "path": "data/raw/4545713647225984.json",
+      "bytes": 134370
+    },
+    {
+      "path": "data/raw/45507655586782998.json",
+      "bytes": 457176
+    },
+    {
+      "path": "data/raw/45518744711972166.json",
+      "bytes": 936499
+    },
+    {
+      "path": "data/raw/45519261544951819.json",
+      "bytes": 511427
+    },
+    {
+      "path": "data/raw/45608932669358493.json",
+      "bytes": 1115366
+    },
+    {
+      "path": "data/raw/4563413583000719.json",
+      "bytes": 1549136
+    },
+    {
+      "path": "data/raw/45641540066710190.json",
+      "bytes": 1151537
+    },
+    {
+      "path": "data/raw/45728383369147894.json",
+      "bytes": 850391
+    },
+    {
+      "path": "data/raw/45768009941430542.json",
+      "bytes": 8795
+    },
+    {
+      "path": "data/raw/45769118141263874.json",
+      "bytes": 10155
+    },
+    {
+      "path": "data/raw/45895339414786358.json",
+      "bytes": 1788155
+    },
+    {
+      "path": "data/raw/45985285798331214.json",
+      "bytes": 10126
+    },
+    {
+      "path": "data/raw/45991797190214892.json",
+      "bytes": 1110134
+    },
+    {
+      "path": "data/raw/46033106714335453.json",
+      "bytes": 17661
+    },
+    {
+      "path": "data/raw/46142316957547223.json",
+      "bytes": 1383967
+    },
+    {
+      "path": "data/raw/4614779520007780.json",
+      "bytes": 1603864
+    },
+    {
+      "path": "data/raw/46178280540110577.json",
+      "bytes": 927244
+    },
+    {
+      "path": "data/raw/4626686276232042.json",
+      "bytes": 349015
+    },
+    {
+      "path": "data/raw/46348559193224090.json",
+      "bytes": 1629314
+    },
+    {
+      "path": "data/raw/46483466867025192.json",
+      "bytes": 97852
+    },
+    {
+      "path": "data/raw/46700660505281786.json",
+      "bytes": 818371
+    },
+    {
+      "path": "data/raw/46741025610365786.json",
+      "bytes": 1294251
+    },
+    {
+      "path": "data/raw/46752599569017089.json",
+      "bytes": 1837999
+    },
+    {
+      "path": "data/raw/46759369771801165.json",
+      "bytes": 10459
+    },
+    {
+      "path": "data/raw/46801030346547943.json",
+      "bytes": 275457
+    },
+    {
+      "path": "data/raw/46878429508891351.json",
+      "bytes": 337466
+    },
+    {
+      "path": "data/raw/46918165794045813.json",
+      "bytes": 203522
+    },
+    {
+      "path": "data/raw/46934177065273437.json",
+      "bytes": 166034
+    },
+    {
+      "path": "data/raw/46982154647719707.json",
+      "bytes": 1781036
+    },
+    {
+      "path": "data/raw/46994694158819212.json",
+      "bytes": 17559
+    },
+    {
+      "path": "data/raw/47026464823464687.json",
+      "bytes": 306905
+    },
+    {
+      "path": "data/raw/47041908051542008.json",
+      "bytes": 383975
+    },
+    {
+      "path": "data/raw/47125023640770480.json",
+      "bytes": 404856
+    },
+    {
+      "path": "data/raw/47141954400623087.json",
+      "bytes": 18369
+    },
+    {
+      "path": "data/raw/4714529145004023.json",
+      "bytes": 20591
+    },
+    {
+      "path": "data/raw/47232550823972469.json",
+      "bytes": 1843124
+    },
+    {
+      "path": "data/raw/47241174183349511.json",
+      "bytes": 48081
+    },
+    {
+      "path": "data/raw/47302318535715632.json",
+      "bytes": 1787996
+    },
+    {
+      "path": "data/raw/4733285133017464.json",
+      "bytes": 1558473
+    },
+    {
+      "path": "data/raw/47333458678352378.json",
+      "bytes": 976039
+    },
+    {
+      "path": "data/raw/47348197320716810.json",
+      "bytes": 896399
+    },
+    {
+      "path": "data/raw/47377315952751604.json",
+      "bytes": 1599699
+    },
+    {
+      "path": "data/raw/47407245139681569.json",
+      "bytes": 122461
+    },
+    {
+      "path": "data/raw/47420367912035981.json",
+      "bytes": 25311
+    },
+    {
+      "path": "data/raw/47436993045051357.json",
+      "bytes": 18655
+    },
+    {
+      "path": "data/raw/47492157735162813.json",
+      "bytes": 210663
+    },
+    {
+      "path": "data/raw/47499077366071464.json",
+      "bytes": 18303
+    },
+    {
+      "path": "data/raw/4758266259250794.json",
+      "bytes": 1503614
+    },
+    {
+      "path": "data/raw/47636042922304144.json",
+      "bytes": 21630
+    },
+    {
+      "path": "data/raw/47702059190622416.json",
+      "bytes": 907441
+    },
+    {
+      "path": "data/raw/47708469237766540.json",
+      "bytes": 3069
+    },
+    {
+      "path": "data/raw/47717365931256099.json",
+      "bytes": 46816
+    },
+    {
+      "path": "data/raw/47749661205825616.json",
+      "bytes": 838418
+    },
+    {
+      "path": "data/raw/47756003257788498.json",
+      "bytes": 454653
+    },
+    {
+      "path": "data/raw/47841327496247362.json",
+      "bytes": 1640902
+    },
+    {
+      "path": "data/raw/47875093814457181.json",
+      "bytes": 8425
+    },
+    {
+      "path": "data/raw/47973532381204870.json",
+      "bytes": 420300
+    },
+    {
+      "path": "data/raw/47996917271187218.json",
+      "bytes": 1833845
+    },
+    {
+      "path": "data/raw/48010225447410247.json",
+      "bytes": 1952258
+    },
+    {
+      "path": "data/raw/48021799996852800.json",
+      "bytes": 96938
+    },
+    {
+      "path": "data/raw/48031561246274682.json",
+      "bytes": 6854
+    },
+    {
+      "path": "data/raw/48092705333705969.json",
+      "bytes": 48191
+    },
+    {
+      "path": "data/raw/48240748007949910.json",
+      "bytes": 174152
+    },
+    {
+      "path": "data/raw/48241092863917835.json",
+      "bytes": 738610
+    },
+    {
+      "path": "data/raw/48261930411425125.json",
+      "bytes": 363132
+    },
+    {
+      "path": "data/raw/48287670503317419.json",
+      "bytes": 1015696
+    },
+    {
+      "path": "data/raw/48287767791629523.json",
+      "bytes": 389993
+    },
+    {
+      "path": "data/raw/48322987151197734.json",
+      "bytes": 20814
+    },
+    {
+      "path": "data/raw/48517714910707769.json",
+      "bytes": 192743
+    },
+    {
+      "path": "data/raw/48542914628343039.json",
+      "bytes": 18126
+    },
+    {
+      "path": "data/raw/48619517949257749.json",
+      "bytes": 1706309
+    },
+    {
+      "path": "data/raw/48623320733330408.json",
+      "bytes": 1948437
+    },
+    {
+      "path": "data/raw/48636523343139021.json",
+      "bytes": 258826
+    },
+    {
+      "path": "data/raw/48670335799816465.json",
+      "bytes": 1381436
+    },
+    {
+      "path": "data/raw/48753732042176709.json",
+      "bytes": 1383718
+    },
+    {
+      "path": "data/raw/48790087678187455.json",
+      "bytes": 27212
+    },
+    {
+      "path": "data/raw/48836100694107106.json",
+      "bytes": 20542
+    },
+    {
+      "path": "data/raw/4885314541377431.json",
+      "bytes": 297138
+    },
+    {
+      "path": "data/raw/48932793456289874.json",
+      "bytes": 178046
+    },
+    {
+      "path": "data/raw/48947196358863781.json",
+      "bytes": 28539
+    },
+    {
+      "path": "data/raw/48961821709187018.json",
+      "bytes": 36754
+    },
+    {
+      "path": "data/raw/48968268685622891.json",
+      "bytes": 99353
+    },
+    {
+      "path": "data/raw/48990026850202503.json",
+      "bytes": 1529912
+    },
+    {
+      "path": "data/raw/49054891736433700.json",
+      "bytes": 1831913
+    },
+    {
+      "path": "data/raw/490987973229371.json",
+      "bytes": 294744
+    },
+    {
+      "path": "data/raw/49098980593105335.json",
+      "bytes": 5922
+    },
+    {
+      "path": "data/raw/49111273992924798.json",
+      "bytes": 71574
+    },
+    {
+      "path": "data/raw/49144093215291545.json",
+      "bytes": 376714
+    },
+    {
+      "path": "data/raw/49149924761238142.json",
+      "bytes": 7258
+    },
+    {
+      "path": "data/raw/49188729526980541.json",
+      "bytes": 1073157
+    },
+    {
+      "path": "data/raw/49270349234092953.json",
+      "bytes": 301955
+    },
+    {
+      "path": "data/raw/49353447565507376.json",
+      "bytes": 1821607
+    },
+    {
+      "path": "data/raw/49366029582844313.json",
+      "bytes": 1982
+    },
+    {
+      "path": "data/raw/49399017998386087.json",
+      "bytes": 1140990
+    },
+    {
+      "path": "data/raw/4942127026063388.json",
+      "bytes": 1730862
+    },
+    {
+      "path": "data/raw/49502666250908008.json",
+      "bytes": 672072
+    },
+    {
+      "path": "data/raw/49531112577387255.json",
+      "bytes": 246274
+    },
+    {
+      "path": "data/raw/49532101082369992.json",
+      "bytes": 1380584
+    },
+    {
+      "path": "data/raw/49572254150311426.json",
+      "bytes": 1380734
+    },
+    {
+      "path": "data/raw/49627523909849331.json",
+      "bytes": 966724
+    },
+    {
+      "path": "data/raw/49632601495766480.json",
+      "bytes": 305149
+    },
+    {
+      "path": "data/raw/49641108336531623.json",
+      "bytes": 544741
+    },
+    {
+      "path": "data/raw/49674915481184052.json",
+      "bytes": 1186994
+    },
+    {
+      "path": "data/raw/49782064767608295.json",
+      "bytes": 170700
+    },
+    {
+      "path": "data/raw/49854144784855542.json",
+      "bytes": 341812
+    },
+    {
+      "path": "data/raw/49883920052253846.json",
+      "bytes": 8206
+    },
+    {
+      "path": "data/raw/49936654339917703.json",
+      "bytes": 21863
+    },
+    {
+      "path": "data/raw/50002340308486819.json",
+      "bytes": 734983
+    },
+    {
+      "path": "data/raw/50010295590788071.json",
+      "bytes": 9934
+    },
+    {
+      "path": "data/raw/50011948410571353.json",
+      "bytes": 234032
+    },
+    {
+      "path": "data/raw/50043085741805909.json",
+      "bytes": 15876
+    },
+    {
+      "path": "data/raw/50072269736641214.json",
+      "bytes": 80774
+    },
+    {
+      "path": "data/raw/50099241445087578.json",
+      "bytes": 18221
+    },
+    {
+      "path": "data/raw/50100062518826135.json",
+      "bytes": 1729843
+    },
+    {
+      "path": "data/raw/50117925085549635.json",
+      "bytes": 946710
+    },
+    {
+      "path": "data/raw/50139638026536387.json",
+      "bytes": 489933
+    },
+    {
+      "path": "data/raw/50185721305191887.json",
+      "bytes": 1592610
+    },
+    {
+      "path": "data/raw/50243708970398750.json",
+      "bytes": 195698
+    },
+    {
+      "path": "data/raw/50247622569476338.json",
+      "bytes": 508602
+    },
+    {
+      "path": "data/raw/50263705198613204.json",
+      "bytes": 27137
+    },
+    {
+      "path": "data/raw/50264175787486822.json",
+      "bytes": 200517
+    },
+    {
+      "path": "data/raw/50303812703694682.json",
+      "bytes": 19350
+    },
+    {
+      "path": "data/raw/50341528161302545.json",
+      "bytes": 1822313
+    },
+    {
+      "path": "data/raw/50503654866742146.json",
+      "bytes": 409232
+    },
+    {
+      "path": "data/raw/50573381652821612.json",
+      "bytes": 27957
+    },
+    {
+      "path": "data/raw/50580753680043015.json",
+      "bytes": 1198369
+    },
+    {
+      "path": "data/raw/50587892784913370.json",
+      "bytes": 435559
+    },
+    {
+      "path": "data/raw/50633804639547462.json",
+      "bytes": 1422804
+    },
+    {
+      "path": "data/raw/50652509974768380.json",
+      "bytes": 57758
+    },
+    {
+      "path": "data/raw/50738985718283463.json",
+      "bytes": 6245
+    },
+    {
+      "path": "data/raw/50792786683910016.json",
+      "bytes": 1221980
+    },
+    {
+      "path": "data/raw/50858076472521650.json",
+      "bytes": 49029
+    },
+    {
+      "path": "data/raw/50885758506315221.json",
+      "bytes": 48835
+    },
+    {
+      "path": "data/raw/50921165792116180.json",
+      "bytes": 16740
+    },
+    {
+      "path": "data/raw/5092823031617455.json",
+      "bytes": 25447
+    },
+    {
+      "path": "data/raw/51017863148152520.json",
+      "bytes": 427250
+    },
+    {
+      "path": "data/raw/51106317433079213.json",
+      "bytes": 1397601
+    },
+    {
+      "path": "data/raw/51200575796028449.json",
+      "bytes": 498839
+    },
+    {
+      "path": "data/raw/51225420656129029.json",
+      "bytes": 26903
+    },
+    {
+      "path": "data/raw/51285326016186930.json",
+      "bytes": 270499
+    },
+    {
+      "path": "data/raw/51294484197536070.json",
+      "bytes": 1193022
+    },
+    {
+      "path": "data/raw/51346017122365212.json",
+      "bytes": 4270
+    },
+    {
+      "path": "data/raw/51390991364277477.json",
+      "bytes": 194168
+    },
+    {
+      "path": "data/raw/51428824560206903.json",
+      "bytes": 17029
+    },
+    {
+      "path": "data/raw/51459202425114449.json",
+      "bytes": 968103
+    },
+    {
+      "path": "data/raw/51498617532027182.json",
+      "bytes": 13800
+    },
+    {
+      "path": "data/raw/51512508512274242.json",
+      "bytes": 25208
+    },
+    {
+      "path": "data/raw/51539000543410496.json",
+      "bytes": 62274
+    },
+    {
+      "path": "data/raw/51617145873056483.json",
+      "bytes": 844554
+    },
+    {
+      "path": "data/raw/5187018329202415.json",
+      "bytes": 1783122
+    },
+    {
+      "path": "data/raw/51920757918600374.json",
+      "bytes": 102096
+    },
+    {
+      "path": "data/raw/51971068201094874.json",
+      "bytes": 1233919
+    },
+    {
+      "path": "data/raw/52065908338534296.json",
+      "bytes": 18541
+    },
+    {
+      "path": "data/raw/52093506777318573.json",
+      "bytes": 17253
+    },
+    {
+      "path": "data/raw/52108299737513207.json",
+      "bytes": 17293
+    },
+    {
+      "path": "data/raw/52220424531578944.json",
+      "bytes": 1740302
+    },
+    {
+      "path": "data/raw/52232388263291380.json",
+      "bytes": 1560149
+    },
+    {
+      "path": "data/raw/52276793997855077.json",
+      "bytes": 17714
+    },
+    {
+      "path": "data/raw/52382684379473036.json",
+      "bytes": 642444
+    },
+    {
+      "path": "data/raw/52455922800537930.json",
+      "bytes": 1214736
+    },
+    {
+      "path": "data/raw/5245886946635216.json",
+      "bytes": 5961
+    },
+    {
+      "path": "data/raw/52497713622747990.json",
+      "bytes": 175785
+    },
+    {
+      "path": "data/raw/52516829478132343.json",
+      "bytes": 17899
+    },
+    {
+      "path": "data/raw/52551569846042389.json",
+      "bytes": 251120
+    },
+    {
+      "path": "data/raw/52587750999094180.json",
+      "bytes": 218380
+    },
+    {
+      "path": "data/raw/52652258924409753.json",
+      "bytes": 27254
+    },
+    {
+      "path": "data/raw/52652397131976039.json",
+      "bytes": 12256
+    },
+    {
+      "path": "data/raw/52723796174811703.json",
+      "bytes": 25555
+    },
+    {
+      "path": "data/raw/52792903131341205.json",
+      "bytes": 1278265
+    },
+    {
+      "path": "data/raw/52846735736632974.json",
+      "bytes": 309831
+    },
+    {
+      "path": "data/raw/5286237676293152.json",
+      "bytes": 218719
+    },
+    {
+      "path": "data/raw/52932092555708556.json",
+      "bytes": 284339
+    },
+    {
+      "path": "data/raw/52995702515619983.json",
+      "bytes": 3695
+    },
+    {
+      "path": "data/raw/5305844922895340.json",
+      "bytes": 691561
+    },
+    {
+      "path": "data/raw/53059909885484371.json",
+      "bytes": 263968
+    },
+    {
+      "path": "data/raw/53113471126689455.json",
+      "bytes": 1757109
+    },
+    {
+      "path": "data/raw/53145304508578701.json",
+      "bytes": 333220
+    },
+    {
+      "path": "data/raw/5317427172344706.json",
+      "bytes": 617720
+    },
+    {
+      "path": "data/raw/53204330224889981.json",
+      "bytes": 747458
+    },
+    {
+      "path": "data/raw/53251602435454519.json",
+      "bytes": 855415
+    },
+    {
+      "path": "data/raw/53254637903825194.json",
+      "bytes": 794509
+    },
+    {
+      "path": "data/raw/53334304751609770.json",
+      "bytes": 433442
+    },
+    {
+      "path": "data/raw/53350307353645375.json",
+      "bytes": 157025
+    },
+    {
+      "path": "data/raw/53379852031035992.json",
+      "bytes": 13493
+    },
+    {
+      "path": "data/raw/53399678938874746.json",
+      "bytes": 5902
+    },
+    {
+      "path": "data/raw/53419976284977130.json",
+      "bytes": 601335
+    },
+    {
+      "path": "data/raw/53449700212786324.json",
+      "bytes": 1273816
+    },
+    {
+      "path": "data/raw/53463652379781502.json",
+      "bytes": 153220
+    },
+    {
+      "path": "data/raw/53514992320442853.json",
+      "bytes": 89171
+    },
+    {
+      "path": "data/raw/53633583359422860.json",
+      "bytes": 65493
+    },
+    {
+      "path": "data/raw/53647874954005806.json",
+      "bytes": 1167995
+    },
+    {
+      "path": "data/raw/53686258677793038.json",
+      "bytes": 1049139
+    },
+    {
+      "path": "data/raw/53757360284587335.json",
+      "bytes": 17671
+    },
+    {
+      "path": "data/raw/53791883295822083.json",
+      "bytes": 10413
+    },
+    {
+      "path": "data/raw/53876951211818232.json",
+      "bytes": 19891
+    },
+    {
+      "path": "data/raw/53939491694438204.json",
+      "bytes": 19364
+    },
+    {
+      "path": "data/raw/54162461162502185.json",
+      "bytes": 15898
+    },
+    {
+      "path": "data/raw/54277068923045214.json",
+      "bytes": 1765212
+    },
+    {
+      "path": "data/raw/5427792638736934.json",
+      "bytes": 656389
+    },
+    {
+      "path": "data/raw/54362614710319812.json",
+      "bytes": 81554
+    },
+    {
+      "path": "data/raw/54369290104873523.json",
+      "bytes": 1171928
+    },
+    {
+      "path": "data/raw/54384872783431726.json",
+      "bytes": 14039
+    },
+    {
+      "path": "data/raw/54419429862704331.json",
+      "bytes": 1639962
+    },
+    {
+      "path": "data/raw/54444475837527920.json",
+      "bytes": 1322172
+    },
+    {
+      "path": "data/raw/54482686501491508.json",
+      "bytes": 754382
+    },
+    {
+      "path": "data/raw/54493234408301135.json",
+      "bytes": 519707
+    },
+    {
+      "path": "data/raw/54509759694064219.json",
+      "bytes": 1081109
+    },
+    {
+      "path": "data/raw/54569128419335832.json",
+      "bytes": 17763
+    },
+    {
+      "path": "data/raw/54676885047867737.json",
+      "bytes": 1879243
+    },
+    {
+      "path": "data/raw/54726816131455857.json",
+      "bytes": 18130
+    },
+    {
+      "path": "data/raw/54804669948012768.json",
+      "bytes": 4030
+    },
+    {
+      "path": "data/raw/55070742656326885.json",
+      "bytes": 332312
+    },
+    {
+      "path": "data/raw/55127657985997520.json",
+      "bytes": 566845
+    },
+    {
+      "path": "data/raw/55134248355240272.json",
+      "bytes": 14071
+    },
+    {
+      "path": "data/raw/5516102131364383.json",
+      "bytes": 1074742
+    },
+    {
+      "path": "data/raw/55201604487356053.json",
+      "bytes": 1263887
+    },
+    {
+      "path": "data/raw/55254206302462116.json",
+      "bytes": 854451
+    },
+    {
+      "path": "data/raw/55294951106810711.json",
+      "bytes": 96286
+    },
+    {
+      "path": "data/raw/55308018877404137.json",
+      "bytes": 322869
+    },
+    {
+      "path": "data/raw/55334557154157949.json",
+      "bytes": 8567
+    },
+    {
+      "path": "data/raw/55372887225116352.json",
+      "bytes": 18673
+    },
+    {
+      "path": "data/raw/55376739611383226.json",
+      "bytes": 198695
+    },
+    {
+      "path": "data/raw/55380241895925075.json",
+      "bytes": 16269
+    },
+    {
+      "path": "data/raw/55545245289132942.json",
+      "bytes": 19526
+    },
+    {
+      "path": "data/raw/55590290897219234.json",
+      "bytes": 7162
+    },
+    {
+      "path": "data/raw/5564768007356822.json",
+      "bytes": 887157
+    },
+    {
+      "path": "data/raw/557341606036871.json",
+      "bytes": 6189
+    },
+    {
+      "path": "data/raw/55740262184167928.json",
+      "bytes": 17979
+    },
+    {
+      "path": "data/raw/55753811091438492.json",
+      "bytes": 5971
+    },
+    {
+      "path": "data/raw/55761294311886451.json",
+      "bytes": 118334
+    },
+    {
+      "path": "data/raw/5582891928037431.json",
+      "bytes": 17387
+    },
+    {
+      "path": "data/raw/55897939403232751.json",
+      "bytes": 1930956
+    },
+    {
+      "path": "data/raw/55979741213594029.json",
+      "bytes": 1135521
+    },
+    {
+      "path": "data/raw/56006915451245411.json",
+      "bytes": 1125389
+    },
+    {
+      "path": "data/raw/56055472208695073.json",
+      "bytes": 21256
+    },
+    {
+      "path": "data/raw/56189844193337321.json",
+      "bytes": 84552
+    },
+    {
+      "path": "data/raw/56198087086479954.json",
+      "bytes": 9960
+    },
+    {
+      "path": "data/raw/56297915760055237.json",
+      "bytes": 13344
+    },
+    {
+      "path": "data/raw/56324206651661881.json",
+      "bytes": 1789913
+    },
+    {
+      "path": "data/raw/56344907495802692.json",
+      "bytes": 288313
+    },
+    {
+      "path": "data/raw/56366176429887611.json",
+      "bytes": 6814
+    },
+    {
+      "path": "data/raw/56375665074210467.json",
+      "bytes": 436579
+    },
+    {
+      "path": "data/raw/56429431740318486.json",
+      "bytes": 1273943
+    },
+    {
+      "path": "data/raw/56477685225237560.json",
+      "bytes": 819234
+    },
+    {
+      "path": "data/raw/56550776668133562.json",
+      "bytes": 1822321
+    },
+    {
+      "path": "data/raw/56567222800264910.json",
+      "bytes": 13091
+    },
+    {
+      "path": "data/raw/56591881518499520.json",
+      "bytes": 978384
+    },
+    {
+      "path": "data/raw/56650067865905863.json",
+      "bytes": 39051
+    },
+    {
+      "path": "data/raw/56712769076499345.json",
+      "bytes": 141710
+    },
+    {
+      "path": "data/raw/56717416662584054.json",
+      "bytes": 1218014
+    },
+    {
+      "path": "data/raw/56749722173437552.json",
+      "bytes": 19726
+    },
+    {
+      "path": "data/raw/56802926348928053.json",
+      "bytes": 342170
+    },
+    {
+      "path": "data/raw/56871139881800017.json",
+      "bytes": 281880
+    },
+    {
+      "path": "data/raw/56886181335890068.json",
+      "bytes": 194555
+    },
+    {
+      "path": "data/raw/56987424987755487.json",
+      "bytes": 167070
+    },
+    {
+      "path": "data/raw/57034983342177082.json",
+      "bytes": 8408
+    },
+    {
+      "path": "data/raw/57086055330734195.json",
+      "bytes": 1530953
+    },
+    {
+      "path": "data/raw/57157873359416943.json",
+      "bytes": 197718
+    },
+    {
+      "path": "data/raw/57191287546444240.json",
+      "bytes": 177259
+    },
+    {
+      "path": "data/raw/57273529732791251.json",
+      "bytes": 1738654
+    },
+    {
+      "path": "data/raw/57285457653311090.json",
+      "bytes": 50910
+    },
+    {
+      "path": "data/raw/57300230097485720.json",
+      "bytes": 567360
+    },
+    {
+      "path": "data/raw/57342697611492231.json",
+      "bytes": 17097
+    },
+    {
+      "path": "data/raw/57370712944387572.json",
+      "bytes": 21638
+    },
+    {
+      "path": "data/raw/57374840325378191.json",
+      "bytes": 97261
+    },
+    {
+      "path": "data/raw/57468269415483633.json",
+      "bytes": 36963
+    },
+    {
+      "path": "data/raw/57548042024361764.json",
+      "bytes": 21731
+    },
+    {
+      "path": "data/raw/57551382352708199.json",
+      "bytes": 790934
+    },
+    {
+      "path": "data/raw/57597726475581654.json",
+      "bytes": 8645
+    },
+    {
+      "path": "data/raw/57600064931636077.json",
+      "bytes": 879820
+    },
+    {
+      "path": "data/raw/57633476576138071.json",
+      "bytes": 16825
+    },
+    {
+      "path": "data/raw/57639364758870873.json",
+      "bytes": 1648163
+    },
+    {
+      "path": "data/raw/57643967123480136.json",
+      "bytes": 8953
+    },
+    {
+      "path": "data/raw/57722642338781674.json",
+      "bytes": 1472690
+    },
+    {
+      "path": "data/raw/57728534324022361.json",
+      "bytes": 561478
+    },
+    {
+      "path": "data/raw/57761388729898548.json",
+      "bytes": 703982
+    },
+    {
+      "path": "data/raw/57776962062862377.json",
+      "bytes": 18364
+    },
+    {
+      "path": "data/raw/57848902730525508.json",
+      "bytes": 29324
+    },
+    {
+      "path": "data/raw/57875847776839336.json",
+      "bytes": 1804844
+    },
+    {
+      "path": "data/raw/57944184894703821.json",
+      "bytes": 2000430
+    },
+    {
+      "path": "data/raw/57964444592843599.json",
+      "bytes": 13827
+    },
+    {
+      "path": "data/raw/57987505904803884.json",
+      "bytes": 25294
+    },
+    {
+      "path": "data/raw/58108537439201620.json",
+      "bytes": 134968
+    },
+    {
+      "path": "data/raw/58180284328186631.json",
+      "bytes": 699111
+    },
+    {
+      "path": "data/raw/58356374066358100.json",
+      "bytes": 439797
+    },
+    {
+      "path": "data/raw/58404227422957334.json",
+      "bytes": 12895
+    },
+    {
+      "path": "data/raw/58462435595049907.json",
+      "bytes": 343221
+    },
+    {
+      "path": "data/raw/58482817740704549.json",
+      "bytes": 298089
+    },
+    {
+      "path": "data/raw/58514988269776425.json",
+      "bytes": 343780
+    },
+    {
+      "path": "data/raw/58549126969789192.json",
+      "bytes": 12821
+    },
+    {
+      "path": "data/raw/58624675782868154.json",
+      "bytes": 50469
+    },
+    {
+      "path": "data/raw/58630636362786806.json",
+      "bytes": 21569
+    },
+    {
+      "path": "data/raw/5866848234665627.json",
+      "bytes": 889725
+    },
+    {
+      "path": "data/raw/58695040447675899.json",
+      "bytes": 665094
+    },
+    {
+      "path": "data/raw/58722731270352481.json",
+      "bytes": 227065
+    },
+    {
+      "path": "data/raw/58741071099161284.json",
+      "bytes": 614034
+    },
+    {
+      "path": "data/raw/58789178087946067.json",
+      "bytes": 434835
+    },
+    {
+      "path": "data/raw/58810336532668771.json",
+      "bytes": 417911
+    },
+    {
+      "path": "data/raw/58852293795036597.json",
+      "bytes": 425308
+    },
+    {
+      "path": "data/raw/58873907630765023.json",
+      "bytes": 526746
+    },
+    {
+      "path": "data/raw/58907519746346841.json",
+      "bytes": 11146
+    },
+    {
+      "path": "data/raw/58931793851445922.json",
+      "bytes": 1985740
+    },
+    {
+      "path": "data/raw/589599697502308.json",
+      "bytes": 284384
+    },
+    {
+      "path": "data/raw/58981113351684710.json",
+      "bytes": 49398
+    },
+    {
+      "path": "data/raw/59046324684454732.json",
+      "bytes": 17794
+    },
+    {
+      "path": "data/raw/59142194115401696.json",
+      "bytes": 655365
+    },
+    {
+      "path": "data/raw/5920901446678689.json",
+      "bytes": 401418
+    },
+    {
+      "path": "data/raw/59217041815333317.json",
+      "bytes": 1634476
+    },
+    {
+      "path": "data/raw/59266699437480384.json",
+      "bytes": 1066703
+    },
+    {
+      "path": "data/raw/59275340743792076.json",
+      "bytes": 17781
+    },
+    {
+      "path": "data/raw/59345957997866018.json",
+      "bytes": 123643
+    },
+    {
+      "path": "data/raw/59369489026367819.json",
+      "bytes": 1066026
+    },
+    {
+      "path": "data/raw/59461185672081215.json",
+      "bytes": 337647
+    },
+    {
+      "path": "data/raw/59470107928175959.json",
+      "bytes": 581580
+    },
+    {
+      "path": "data/raw/59486059679335017.json",
+      "bytes": 2050615
+    },
+    {
+      "path": "data/raw/59522975635235187.json",
+      "bytes": 216277
+    },
+    {
+      "path": "data/raw/59612098290740355.json",
+      "bytes": 1695162
+    },
+    {
+      "path": "data/raw/59641261891847088.json",
+      "bytes": 145671
+    },
+    {
+      "path": "data/raw/5968811612822747.json",
+      "bytes": 461810
+    },
+    {
+      "path": "data/raw/59737057733169898.json",
+      "bytes": 25187
+    },
+    {
+      "path": "data/raw/59848307608894801.json",
+      "bytes": 939913
+    },
+    {
+      "path": "data/raw/59866041653103343.json",
+      "bytes": 689373
+    },
+    {
+      "path": "data/raw/5987841496184505.json",
+      "bytes": 564724
+    },
+    {
+      "path": "data/raw/59894184850560807.json",
+      "bytes": 84377
+    },
+    {
+      "path": "data/raw/59921975187856916.json",
+      "bytes": 1551845
+    },
+    {
+      "path": "data/raw/59962858215609867.json",
+      "bytes": 27374
+    },
+    {
+      "path": "data/raw/60079434631497942.json",
+      "bytes": 1169642
+    },
+    {
+      "path": "data/raw/60162288821230099.json",
+      "bytes": 373061
+    },
+    {
+      "path": "data/raw/60210342490439455.json",
+      "bytes": 7043
+    },
+    {
+      "path": "data/raw/60235881999727383.json",
+      "bytes": 48358
+    },
+    {
+      "path": "data/raw/60247433951600827.json",
+      "bytes": 1185329
+    },
+    {
+      "path": "data/raw/60289595205403229.json",
+      "bytes": 430542
+    },
+    {
+      "path": "data/raw/60329326119353667.json",
+      "bytes": 8675
+    },
+    {
+      "path": "data/raw/60338819916476186.json",
+      "bytes": 12927
+    },
+    {
+      "path": "data/raw/60350996279289099.json",
+      "bytes": 1003096
+    },
+    {
+      "path": "data/raw/60369091709615715.json",
+      "bytes": 183904
+    },
+    {
+      "path": "data/raw/60406254194457384.json",
+      "bytes": 15755
+    },
+    {
+      "path": "data/raw/6043384171800349.json",
+      "bytes": 1041044
+    },
+    {
+      "path": "data/raw/60451823714332895.json",
+      "bytes": 1772688
+    },
+    {
+      "path": "data/raw/60457961736189295.json",
+      "bytes": 17544
+    },
+    {
+      "path": "data/raw/60480450687826144.json",
+      "bytes": 152938
+    },
+    {
+      "path": "data/raw/60523145697836739.json",
+      "bytes": 840038
+    },
+    {
+      "path": "data/raw/60610861509165508.json",
+      "bytes": 1532455
+    },
+    {
+      "path": "data/raw/60654872678917533.json",
+      "bytes": 1595995
+    },
+    {
+      "path": "data/raw/60720002743232058.json",
+      "bytes": 11684
+    },
+    {
+      "path": "data/raw/60731011247436482.json",
+      "bytes": 93028
+    },
+    {
+      "path": "data/raw/60783654574662426.json",
+      "bytes": 630752
+    },
+    {
+      "path": "data/raw/60803468196917769.json",
+      "bytes": 13814
+    },
+    {
+      "path": "data/raw/60887982279284651.json",
+      "bytes": 457370
+    },
+    {
+      "path": "data/raw/60960899751339935.json",
+      "bytes": 9385
+    },
+    {
+      "path": "data/raw/61008578771363208.json",
+      "bytes": 2033
+    },
+    {
+      "path": "data/raw/6110133418282108.json",
+      "bytes": 704679
+    },
+    {
+      "path": "data/raw/61102694810476197.json",
+      "bytes": 1555872
+    },
+    {
+      "path": "data/raw/6116572045021585.json",
+      "bytes": 431412
+    },
+    {
+      "path": "data/raw/611986653700161.json",
+      "bytes": 1314892
+    },
+    {
+      "path": "data/raw/61218356902416193.json",
+      "bytes": 9793
+    },
+    {
+      "path": "data/raw/61241641746491741.json",
+      "bytes": 13748
+    },
+    {
+      "path": "data/raw/61265100181977543.json",
+      "bytes": 450160
+    },
+    {
+      "path": "data/raw/61298636307861167.json",
+      "bytes": 827333
+    },
+    {
+      "path": "data/raw/61310599391543522.json",
+      "bytes": 156548
+    },
+    {
+      "path": "data/raw/6131290133202745.json",
+      "bytes": 1727074
+    },
+    {
+      "path": "data/raw/61332057061846617.json",
+      "bytes": 1645397
+    },
+    {
+      "path": "data/raw/61353819417460675.json",
+      "bytes": 3075
+    },
+    {
+      "path": "data/raw/61430920456509110.json",
+      "bytes": 6050
+    },
+    {
+      "path": "data/raw/61469668095573716.json",
+      "bytes": 480362
+    },
+    {
+      "path": "data/raw/61506294208022391.json",
+      "bytes": 1628239
+    },
+    {
+      "path": "data/raw/61556681926102940.json",
+      "bytes": 17987
+    },
+    {
+      "path": "data/raw/61664227282090067.json",
+      "bytes": 1137699
+    },
+    {
+      "path": "data/raw/61805666737517582.json",
+      "bytes": 167712
+    },
+    {
+      "path": "data/raw/61920683599787147.json",
+      "bytes": 165957
+    },
+    {
+      "path": "data/raw/61932671684681771.json",
+      "bytes": 12323
+    },
+    {
+      "path": "data/raw/61954477957575378.json",
+      "bytes": 824059
+    },
+    {
+      "path": "data/raw/61964603703044288.json",
+      "bytes": 14206
+    },
+    {
+      "path": "data/raw/61965667862447288.json",
+      "bytes": 12418
+    },
+    {
+      "path": "data/raw/61978776664766359.json",
+      "bytes": 371336
+    },
+    {
+      "path": "data/raw/62012736978844991.json",
+      "bytes": 613728
+    },
+    {
+      "path": "data/raw/62069100905581368.json",
+      "bytes": 224624
+    },
+    {
+      "path": "data/raw/62098181644893039.json",
+      "bytes": 20083
+    },
+    {
+      "path": "data/raw/62107151670661969.json",
+      "bytes": 406820
+    },
+    {
+      "path": "data/raw/62177651435283872.json",
+      "bytes": 1693726
+    },
+    {
+      "path": "data/raw/6223226316297962.json",
+      "bytes": 19182
+    },
+    {
+      "path": "data/raw/62235397452612911.json",
+      "bytes": 570740
+    },
+    {
+      "path": "data/raw/62258804563636993.json",
+      "bytes": 1662519
+    },
+    {
+      "path": "data/raw/6232053018652624.json",
+      "bytes": 18133
+    },
+    {
+      "path": "data/raw/62327572123241646.json",
+      "bytes": 19846
+    },
+    {
+      "path": "data/raw/6233172939132588.json",
+      "bytes": 247993
+    },
+    {
+      "path": "data/raw/62346804681275278.json",
+      "bytes": 1779277
+    },
+    {
+      "path": "data/raw/6237807001018762.json",
+      "bytes": 160468
+    },
+    {
+      "path": "data/raw/62404730109947970.json",
+      "bytes": 521399
+    },
+    {
+      "path": "data/raw/62478276461613732.json",
+      "bytes": 61730
+    },
+    {
+      "path": "data/raw/62566771123456823.json",
+      "bytes": 7168
+    },
+    {
+      "path": "data/raw/62575434414985179.json",
+      "bytes": 424351
+    },
+    {
+      "path": "data/raw/62603302940123327.json",
+      "bytes": 1663788
+    },
+    {
+      "path": "data/raw/62708526880913292.json",
+      "bytes": 365713
+    },
+    {
+      "path": "data/raw/62786156501584862.json",
+      "bytes": 1063356
+    },
+    {
+      "path": "data/raw/6279426571085158.json",
+      "bytes": 140570
+    },
+    {
+      "path": "data/raw/62794928774385833.json",
+      "bytes": 1385820
+    },
+    {
+      "path": "data/raw/62845384302495432.json",
+      "bytes": 350545
+    },
+    {
+      "path": "data/raw/62871204147035019.json",
+      "bytes": 13455
+    },
+    {
+      "path": "data/raw/62876078446037226.json",
+      "bytes": 13052
+    },
+    {
+      "path": "data/raw/62945240926992257.json",
+      "bytes": 67193
+    },
+    {
+      "path": "data/raw/62952165421099192.json",
+      "bytes": 1734084
+    },
+    {
+      "path": "data/raw/62969097124964887.json",
+      "bytes": 20916
+    },
+    {
+      "path": "data/raw/62977319271289925.json",
+      "bytes": 1062620
+    },
+    {
+      "path": "data/raw/63084741752814852.json",
+      "bytes": 1205375
+    },
+    {
+      "path": "data/raw/63130510582824261.json",
+      "bytes": 4315
+    },
+    {
+      "path": "data/raw/6313671729583238.json",
+      "bytes": 152426
+    },
+    {
+      "path": "data/raw/6328167131743522.json",
+      "bytes": 253393
+    },
+    {
+      "path": "data/raw/63283084239560679.json",
+      "bytes": 13557
+    },
+    {
+      "path": "data/raw/63305142946100720.json",
+      "bytes": 13444
+    },
+    {
+      "path": "data/raw/63315013743060811.json",
+      "bytes": 1090888
+    },
+    {
+      "path": "data/raw/63363116407864462.json",
+      "bytes": 1908841
+    },
+    {
+      "path": "data/raw/63380098535169030.json",
+      "bytes": 1595688
+    },
+    {
+      "path": "data/raw/6340008135535479.json",
+      "bytes": 6775
+    },
+    {
+      "path": "data/raw/63471443183226352.json",
+      "bytes": 3171
+    },
+    {
+      "path": "data/raw/63481599728522324.json",
+      "bytes": 1694704
+    },
+    {
+      "path": "data/raw/63499217872110599.json",
+      "bytes": 1153830
+    },
+    {
+      "path": "data/raw/63507121552152989.json",
+      "bytes": 125690
+    },
+    {
+      "path": "data/raw/63514093298304639.json",
+      "bytes": 243921
+    },
+    {
+      "path": "data/raw/63520812390415652.json",
+      "bytes": 63613
+    },
+    {
+      "path": "data/raw/63580313877463104.json",
+      "bytes": 1549311
+    },
+    {
+      "path": "data/raw/6362118829011821.json",
+      "bytes": 169227
+    },
+    {
+      "path": "data/raw/63704201144621295.json",
+      "bytes": 1187332
+    },
+    {
+      "path": "data/raw/6375951461729203.json",
+      "bytes": 411807
+    },
+    {
+      "path": "data/raw/63830424809501048.json",
+      "bytes": 877740
+    },
+    {
+      "path": "data/raw/63886404454477678.json",
+      "bytes": 207496
+    },
+    {
+      "path": "data/raw/63910745011900124.json",
+      "bytes": 27253
+    },
+    {
+      "path": "data/raw/63915926161403347.json",
+      "bytes": 1796959
+    },
+    {
+      "path": "data/raw/63917421733088077.json",
+      "bytes": 1454858
+    },
+    {
+      "path": "data/raw/64007203906495070.json",
+      "bytes": 1366904
+    },
+    {
+      "path": "data/raw/64053833253854597.json",
+      "bytes": 14154
+    },
+    {
+      "path": "data/raw/64059415899989731.json",
+      "bytes": 9808
+    },
+    {
+      "path": "data/raw/64155926828410021.json",
+      "bytes": 1089270
+    },
+    {
+      "path": "data/raw/64158949553973920.json",
+      "bytes": 28109
+    },
+    {
+      "path": "data/raw/64179199721036185.json",
+      "bytes": 6252
+    },
+    {
+      "path": "data/raw/64216772923447100.json",
+      "bytes": 297670
+    },
+    {
+      "path": "data/raw/64298008532791199.json",
+      "bytes": 942863
+    },
+    {
+      "path": "data/raw/64298714449497795.json",
+      "bytes": 20877
+    },
+    {
+      "path": "data/raw/6433335428452486.json",
+      "bytes": 734312
+    },
+    {
+      "path": "data/raw/64341992373049080.json",
+      "bytes": 1196938
+    },
+    {
+      "path": "data/raw/64358061873294912.json",
+      "bytes": 1661854
+    },
+    {
+      "path": "data/raw/64380036977879368.json",
+      "bytes": 74747
+    },
+    {
+      "path": "data/raw/64427132952754690.json",
+      "bytes": 17347
+    },
+    {
+      "path": "data/raw/64617910055465018.json",
+      "bytes": 27114
+    },
+    {
+      "path": "data/raw/64619251116188373.json",
+      "bytes": 527764
+    },
+    {
+      "path": "data/raw/64659064562132185.json",
+      "bytes": 200824
+    },
+    {
+      "path": "data/raw/64674618286697547.json",
+      "bytes": 5896
+    },
+    {
+      "path": "data/raw/64699417405634265.json",
+      "bytes": 785118
+    },
+    {
+      "path": "data/raw/64724847373019027.json",
+      "bytes": 21773
+    },
+    {
+      "path": "data/raw/64726704607252497.json",
+      "bytes": 10280
+    },
+    {
+      "path": "data/raw/6478064539164167.json",
+      "bytes": 795384
+    },
+    {
+      "path": "data/raw/64795751499397128.json",
+      "bytes": 153445
+    },
+    {
+      "path": "data/raw/64842837716888827.json",
+      "bytes": 699366
+    },
+    {
+      "path": "data/raw/64843936383937546.json",
+      "bytes": 867011
+    },
+    {
+      "path": "data/raw/64882372946109233.json",
+      "bytes": 16903
+    },
+    {
+      "path": "data/raw/64899658576570461.json",
+      "bytes": 102556
+    },
+    {
+      "path": "data/raw/64932123558151000.json",
+      "bytes": 9983
+    },
+    {
+      "path": "data/raw/64942549055019553.json",
+      "bytes": 637881
+    },
+    {
+      "path": "data/raw/64969599336655725.json",
+      "bytes": 532119
+    },
+    {
+      "path": "data/raw/64973252728260903.json",
+      "bytes": 519159
+    },
+    {
+      "path": "data/raw/65004959184388996.json",
+      "bytes": 1547775
+    },
+    {
+      "path": "data/raw/65018804181564924.json",
+      "bytes": 888136
+    },
+    {
+      "path": "data/raw/65023851436340574.json",
+      "bytes": 984592
+    },
+    {
+      "path": "data/raw/65122215875355555.json",
+      "bytes": 1560363
+    },
+    {
+      "path": "data/raw/65190029034514887.json",
+      "bytes": 191535
+    },
+    {
+      "path": "data/raw/65197850030400728.json",
+      "bytes": 237544
+    },
+    {
+      "path": "data/raw/65200406890497224.json",
+      "bytes": 13973
+    },
+    {
+      "path": "data/raw/65249046611427924.json",
+      "bytes": 499329
+    },
+    {
+      "path": "data/raw/65321970913593427.json",
+      "bytes": 1511289
+    },
+    {
+      "path": "data/raw/65365726391403130.json",
+      "bytes": 34274
+    },
+    {
+      "path": "data/raw/65378630011538741.json",
+      "bytes": 195922
+    },
+    {
+      "path": "data/raw/65414507129586385.json",
+      "bytes": 1672185
+    },
+    {
+      "path": "data/raw/65473703162196532.json",
+      "bytes": 160224
+    },
+    {
+      "path": "data/raw/655060129740445.json",
+      "bytes": 511848
+    },
+    {
+      "path": "data/raw/65576885779918210.json",
+      "bytes": 530137
+    },
+    {
+      "path": "data/raw/65640021232361587.json",
+      "bytes": 160825
+    },
+    {
+      "path": "data/raw/65663173216130783.json",
+      "bytes": 195385
+    },
+    {
+      "path": "data/raw/65671173927025645.json",
+      "bytes": 959877
+    },
+    {
+      "path": "data/raw/65736765815044639.json",
+      "bytes": 100140
+    },
+    {
+      "path": "data/raw/65852697063347955.json",
+      "bytes": 76341
+    },
+    {
+      "path": "data/raw/65883838195688438.json",
+      "bytes": 2046070
+    },
+    {
+      "path": "data/raw/66025809087145106.json",
+      "bytes": 16741
+    },
+    {
+      "path": "data/raw/66036975502302203.json",
+      "bytes": 998184
+    },
+    {
+      "path": "data/raw/66112031135635506.json",
+      "bytes": 14005
+    },
+    {
+      "path": "data/raw/66118902229267173.json",
+      "bytes": 9077
+    },
+    {
+      "path": "data/raw/66127247173352975.json",
+      "bytes": 1147175
+    },
+    {
+      "path": "data/raw/66142616039907394.json",
+      "bytes": 934335
+    },
+    {
+      "path": "data/raw/66214092362179379.json",
+      "bytes": 19730
+    },
+    {
+      "path": "data/raw/66219723709595228.json",
+      "bytes": 183094
+    },
+    {
+      "path": "data/raw/66278746143105902.json",
+      "bytes": 13950
+    },
+    {
+      "path": "data/raw/66295665969375744.json",
+      "bytes": 1606207
+    },
+    {
+      "path": "data/raw/66305369579423152.json",
+      "bytes": 62871
+    },
+    {
+      "path": "data/raw/66315581735594751.json",
+      "bytes": 473331
+    },
+    {
+      "path": "data/raw/66341244362469110.json",
+      "bytes": 17845
+    },
+    {
+      "path": "data/raw/66403035348744901.json",
+      "bytes": 419262
+    },
+    {
+      "path": "data/raw/66416853783916493.json",
+      "bytes": 237638
+    },
+    {
+      "path": "data/raw/66424163876658304.json",
+      "bytes": 1157922
+    },
+    {
+      "path": "data/raw/66450490505950110.json",
+      "bytes": 1666178
+    },
+    {
+      "path": "data/raw/66456062140680461.json",
+      "bytes": 1871905
+    },
+    {
+      "path": "data/raw/66565762259123454.json",
+      "bytes": 78410
+    },
+    {
+      "path": "data/raw/66599109405217136.json",
+      "bytes": 800237
+    },
+    {
+      "path": "data/raw/66670327908408150.json",
+      "bytes": 19674
+    },
+    {
+      "path": "data/raw/66682662312253625.json",
+      "bytes": 1088683
+    },
+    {
+      "path": "data/raw/66721204145017523.json",
+      "bytes": 423075
+    },
+    {
+      "path": "data/raw/66726992874614788.json",
+      "bytes": 612704
+    },
+    {
+      "path": "data/raw/66772024744156373.json",
+      "bytes": 1866542
+    },
+    {
+      "path": "data/raw/66818022341772870.json",
+      "bytes": 1001564
+    },
+    {
+      "path": "data/raw/669004835800651.json",
+      "bytes": 12935
+    },
+    {
+      "path": "data/raw/67030488744129337.json",
+      "bytes": 1711671
+    },
+    {
+      "path": "data/raw/67126881188552864.json",
+      "bytes": 1575545
+    },
+    {
+      "path": "data/raw/67141987086032267.json",
+      "bytes": 262323
+    },
+    {
+      "path": "data/raw/67170215467608124.json",
+      "bytes": 1198892
+    },
+    {
+      "path": "data/raw/67206358287598044.json",
+      "bytes": 1769624
+    },
+    {
+      "path": "data/raw/67213778593531096.json",
+      "bytes": 623767
+    },
+    {
+      "path": "data/raw/67241087413794092.json",
+      "bytes": 17690
+    },
+    {
+      "path": "data/raw/67244978897607661.json",
+      "bytes": 152183
+    },
+    {
+      "path": "data/raw/67245068099249026.json",
+      "bytes": 235313
+    },
+    {
+      "path": "data/raw/67261627618765635.json",
+      "bytes": 241713
+    },
+    {
+      "path": "data/raw/67291499254940004.json",
+      "bytes": 18290
+    },
+    {
+      "path": "data/raw/67294227180710857.json",
+      "bytes": 223098
+    },
+    {
+      "path": "data/raw/67295485155210436.json",
+      "bytes": 3088
+    },
+    {
+      "path": "data/raw/67327029014085707.json",
+      "bytes": 1717567
+    },
+    {
+      "path": "data/raw/67455383896188985.json",
+      "bytes": 172527
+    },
+    {
+      "path": "data/raw/67522512921942106.json",
+      "bytes": 454129
+    },
+    {
+      "path": "data/raw/67535331549405846.json",
+      "bytes": 1165380
+    },
+    {
+      "path": "data/raw/6757220448540984.json",
+      "bytes": 1776079
+    },
+    {
+      "path": "data/raw/67675656072510693.json",
+      "bytes": 538030
+    },
+    {
+      "path": "data/raw/67690708346979840.json",
+      "bytes": 1732816
+    },
+    {
+      "path": "data/raw/67717913151786055.json",
+      "bytes": 280896
+    },
+    {
+      "path": "data/raw/67850045213257224.json",
+      "bytes": 697260
+    },
+    {
+      "path": "data/raw/67868738676326187.json",
+      "bytes": 254384
+    },
+    {
+      "path": "data/raw/67948828314784308.json",
+      "bytes": 16851
+    },
+    {
+      "path": "data/raw/67988012428906654.json",
+      "bytes": 1742813
+    },
+    {
+      "path": "data/raw/68115844277345930.json",
+      "bytes": 1381120
+    },
+    {
+      "path": "data/raw/68117765376081366.json",
+      "bytes": 1784870
+    },
+    {
+      "path": "data/raw/68189757644218674.json",
+      "bytes": 7013
+    },
+    {
+      "path": "data/raw/68203878405672734.json",
+      "bytes": 1079828
+    },
+    {
+      "path": "data/raw/68326919524398561.json",
+      "bytes": 86174
+    },
+    {
+      "path": "data/raw/68347423518804677.json",
+      "bytes": 132654
+    },
+    {
+      "path": "data/raw/68376789401977331.json",
+      "bytes": 153564
+    },
+    {
+      "path": "data/raw/68392966859938879.json",
+      "bytes": 9842
+    },
+    {
+      "path": "data/raw/6847536925606808.json",
+      "bytes": 677959
+    },
+    {
+      "path": "data/raw/68475700698158846.json",
+      "bytes": 8299
+    },
+    {
+      "path": "data/raw/68488673556087148.json",
+      "bytes": 1688266
+    },
+    {
+      "path": "data/raw/68511398880877261.json",
+      "bytes": 16976
+    },
+    {
+      "path": "data/raw/68517032834363488.json",
+      "bytes": 1045266
+    },
+    {
+      "path": "data/raw/68536788290212877.json",
+      "bytes": 58172
+    },
+    {
+      "path": "data/raw/68635710163497089.json",
+      "bytes": 1120864
+    },
+    {
+      "path": "data/raw/68696706057281209.json",
+      "bytes": 20749
+    },
+    {
+      "path": "data/raw/68705173735383474.json",
+      "bytes": 19325
+    },
+    {
+      "path": "data/raw/68765038081150767.json",
+      "bytes": 17020
+    },
+    {
+      "path": "data/raw/68825919328166149.json",
+      "bytes": 11375
+    },
+    {
+      "path": "data/raw/68863997659126807.json",
+      "bytes": 247881
+    },
+    {
+      "path": "data/raw/68909035712962732.json",
+      "bytes": 1295287
+    },
+    {
+      "path": "data/raw/68928111889585263.json",
+      "bytes": 1057918
+    },
+    {
+      "path": "data/raw/68941822863885255.json",
+      "bytes": 562526
+    },
+    {
+      "path": "data/raw/68960649297297447.json",
+      "bytes": 27053
+    },
+    {
+      "path": "data/raw/69027010142075669.json",
+      "bytes": 18153
+    },
+    {
+      "path": "data/raw/6905737326614124.json",
+      "bytes": 163737
+    },
+    {
+      "path": "data/raw/69066583567362240.json",
+      "bytes": 18460
+    },
+    {
+      "path": "data/raw/69067576215760005.json",
+      "bytes": 1103689
+    },
+    {
+      "path": "data/raw/69090868458637360.json",
+      "bytes": 1647104
+    },
+    {
+      "path": "data/raw/69143674941561637.json",
+      "bytes": 886624
+    },
+    {
+      "path": "data/raw/69155867302158609.json",
+      "bytes": 40106
+    },
+    {
+      "path": "data/raw/69171897374421261.json",
+      "bytes": 317506
+    },
+    {
+      "path": "data/raw/69226044702448424.json",
+      "bytes": 17190
+    },
+    {
+      "path": "data/raw/69243469815198168.json",
+      "bytes": 4693
+    },
+    {
+      "path": "data/raw/69357254079049448.json",
+      "bytes": 17176
+    },
+    {
+      "path": "data/raw/69446612239102459.json",
+      "bytes": 453565
+    },
+    {
+      "path": "data/raw/69454539056549106.json",
+      "bytes": 1620771
+    },
+    {
+      "path": "data/raw/69540585676934415.json",
+      "bytes": 468399
+    },
+    {
+      "path": "data/raw/69562625496483761.json",
+      "bytes": 22888
+    },
+    {
+      "path": "data/raw/69646290980663168.json",
+      "bytes": 13667
+    },
+    {
+      "path": "data/raw/69817338460284329.json",
+      "bytes": 412076
+    },
+    {
+      "path": "data/raw/69847139870135237.json",
+      "bytes": 846494
+    },
+    {
+      "path": "data/raw/69904617508102874.json",
+      "bytes": 383181
+    },
+    {
+      "path": "data/raw/70160331666811226.json",
+      "bytes": 17838
+    },
+    {
+      "path": "data/raw/70182111157131717.json",
+      "bytes": 24419
+    },
+    {
+      "path": "data/raw/70219663893822560.json",
+      "bytes": 1853583
+    },
+    {
+      "path": "data/raw/70270965300262393.json",
+      "bytes": 1423329
+    },
+    {
+      "path": "data/raw/70289374539527245.json",
+      "bytes": 1808154
+    },
+    {
+      "path": "data/raw/70309338813767186.json",
+      "bytes": 460535
+    },
+    {
+      "path": "data/raw/70391097626818082.json",
+      "bytes": 575883
+    },
+    {
+      "path": "data/raw/70474983732269112.json",
+      "bytes": 2014858
+    },
+    {
+      "path": "data/raw/70498485598181604.json",
+      "bytes": 1067339
+    },
+    {
+      "path": "data/raw/70515583859928047.json",
+      "bytes": 267032
+    },
+    {
+      "path": "data/raw/70541934393301867.json",
+      "bytes": 389264
+    },
+    {
+      "path": "data/raw/70550167438703193.json",
+      "bytes": 7044
+    },
+    {
+      "path": "data/raw/70564601253876673.json",
+      "bytes": 27682
+    },
+    {
+      "path": "data/raw/70595828753641750.json",
+      "bytes": 885203
+    },
+    {
+      "path": "data/raw/70698996132397388.json",
+      "bytes": 325800
+    },
+    {
+      "path": "data/raw/70814244102598215.json",
+      "bytes": 246399
+    },
+    {
+      "path": "data/raw/70883594945615893.json",
+      "bytes": 1126368
+    },
+    {
+      "path": "data/raw/70934270174405743.json",
+      "bytes": 2011128
+    },
+    {
+      "path": "data/raw/7093655625757378.json",
+      "bytes": 1168627
+    },
+    {
+      "path": "data/raw/7104496710718469.json",
+      "bytes": 210339
+    },
+    {
+      "path": "data/raw/71051000490303906.json",
+      "bytes": 122281
+    },
+    {
+      "path": "data/raw/71059014594878101.json",
+      "bytes": 24550
+    },
+    {
+      "path": "data/raw/71068313834275501.json",
+      "bytes": 706206
+    },
+    {
+      "path": "data/raw/71076372178147339.json",
+      "bytes": 539258
+    },
+    {
+      "path": "data/raw/71108387303091880.json",
+      "bytes": 130759
+    },
+    {
+      "path": "data/raw/71165086685863262.json",
+      "bytes": 9255
+    },
+    {
+      "path": "data/raw/71266020070603888.json",
+      "bytes": 142918
+    },
+    {
+      "path": "data/raw/71290297158948749.json",
+      "bytes": 751147
+    },
+    {
+      "path": "data/raw/71483646978964608.json",
+      "bytes": 409849
+    },
+    {
+      "path": "data/raw/71510396252618330.json",
+      "bytes": 1000916
+    },
+    {
+      "path": "data/raw/71523986304961239.json",
+      "bytes": 1233805
+    },
+    {
+      "path": "data/raw/71571639927013317.json",
+      "bytes": 227854
+    },
+    {
+      "path": "data/raw/71595553356620707.json",
+      "bytes": 63368
+    },
+    {
+      "path": "data/raw/71666521540545716.json",
+      "bytes": 636212
+    },
+    {
+      "path": "data/raw/71672399601682259.json",
+      "bytes": 941625
+    },
+    {
+      "path": "data/raw/7171962866271439.json",
+      "bytes": 35028
+    },
+    {
+      "path": "data/raw/71744682148776880.json",
+      "bytes": 1636920
+    },
+    {
+      "path": "data/raw/71758511001096824.json",
+      "bytes": 513787
+    },
+    {
+      "path": "data/raw/71779402170497603.json",
+      "bytes": 153200
+    },
+    {
+      "path": "data/raw/7183333492448248.json",
+      "bytes": 1879403
+    },
+    {
+      "path": "data/raw/71843282162462661.json",
+      "bytes": 439825
+    },
+    {
+      "path": "data/raw/71856634742001725.json",
+      "bytes": 744893
+    },
+    {
+      "path": "data/raw/71945594172117613.json",
+      "bytes": 350334
+    },
+    {
+      "path": "data/raw/71957984642204570.json",
+      "bytes": 601800
+    },
+    {
+      "path": "data/raw/72028609344780100.json",
+      "bytes": 408492
+    },
+    {
+      "path": "data/raw/72044846109864381.json",
+      "bytes": 362527
+    },
+    {
+      "path": "data/raw/7235435095059069.json",
+      "bytes": 972747
+    },
+    {
+      "path": "data/raw/7300125658580126.json",
+      "bytes": 708887
+    },
+    {
+      "path": "data/raw/7376158544119907.json",
+      "bytes": 101093
+    },
+    {
+      "path": "data/raw/7385624172574740.json",
+      "bytes": 1999345
+    },
+    {
+      "path": "data/raw/7395271748414592.json",
+      "bytes": 1170783
+    },
+    {
+      "path": "data/raw/7457232989848872.json",
+      "bytes": 1655851
+    },
+    {
+      "path": "data/raw/7504459417903246.json",
+      "bytes": 16681
+    },
+    {
+      "path": "data/raw/7505990056227818.json",
+      "bytes": 1231027
+    },
+    {
+      "path": "data/raw/7670135462634715.json",
+      "bytes": 407737
+    },
+    {
+      "path": "data/raw/7681671915916933.json",
+      "bytes": 293048
+    },
+    {
+      "path": "data/raw/7711282667602555.json",
+      "bytes": 2034590
+    },
+    {
+      "path": "data/raw/7740831252462823.json",
+      "bytes": 25501
+    },
+    {
+      "path": "data/raw/7745894403636165.json",
+      "bytes": 1510096
+    },
+    {
+      "path": "data/raw/778253364357513.json",
+      "bytes": 1472700
+    },
+    {
+      "path": "data/raw/7803396484851273.json",
+      "bytes": 185500
+    },
+    {
+      "path": "data/raw/7838473806129208.json",
+      "bytes": 16297
+    },
+    {
+      "path": "data/raw/7854238750997270.json",
+      "bytes": 85584
+    },
+    {
+      "path": "data/raw/7887331100268907.json",
+      "bytes": 26004
+    },
+    {
+      "path": "data/raw/8000351713789858.json",
+      "bytes": 212866
+    },
+    {
+      "path": "data/raw/8016626572941686.json",
+      "bytes": 13788
+    },
+    {
+      "path": "data/raw/8021561335311415.json",
+      "bytes": 226922
+    },
+    {
+      "path": "data/raw/8040378907652400.json",
+      "bytes": 71717
+    },
+    {
+      "path": "data/raw/8159393776190600.json",
+      "bytes": 20401
+    },
+    {
+      "path": "data/raw/8175784894140974.json",
+      "bytes": 484399
+    },
+    {
+      "path": "data/raw/8234855558996646.json",
+      "bytes": 426800
+    },
+    {
+      "path": "data/raw/831325835570803.json",
+      "bytes": 1101609
+    },
+    {
+      "path": "data/raw/8456220681927384.json",
+      "bytes": 122822
+    },
+    {
+      "path": "data/raw/8602793697394313.json",
+      "bytes": 192045
+    },
+    {
+      "path": "data/raw/8620139816622134.json",
+      "bytes": 79350
+    },
+    {
+      "path": "data/raw/8646067353086740.json",
+      "bytes": 1357276
+    },
+    {
+      "path": "data/raw/8660681364361165.json",
+      "bytes": 19084
+    },
+    {
+      "path": "data/raw/8688959373404772.json",
+      "bytes": 11912
+    },
+    {
+      "path": "data/raw/8725363201030474.json",
+      "bytes": 487527
+    },
+    {
+      "path": "data/raw/8755818493504217.json",
+      "bytes": 11577
+    },
+    {
+      "path": "data/raw/8802832452124529.json",
+      "bytes": 8874
+    },
+    {
+      "path": "data/raw/8819583151943787.json",
+      "bytes": 13065
+    },
+    {
+      "path": "data/raw/8912965520056581.json",
+      "bytes": 190668
+    },
+    {
+      "path": "data/raw/8915450910866216.json",
+      "bytes": 1768726
+    },
+    {
+      "path": "data/raw/8952498925412032.json",
+      "bytes": 6872
+    },
+    {
+      "path": "data/raw/8961366473557410.json",
+      "bytes": 195857
+    },
+    {
+      "path": "data/raw/8977369674477111.json",
+      "bytes": 1733237
+    },
+    {
+      "path": "data/raw/8977441217024425.json",
+      "bytes": 1639199
+    },
+    {
+      "path": "data/raw/9050415909189504.json",
+      "bytes": 882934
+    },
+    {
+      "path": "data/raw/9089296888187061.json",
+      "bytes": 259062
+    },
+    {
+      "path": "data/raw/9098178887955847.json",
+      "bytes": 301228
+    },
+    {
+      "path": "data/raw/9141577977527107.json",
+      "bytes": 906544
+    },
+    {
+      "path": "data/raw/9155145921347611.json",
+      "bytes": 211254
+    },
+    {
+      "path": "data/raw/917857106093847.json",
+      "bytes": 875821
+    },
+    {
+      "path": "data/raw/9375107506435996.json",
+      "bytes": 264474
+    },
+    {
+      "path": "data/raw/9481703061634967.json",
+      "bytes": 1329166
+    },
+    {
+      "path": "data/raw/9501116319168306.json",
+      "bytes": 17509
+    },
+    {
+      "path": "data/raw/9698674686691945.json",
+      "bytes": 1637035
+    },
+    {
+      "path": "data/raw/9751062304772298.json",
+      "bytes": 47437
+    },
+    {
+      "path": "data/raw/9761381741308262.json",
+      "bytes": 1255253
+    },
+    {
+      "path": "data/raw/9917562130961534.json",
+      "bytes": 126923
+    },
+    {
+      "path": "data/raw/9956888831468521.json",
+      "bytes": 266622
+    },
+    {
+      "path": "data/symbols.json",
+      "bytes": 1161170
+    },
+    {
+      "path": "data/top_setups.json",
+      "bytes": 11566
+    },
+    {
+      "path": "main.py",
+      "bytes": 27679
+    },
+    {
+      "path": "market_data/history.py",
+      "bytes": 6159
+    },
+    {
+      "path": "market_data/symbols.py",
+      "bytes": 13115
+    },
+    {
+      "path": "market_data/tsetmc.py",
+      "bytes": 1866
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 98
+    },
+    {
+      "path": "run_all.py",
+      "bytes": 2687
+    },
+    {
+      "path": "src/analysis/__init__.py",
+      "bytes": 0
+    },
+    {
+      "path": "src/analysis/advanced_indicators.py",
+      "bytes": 11542
+    },
+    {
+      "path": "src/analysis/backtest.py",
+      "bytes": 9815
+    },
+    {
+      "path": "src/analysis/batch_backtest.py",
+      "bytes": 3065
+    },
+    {
+      "path": "src/analysis/deep_analyzer.py",
+      "bytes": 12078
+    },
+    {
+      "path": "src/analysis/extensions_v1.py",
+      "bytes": 2469
+    },
+    {
+      "path": "src/analysis/extensions_v2.py",
+      "bytes": 1815
+    },
+    {
+      "path": "src/analysis/extensions_v3.py",
+      "bytes": 689
+    },
+    {
+      "path": "src/analysis/indicators.py",
+      "bytes": 8031
+    },
+    {
+      "path": "src/analysis/screener.py",
+      "bytes": 7978
+    },
+    {
+      "path": "src/analysis/setup_finder.py",
+      "bytes": 6558
+    },
+    {
+      "path": "src/analysis/smart_scanner.py",
+      "bytes": 7081
+    },
+    {
+      "path": "src/api/__init__.py",
+      "bytes": 0
+    },
+    {
+      "path": "src/api/dashboard_server.py",
+      "bytes": 1589
+    },
+    {
+      "path": "src/api/server.py",
+      "bytes": 7412
+    },
+    {
+      "path": "src/config.py",
+      "bytes": 1591
+    },
+    {
+      "path": "src/data/batch_advanced_indicators.py",
+      "bytes": 12543
+    },
+    {
+      "path": "src/data/batch_downloader.py",
+      "bytes": 7963
+    },
+    {
+      "path": "src/data/batch_extensions_v1.py",
+      "bytes": 2175
+    },
+    {
+      "path": "src/data/batch_extensions_v2.py",
+      "bytes": 3908
+    },
+    {
+      "path": "src/data/batch_extensions_v3.py",
+      "bytes": 1931
+    },
+    {
+      "path": "src/data/batch_indicators.py",
+      "bytes": 4855
+    },
+    {
+      "path": "src/data/database.py",
+      "bytes": 6865
+    },
+    {
+      "path": "src/data/history.py",
+      "bytes": 3853
+    },
+    {
+      "path": "src/data/incremental.py",
+      "bytes": 6549
+    },
+    {
+      "path": "src/data/indicators_db.py",
+      "bytes": 5982
+    },
+    {
+      "path": "src/data/migrate_extensions_v1.py",
+      "bytes": 1109
+    },
+    {
+      "path": "src/data/migrate_extensions_v2.py",
+      "bytes": 1610
+    },
+    {
+      "path": "src/data/migrate_extensions_v3.py",
+      "bytes": 743
+    },
+    {
+      "path": "src/data/migrate_history.py",
+      "bytes": 5130
+    },
+    {
+      "path": "src/data/migrate_indicators_v2.py",
+      "bytes": 2476
+    },
+    {
+      "path": "src/data/symbols.py",
+      "bytes": 4058
+    },
+    {
+      "path": "src/data/tsetmc.py",
+      "bytes": 2915
+    },
+    {
+      "path": "src/data/update_markets.py",
+      "bytes": 6519
+    },
+    {
+      "path": "static/app.js",
+      "bytes": 7315
+    },
+    {
+      "path": "static/dashboard.html",
+      "bytes": 3393
+    },
+    {
+      "path": "static/index.html",
+      "bytes": 4589
+    },
+    {
+      "path": "static/style.css",
+      "bytes": 3685
+    },
+    {
+      "path": "tests/map_fields.py",
+      "bytes": 2915
+    },
+    {
+      "path": "tools/project_inventory.py",
+      "bytes": 3270
+    },
+    {
+      "path": "tools/setup_database.py",
+      "bytes": 5662
+    }
+  ],
+  "findings": [
+    {
+      "file": "tools/setup_database.py",
+      "line": 90,
+      "kind": "todo",
+      "detail": "TODO"
+    },
+    {
+      "file": "tools/setup_database.py",
+      "line": 90,
+      "kind": "todo",
+      "detail": "TODO"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "todo"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "TODO"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "FIXME"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "XXX"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "HACK"
+    },
+    {
+      "file": "tools/project_inventory.py",
+      "line": 12,
+      "kind": "todo",
+      "detail": "NotImplemented"
+    },
+    {
+      "file": "src/data/update_markets.py",
+      "line": 74,
+      "kind": "stub",
+      "detail": "pass"
+    }
+  ],
+  "git_status": "M dashboard/app.js\n M src/analysis/deep_analyzer.py\n?? ROADMAP_V2.md\n?? src/analysis/extensions_v1.py\n?? src/analysis/extensions_v2.py\n?? src/analysis/extensions_v3.py\n?? src/data/batch_extensions_v1.py\n?? src/data/batch_extensions_v2.py\n?? src/data/batch_extensions_v3.py\n?? src/data/migrate_extensions_v1.py\n?? src/data/migrate_extensions_v2.py\n?? src/data/migrate_extensions_v3.py\n?? tools/",
+  "git_branch": "main",
+  "git_remote": "origin\thttps://github.com/Behzadk82/BEHZAD_AI.git (fetch)\norigin\thttps://github.com/Behzadk82/BEHZAD_AI.git (push)",
+  "git_last_commit": "d71d4d5 Phase 5: Advanced indicators (33 columns), deep analyzer, 1379 symbols with history"
+}

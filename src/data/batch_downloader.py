@@ -1,232 +1,781 @@
-# src/data/batch_downloader.py
-# Robust batch history downloader - Phase 3.1
-# Downloads in batches of 500, with retry, checkpoint, and raw JSON backup.
-# Rules:
-#   - 403/429 -> STOP immediately (saves checkpoint)
-#   - 500/502/503/504 -> retry up to 3 times
-#   - Other errors -> log and continue to next symbol
-#   - Every successful download is also saved to data/raw/{ins_code}.json
+# BEHZAD_AI - Phase 3.1
+# Safe and resumable batch history downloader
 
 import json
-import time
+import math
+import os
+import shutil
 import sqlite3
-import requests
+import tempfile
+import time
+
+from datetime import datetime, timezone
 from pathlib import Path
 import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
-from src.config import DB_PATH, TSETMC_BASE, HEADERS, TIMEOUT_DAILY_LIST
+import requests
 
-CHECKPOINT_FILE = Path("data/batch_checkpoint.json")
-RAW_DIR = Path("data/raw")
-BATCH_SIZE = 500
-MAX_RETRIES = 3
-RETRY_STATUS_CODES = [500, 502, 503, 504]
-STOP_STATUS_CODES = [403, 429]
-DELAY_BETWEEN = 1.0
+sys.path.insert(
+    0,
+    str(Path(__file__).resolve().parent.parent.parent)
+)
+
+from src.config import (
+    BASE_DIR,
+    DATA_DIR,
+    DB_PATH,
+    BATCH_CHECKPOINT_FILE,
+    BATCH_SIZE,
+    TSETMC_BASE,
+    HEADERS,
+    TIMEOUT_DAILY_LIST,
+    MAX_RETRIES,
+    RETRY_BACKOFF_BASE,
+    RETRY_STATUS_CODES,
+    STOP_STATUS_CODES,
+    DELAY_BETWEEN_SYMBOLS,
+)
+
+
+CHECKPOINT_FILE = BATCH_CHECKPOINT_FILE
+RAW_DIR = DATA_DIR / "raw"
+
+
+# ==================================================
+# CHECKPOINT
+# ==================================================
+
+def empty_state():
+    return {
+        "completed": [],
+        "failed": [],
+        "batch_num": 0,
+    }
 
 
 def load_checkpoint():
-    if CHECKPOINT_FILE.exists():
-        with CHECKPOINT_FILE.open("r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"completed": [], "failed": [], "batch_num": 0}
+    if not CHECKPOINT_FILE.exists():
+        return empty_state()
+
+    try:
+        with CHECKPOINT_FILE.open(
+            "r",
+            encoding="utf-8"
+        ) as f:
+            state = json.load(f)
+
+        if not isinstance(state, dict):
+            raise ValueError("Checkpoint must be a JSON object")
+
+        completed = state.get("completed", [])
+        failed = state.get("failed", [])
+        batch_num = state.get("batch_num", 0)
+
+        if not isinstance(completed, list):
+            raise ValueError("Invalid completed list")
+
+        if not isinstance(failed, list):
+            raise ValueError("Invalid failed list")
+
+        if (
+            not isinstance(batch_num, int)
+            or isinstance(batch_num, bool)
+            or batch_num < 0
+        ):
+            raise ValueError("Invalid batch_num")
+
+        # Preserve all existing completed symbols.
+        completed = list(
+            dict.fromkeys(str(x) for x in completed)
+        )
+
+        valid_failed = []
+
+        for item in failed:
+            if isinstance(item, dict) and item.get("ins_code"):
+                valid_failed.append(item)
+
+        state["completed"] = completed
+        state["failed"] = valid_failed
+        state["batch_num"] = batch_num
+
+        return state
+
+    except Exception as exc:
+        raise RuntimeError(
+            f"Checkpoint load failed: {exc}. "
+            "Original checkpoint was not modified."
+        ) from exc
 
 
 def save_checkpoint(state):
-    CHECKPOINT_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with CHECKPOINT_FILE.open("w", encoding="utf-8") as f:
-        json.dump(state, f, ensure_ascii=False, indent=2)
+    CHECKPOINT_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
 
+    fd, temp_name = tempfile.mkstemp(
+        prefix="batch_checkpoint_",
+        suffix=".tmp",
+        dir=str(CHECKPOINT_FILE.parent),
+    )
+
+    try:
+        with os.fdopen(
+            fd,
+            "w",
+            encoding="utf-8"
+        ) as f:
+            json.dump(
+                state,
+                f,
+                ensure_ascii=False,
+                indent=2
+            )
+            f.flush()
+            os.fsync(f.fileno())
+
+        os.replace(
+            temp_name,
+            CHECKPOINT_FILE
+        )
+
+    except Exception:
+        try:
+            os.unlink(temp_name)
+        except OSError:
+            pass
+
+        raise
+
+
+def mark_completed(state, ins_code):
+    ins_code = str(ins_code)
+
+    if ins_code not in state["completed"]:
+        state["completed"].append(ins_code)
+
+    state["failed"] = [
+        item
+        for item in state["failed"]
+        if str(item.get("ins_code")) != ins_code
+    ]
+
+
+def mark_failed(state, ins_code, symbol, error):
+    ins_code = str(ins_code)
+
+    # A symbol cannot be both completed and failed.
+    state["completed"] = [
+        item
+        for item in state["completed"]
+        if str(item) != ins_code
+    ]
+
+    # Keep only the latest failure for this symbol.
+    state["failed"] = [
+        item
+        for item in state["failed"]
+        if str(item.get("ins_code")) != ins_code
+    ]
+
+    state["failed"].append({
+        "ins_code": ins_code,
+        "symbol": str(symbol),
+        "error": str(error),
+        "updated_at": datetime.now(
+            timezone.utc
+        ).isoformat(timespec="seconds"),
+    })
+
+
+# ==================================================
+# DATABASE
+# ==================================================
 
 def get_all_symbols():
-    con = sqlite3.connect(DB_PATH, timeout=15)
-    con.row_factory = sqlite3.Row
-    rows = con.execute("SELECT ins_code, symbol FROM symbols ORDER BY trades DESC").fetchall()
-    con.close()
-    return [{"ins_code": r["ins_code"], "symbol": r["symbol"]} for r in rows]
+    if not DB_PATH.exists():
+        raise FileNotFoundError(
+            f"Database does not exist: {DB_PATH}"
+        )
+
+    con = sqlite3.connect(
+        DB_PATH,
+        timeout=15
+    )
+
+    try:
+        con.row_factory = sqlite3.Row
+        con.execute("PRAGMA busy_timeout=15000")
+
+        rows = con.execute("""
+            SELECT ins_code, symbol
+            FROM symbols
+            ORDER BY trades DESC
+        """).fetchall()
+
+        return [
+            {
+                "ins_code": str(row["ins_code"]),
+                "symbol": str(row["symbol"]),
+            }
+            for row in rows
+        ]
+
+    finally:
+        con.close()
 
 
-def fetch_with_retry(session, url):
-    """Fetch URL with retries. Returns (data, error_flag)."""
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            r = session.get(url, timeout=TIMEOUT_DAILY_LIST)
-            
-            # Stop codes - return immediately
-            if r.status_code in STOP_STATUS_CODES:
-                return None, f"STOP_{r.status_code}"
-            
-            # Retry codes
-            if r.status_code in RETRY_STATUS_CODES and attempt < MAX_RETRIES:
-                wait = 2 ** attempt
-                print(f"  [retry {attempt}] HTTP {r.status_code}, wait {wait}s", end=" ")
-                time.sleep(wait)
-                continue
-            
-            r.raise_for_status()
-            data = r.json()
-            records = data.get("closingPriceDaily", [])
-            if not isinstance(records, list):
-                return None, "INVALID_STRUCTURE"
-            return records, None
-        
-        except requests.exceptions.Timeout:
-            if attempt < MAX_RETRIES:
-                print(f"  [retry {attempt}] Timeout", end=" ")
-                time.sleep(2 ** attempt)
-            else:
-                return None, "TIMEOUT"
-        
-        except requests.exceptions.ConnectionError:
-            return None, "CONNECTION_ERROR"
-        
-        except Exception as e:
-            if attempt < MAX_RETRIES:
-                print(f"  [retry {attempt}] {type(e).__name__}", end=" ")
-                time.sleep(2 ** attempt)
-            else:
-                return None, str(e)
-    
-    return None, "MAX_RETRIES_EXCEEDED"
+def to_number(value):
+    if value is None or value == "":
+        return 0.0
+
+    result = float(value)
+
+    if not math.isfinite(result):
+        raise ValueError("Non-finite numeric value")
+
+    return result
 
 
-def save_raw_json(ins_code, records):
-    """Save raw records to data/raw/{ins_code}.json for backup."""
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-    path = RAW_DIR / f"{ins_code}.json"
-    if path.exists():
-        return  # Don't overwrite
-    with path.open("w", encoding="utf-8") as f:
-        json.dump({"closingPriceDaily": records}, f, ensure_ascii=False)
+def _normalize_batch_record(raw):
+    """
+    Validate and normalize one batch history record.
+    Returns normalized values or None if invalid.
+    """
+    if not isinstance(raw, dict):
+        return None
+
+    try:
+        date_text = str(raw.get("dEven", "")).strip()
+
+        if len(date_text) != 8 or not date_text.isdigit():
+            return None
+
+        # Strict Gregorian YYYYMMDD validation.
+        datetime.strptime(date_text, "%Y%m%d")
+        date = int(date_text)
+
+        fields = (
+            "pClosing",
+            "pDrCotVal",
+            "priceMin",
+            "priceMax",
+            "priceFirst",
+            "priceYesterday",
+            "priceChange",
+            "qTotTran5J",
+            "qTotCap",
+            "zTotTran",
+        )
+
+        numbers = {
+            field: to_number(raw.get(field))
+            for field in fields
+        }
+
+        nonnegative_fields = (
+            "pClosing",
+            "pDrCotVal",
+            "priceMin",
+            "priceMax",
+            "priceFirst",
+            "priceYesterday",
+            "qTotTran5J",
+            "qTotCap",
+            "zTotTran",
+        )
+
+        if any(numbers[field] < 0 for field in nonnegative_fields):
+            return None
+
+        close = numbers["pClosing"]
+        last = numbers["pDrCotVal"]
+
+        # At least one valid positive market price is required.
+        if close <= 0 and last <= 0:
+            return None
+
+        # Keep the same fallback behavior as Incremental.
+        if close <= 0:
+            close = last
+
+        if last <= 0:
+            last = close
+
+        return (
+            date,
+            close,
+            last,
+            numbers["priceMin"],
+            numbers["priceMax"],
+            numbers["priceFirst"],
+            numbers["priceYesterday"],
+            numbers["priceChange"],
+            numbers["qTotTran5J"],
+            numbers["qTotCap"],
+            numbers["zTotTran"],
+        )
+
+    except (TypeError, ValueError, OverflowError):
+        return None
 
 
 def save_to_db(ins_code, records):
+    """
+    Insert only valid normalized records.
+    Existing records are never overwritten.
+    Returns the actual number of inserted rows.
+    """
     if not records:
         return 0
-    con = sqlite3.connect(DB_PATH, timeout=15)
-    con.execute("PRAGMA journal_mode=WAL")
-    count = 0
-    from datetime import datetime, timezone
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    
-    with con:
-        for raw in records:
-            date = int(raw.get("dEven", 0))
-            if date <= 0:
+
+    now = datetime.now(
+        timezone.utc
+    ).isoformat(timespec="seconds")
+
+    con = sqlite3.connect(
+        DB_PATH,
+        timeout=15,
+    )
+
+    inserted = 0
+
+    try:
+        con.execute("PRAGMA busy_timeout=15000")
+
+        with con:
+            for raw in records:
+                normalized = _normalize_batch_record(raw)
+
+                if normalized is None:
+                    continue
+
+                (
+                    date,
+                    close,
+                    last,
+                    price_min,
+                    price_max,
+                    price_first,
+                    price_yesterday,
+                    price_change,
+                    volume,
+                    value,
+                    trades,
+                ) = normalized
+
+                values = (
+                    str(ins_code),
+                    date,
+                    close,
+                    last,
+                    price_min,
+                    price_max,
+                    price_first,
+                    price_yesterday,
+                    price_change,
+                    volume,
+                    value,
+                    trades,
+                    "batch",
+                    now,
+                )
+
+                cursor = con.execute(
+                    """
+                    INSERT INTO price_history (
+                        ins_code,
+                        date,
+                        price_close,
+                        price_last,
+                        price_min,
+                        price_max,
+                        price_first,
+                        price_yesterday,
+                        price_change,
+                        volume,
+                        value,
+                        trades,
+                        source,
+                        inserted_at
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(ins_code, date) DO NOTHING
+                    """,
+                    values,
+                )
+
+                if cursor.rowcount == 1:
+                    inserted += 1
+
+        return inserted
+
+    finally:
+        con.close()
+
+
+# RAW JSON BACKUP
+# ==================================================
+
+def save_raw_json(ins_code, records):
+    RAW_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    path = RAW_DIR / f"{ins_code}.json"
+
+    payload = {
+        "closingPriceDaily": records
+    }
+
+    if path.exists():
+        try:
+            with path.open(
+                "r",
+                encoding="utf-8"
+            ) as f:
+                old_data = json.load(f)
+
+            if old_data == payload:
+                return
+
+        except Exception:
+            pass
+
+        timestamp = datetime.now(
+            timezone.utc
+        ).strftime("%Y%m%d_%H%M%S_%f")
+
+        backup_path = RAW_DIR / (
+            f"{ins_code}.backup_{timestamp}.json"
+        )
+
+        shutil.copy2(path, backup_path)
+
+    fd, temp_name = tempfile.mkstemp(
+        prefix=f"{ins_code}_",
+        suffix=".tmp",
+        dir=str(RAW_DIR)
+    )
+
+    try:
+        with os.fdopen(
+            fd,
+            "w",
+            encoding="utf-8"
+        ) as f:
+            json.dump(
+                payload,
+                f,
+                ensure_ascii=False
+            )
+            f.flush()
+            os.fsync(f.fileno())
+
+        os.replace(temp_name, path)
+
+    except Exception:
+        try:
+            os.unlink(temp_name)
+        except OSError:
+            pass
+
+        raise
+
+
+# ==================================================
+# NETWORK
+# ==================================================
+
+def fetch_with_retry(session, url):
+    for attempt in range(1, MAX_RETRIES + 1):
+
+        try:
+            response = session.get(
+                url,
+                timeout=TIMEOUT_DAILY_LIST
+            )
+
+            status = response.status_code
+
+            if status in STOP_STATUS_CODES:
+                return None, f"STOP_{status}"
+
+            if status in RETRY_STATUS_CODES:
+                if attempt < MAX_RETRIES:
+                    wait = RETRY_BACKOFF_BASE ** attempt
+
+                    print(
+                        f"[retry {attempt}] "
+                        f"HTTP {status}; waiting {wait}s"
+                    )
+
+                    time.sleep(wait)
+                    continue
+
+                return None, f"HTTP_{status}"
+
+            response.raise_for_status()
+
+            data = response.json()
+
+            if not isinstance(data, dict):
+                return None, "INVALID_STRUCTURE"
+
+            records = data.get("closingPriceDaily")
+
+            if not isinstance(records, list):
+                return None, "INVALID_STRUCTURE"
+
+            if not records:
+                return None, "EMPTY_RESPONSE"
+
+            return records, None
+
+        except requests.exceptions.Timeout:
+            if attempt < MAX_RETRIES:
+                time.sleep(
+                    RETRY_BACKOFF_BASE ** attempt
+                )
                 continue
-            con.execute("""
-                INSERT INTO price_history (
-                    ins_code, date, price_close, price_last, price_min, price_max,
-                    price_first, price_yesterday, price_change, volume, value, trades, source, inserted_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(ins_code, date) DO NOTHING
-            """, (
-                ins_code, date,
-                float(raw.get("pClosing", 0) or 0),
-                float(raw.get("pDrCotVal", 0) or 0),
-                float(raw.get("priceMin", 0) or 0),
-                float(raw.get("priceMax", 0) or 0),
-                float(raw.get("priceFirst", 0) or 0),
-                float(raw.get("priceYesterday", 0) or 0),
-                float(raw.get("priceChange", 0) or 0),
-                float(raw.get("qTotTran5J", 0) or 0),
-                float(raw.get("qTotCap", 0) or 0),
-                float(raw.get("zTotTran", 0) or 0),
-                "batch", now
-            ))
-            count += 1
-    con.close()
-    return count
+
+            return None, "TIMEOUT"
+
+        except requests.exceptions.ConnectionError:
+            if attempt < MAX_RETRIES:
+                time.sleep(
+                    RETRY_BACKOFF_BASE ** attempt
+                )
+                continue
+
+            return None, "CONNECTION_ERROR"
+
+        except requests.exceptions.HTTPError as exc:
+            status = (
+                exc.response.status_code
+                if exc.response is not None
+                else "UNKNOWN"
+            )
+
+            return None, f"HTTP_ERROR_{status}"
+
+        except requests.exceptions.RequestException as exc:
+            if attempt < MAX_RETRIES:
+                time.sleep(
+                    RETRY_BACKOFF_BASE ** attempt
+                )
+                continue
+
+            return None, f"REQUEST_ERROR: {exc}"
+
+        except ValueError as exc:
+            return None, f"INVALID_JSON: {exc}"
+
+        except Exception as exc:
+            return None, f"UNEXPECTED_ERROR: {exc}"
+
+    return None, "MAX_RETRIES_EXCEEDED"
 
 
-def process_batch(batch, state, session, batch_num, total_pending):
+# ==================================================
+# BATCH PROCESSING
+# ==================================================
+
+
+def _count_valid_history_records(records):
+    """
+    Count records that pass the same validation as database insertion.
+    Duplicate valid records are still counted individually.
+    """
+    valid_count = 0
+
+    for raw in records:
+        if _normalize_batch_record(raw) is not None:
+            valid_count += 1
+
+    return valid_count
+
+
+def process_batch(batch, state, session):
     success = 0
     failed = 0
     stopped = False
-    
-    for i, sym in enumerate(batch, 1):
+
+    for index, sym in enumerate(batch, 1):
+
         ins_code = sym["ins_code"]
         symbol = sym["symbol"]
-        print(f"[{i}/{len(batch)}] {symbol:15s} ...", end=" ")
-        
-        url = f"{TSETMC_BASE}/ClosingPrice/GetClosingPriceDailyList/{ins_code}/0"
-        records, error = fetch_with_retry(session, url)
-        
+
+        print(
+            f"[{index}/{len(batch)}] "
+            f"{symbol:15s} ...",
+            end=" ",
+            flush=True
+        )
+
+        url = (
+            f"{TSETMC_BASE}/ClosingPrice/"
+            f"GetClosingPriceDailyList/{ins_code}/0"
+        )
+
+        records, error = fetch_with_retry(
+            session,
+            url
+        )
+
         if error and error.startswith("STOP_"):
-            print(f"🛑 {error} - STOPPING BATCH")
-            state["failed"].append({"ins_code": ins_code, "symbol": symbol, "error": error})
+            print(f"STOPPED: {error}")
+
+            mark_failed(
+                state,
+                ins_code,
+                symbol,
+                error
+            )
+
             save_checkpoint(state)
             stopped = True
             break
-        
-        if records:
-            saved = save_to_db(ins_code, records)
-            save_raw_json(ins_code, records)
-            state["completed"].append(ins_code)
-            success += 1
-            print(f"✅ {saved} days")
-        else:
-            state["failed"].append({"ins_code": ins_code, "symbol": symbol, "error": error})
+
+        if error:
+            mark_failed(
+                state,
+                ins_code,
+                symbol,
+                error
+            )
+
             failed += 1
-            print(f"❌ {error}")
-        
-        time.sleep(DELAY_BETWEEN)
-    
+
+            print(f"FAILED: {error}")
+
+            save_checkpoint(state)
+            time.sleep(DELAY_BETWEEN_SYMBOLS)
+            continue
+
+        try:
+            valid_count = _count_valid_history_records(records)
+
+            if valid_count == 0:
+                raise ValueError(
+                    "API response contains no valid history records"
+                )
+
+            saved = save_to_db(
+                ins_code,
+                records
+            )
+
+            save_raw_json(
+                ins_code,
+                records
+            )
+
+            mark_completed(
+                state,
+                ins_code
+            )
+
+            success += 1
+
+            print(
+                f"SUCCESS | Valid API rows: {valid_count} "
+                f"| New DB rows: {saved}"
+            )
+
+        except Exception as exc:
+            mark_failed(
+                state,
+                ins_code,
+                symbol,
+                f"SAVE_ERROR: {exc}"
+            )
+
+            failed += 1
+
+            print(f"SAVE ERROR: {exc}")
+
+        save_checkpoint(state)
+
+        time.sleep(DELAY_BETWEEN_SYMBOLS)
+
     return success, failed, stopped
 
 
+# ==================================================
+# MAIN
+# ==================================================
+
 def main():
-    print("=" * 70)
-    print("BATCH DOWNLOADER - Phase 3.1")
-    print(f"  Batch size: {BATCH_SIZE}")
-    print(f"  Max retries: {MAX_RETRIES}")
-    print(f"  Stop codes: {STOP_STATUS_CODES}")
-    print("=" * 70)
+    print("=" * 65)
+    print("BEHZAD_AI - BATCH HISTORY DOWNLOADER")
+    print("=" * 65)
+
+    print(f"Project: {BASE_DIR}")
+    print(f"Database: {DB_PATH}")
+    print(f"Checkpoint: {CHECKPOINT_FILE}")
+    print(f"Batch size: {BATCH_SIZE}")
+    print(f"Retries: {MAX_RETRIES}")
     print()
-    
+
     state = load_checkpoint()
     symbols = get_all_symbols()
-    
-    # Filter out completed AND permanently failed
+
     completed_set = set(state["completed"])
-    failed_set = {f["ins_code"] for f in state["failed"] if f["error"] in ("INVALID_STRUCTURE",)}
-    pending = [s for s in symbols if s["ins_code"] not in completed_set and s["ins_code"] not in failed_set]
-    
-    print(f"📊 Total symbols: {len(symbols)}")
-    print(f"✅ Completed: {len(state['completed'])}")
-    print(f"❌ Failed: {len(state['failed'])}")
-    print(f"⏳ Pending: {len(pending)}")
+
+    pending = [
+        symbol
+        for symbol in symbols
+        if symbol["ins_code"] not in completed_set
+    ]
+
+    print(f"Total symbols: {len(symbols)}")
+    print(f"Completed: {len(completed_set)}")
+    print(f"Failed records: {len(state['failed'])}")
+    print(f"Pending: {len(pending)}")
     print()
-    
+
     if not pending:
-        print("🎉 All done! No pending symbols.")
+        print("No pending symbols.")
         return
-    
+
     batch = pending[:BATCH_SIZE]
+
     state["batch_num"] += 1
-    print(f"🚀 Starting batch #{state['batch_num']} with {len(batch)} symbols...")
-    print()
-    
+    save_checkpoint(state)
+
+    print(
+        f"Starting batch #{state['batch_num']} "
+        f"with {len(batch)} symbols"
+    )
+
     session = requests.Session()
     session.headers.update(HEADERS)
-    
-    success, failed, stopped = process_batch(batch, state, session, state["batch_num"], len(pending))
-    
-    # Save checkpoint after batch
+
+    try:
+        success, failed, stopped = process_batch(
+            batch,
+            state,
+            session
+        )
+
+    finally:
+        session.close()
+
     save_checkpoint(state)
-    
+
     print()
-    print("=" * 70)
-    if stopped:
-        print("🛑 BATCH STOPPED (rate limit / access denied)")
-    else:
-        print("✅ BATCH COMPLETE")
-    print(f"  Success: {success}")
-    print(f"  Failed: {failed}")
-    print(f"  Total completed: {len(state['completed'])}/{len(symbols)}")
-    print(f"  Remaining: {len(pending) - success}")
-    print("=" * 70)
+    print("=" * 65)
+    print("BATCH SUMMARY")
+    print("=" * 65)
+    print(f"Success: {success}")
+    print(f"Failed: {failed}")
+    print(f"Completed total: {len(state['completed'])}")
+    print(f"Remaining: {max(0, len(pending) - success)}")
+    print(f"Stopped: {stopped}")
+    print("=" * 65)
 
 
 if __name__ == "__main__":

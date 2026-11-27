@@ -1,0 +1,139 @@
+test_invalid_date_removed (__main__.TestHistoryEngine.test_invalid_date_removed) ... FAIL
+test_invalid_dates (__main__.TestHistoryEngine.test_invalid_dates) ... FAIL
+test_invalid_price_removed (__main__.TestHistoryEngine.test_invalid_price_removed) ... FAIL
+test_missing_close_fallback (__main__.TestHistoryEngine.test_missing_close_fallback) ... ERROR
+test_normalize_sort_and_duplicates (__main__.TestHistoryEngine.test_normalize_sort_and_duplicates) ... FAIL
+test_safe_float (__main__.TestHistoryEngine.test_safe_float) ... FAIL
+test_safe_int (__main__.TestHistoryEngine.test_safe_int) ... FAIL
+test_save_json (__main__.TestHistoryEngine.test_save_json) ... ERROR
+test_statistics (__main__.TestHistoryEngine.test_statistics) ... FAIL
+test_valid_dates (__main__.TestHistoryEngine.test_valid_dates) ... ok
+
+======================================================================
+ERROR: test_missing_close_fallback (__main__.TestHistoryEngine.test_missing_close_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 208, in test_missing_close_fallback
+    result[0]["price_close"],
+    ~~~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'price_close'
+
+======================================================================
+ERROR: test_save_json (__main__.TestHistoryEngine.test_save_json)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 313, in test_save_json
+    success = HistoryFetcher.save_json(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'HistoryFetcher' has no attribute 'save_json'. Did you mean: 'safe_json'?
+
+======================================================================
+FAIL: test_invalid_date_removed (__main__.TestHistoryEngine.test_invalid_date_removed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 238, in test_invalid_date_removed
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        result[0]["date"],
+        ^^^^^^^^^^^^^^^^^^
+        20250101
+        ^^^^^^^^
+    )
+    ^
+AssertionError: '2025-01-01' != 20250101
+
+======================================================================
+FAIL: test_invalid_dates (__main__.TestHistoryEngine.test_invalid_dates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 107, in test_invalid_dates
+    self.assertFalse(
+    ~~~~~~~~~~~~~~~~^
+        HistoryFetcher.is_valid_date(2025011)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_invalid_price_removed (__main__.TestHistoryEngine.test_invalid_price_removed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 184, in test_invalid_price_removed
+    self.assertEqual(len(result), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 3 != 1
+
+======================================================================
+FAIL: test_normalize_sort_and_duplicates (__main__.TestHistoryEngine.test_normalize_sort_and_duplicates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 155, in test_normalize_sort_and_duplicates
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        dates,
+        ^^^^^^
+        [20250101, 20250102, 20250103]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+AssertionError: Lists differ: ['2025-01-01', '2025-01-02', '2025-01-03'] != [20250101, 20250102, 20250103]
+
+First differing element 0:
+'2025-01-01'
+20250101
+
+- ['2025-01-01', '2025-01-02', '2025-01-03']
+?  -    -  -  -  -    -  -  -  -    -  -  -
+
++ [20250101, 20250102, 20250103]
+
+======================================================================
+FAIL: test_safe_float (__main__.TestHistoryEngine.test_safe_float)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 51, in test_safe_float
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        HistoryFetcher.safe_float(None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        0.0
+        ^^^
+    )
+    ^
+AssertionError: None != 0.0
+
+======================================================================
+FAIL: test_safe_int (__main__.TestHistoryEngine.test_safe_int)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 73, in test_safe_int
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        HistoryFetcher.safe_int(None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        0
+        ^
+    )
+    ^
+AssertionError: None != 0
+
+======================================================================
+FAIL: test_statistics (__main__.TestHistoryEngine.test_statistics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/storage/emulated/0/BEHZAD_AI/tools/test_history.py", line 268, in test_statistics
+    self.assertEqual(
+    ~~~~~~~~~~~~~~~~^
+        stats["count"],
+        ^^^^^^^^^^^^^^^
+        2
+        ^
+    )
+    ^
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.026s
+
+FAILED (failures=7, errors=2)

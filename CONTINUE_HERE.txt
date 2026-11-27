@@ -1,0 +1,371 @@
+BEHZAD_AI - PERMANENT CONTINUATION FILE
+LAST UPDATED: 2026-11-27
+
+========================================
+1. PROJECT IDENTITY
+========================================
+
+Project: BEHZAD_AI
+Root: /storage/emulated/0/BEHZAD_AI
+
+Main database:
+data/behzad_ai.db
+
+Database size last confirmed:
+1.9 GB
+
+Checkpoint:
+data/batch_checkpoint.json
+
+Raw data:
+data/raw
+
+Python:
+3.13.13
+
+========================================
+2. ABSOLUTE PROJECT RULES
+========================================
+
+- Never change project paths.
+- Never change database paths.
+- Never create a parallel production database.
+- Never delete existing project data.
+- Never reset the production checkpoint.
+- Never run batch downloader against production DB
+  without explicit user approval.
+- Never use live API during isolated tests.
+- Never send ZIP files.
+- Inspect a file before editing it.
+- Do not request source files already provided
+  in the current project handoff.
+- Work on one specific task at a time.
+- Test every code change.
+- Record verified results.
+- Never repeat previously passed tests without
+  a technical reason.
+- Do not claim PASS without actual test output.
+
+========================================
+3. VERIFIED PREVIOUS WORK
+========================================
+
+History Engine:
+- 10 tests PASS.
+
+Incremental:
+- Normalization tests PASS.
+
+Batch Indicators:
+- Syntax PASS.
+- Offline functional tests PASS.
+- Pending detection PASS.
+- Indicator computation PASS.
+- 60 synthetic rows PASS.
+- Duplicate protection PASS.
+
+Batch Downloader:
+- Syntax PASS.
+- Network tests: 7 PASS.
+- History validation tests: 6 PASS.
+- Checkpoint consistency tests: 4 PASS.
+- Failure Recovery test: PASS.
+- Checkpoint Recovery test: PASS.
+- Atomic checkpoint save implemented.
+- Atomic raw JSON save implemented.
+- Duplicate DB insert protection implemented.
+
+Do not repeat these tests.
+
+========================================
+4. FILES ALREADY INSPECTED
+========================================
+
+src/data/batch_downloader.py
+- Complete source supplied by user.
+- 726 lines.
+- Functions and process_batch inspected.
+- No need to request its source again.
+
+src/config.py
+- Configuration paths inspected.
+- DB_PATH = DATA_DIR / "behzad_ai.db"
+- BATCH_CHECKPOINT_FILE =
+  DATA_DIR / "batch_checkpoint.json"
+- BATCH_SIZE = 20
+- MAX_RETRIES = 3
+- RETRY_BACKOFF_BASE = 2
+- RETRY_STATUS_CODES = [500, 502, 503, 504]
+- TIMEOUT_DAILY_LIST = 40
+- DELAY_BETWEEN_SYMBOLS = 1.0
+
+src/data/migrate_history.py
+- price_history schema inspected.
+- PRIMARY KEY (ins_code, date)
+- Indexes on date and ins_code.
+- Compatible with:
+  ON CONFLICT(ins_code, date) DO NOTHING
+
+tools/project_checkpoint.py
+- Source inspected.
+- Creates project inventory report.
+- Does not access database.
+- Does not modify source files.
+
+========================================
+5. BATCH DOWNLOADER CURRENT FLOW
+========================================
+
+process_batch:
+1. Fetch API response.
+2. Validate history records.
+3. Save to database.
+4. Save raw JSON.
+5. Mark symbol completed.
+6. Save checkpoint.
+
+On HTTP stop status:
+- Mark symbol failed.
+- Save checkpoint.
+- Stop current batch.
+
+On ordinary network failure:
+- Mark failed.
+- Save checkpoint.
+- Continue to next symbol.
+
+On save failure:
+- Mark failed.
+- Save checkpoint.
+
+========================================
+6. CURRENT TASK - DO NOT RESTART
+========================================
+
+Build isolated tests for process_batch.
+
+User explicitly requested these tests:
+
+A. Duplicate insertion prevention.
+B. Stop behavior for sensitive HTTP errors:
+   401, 403, 429.
+C. Checkpoint state correctness.
+
+Do NOT repeat:
+- Failure Recovery test.
+- Checkpoint Recovery test.
+- Previous network tests.
+- Previous checkpoint tests.
+- Previous history validation tests.
+
+========================================
+7. TEST SAFETY REQUIREMENTS
+========================================
+
+All tests must use:
+- Temporary SQLite database.
+- Temporary raw directory.
+- Temporary checkpoint file.
+- Mock HTTP responses.
+- No live API.
+- No production database writes.
+
+Before running tests:
+- Inspect test script.
+- Verify all three paths are redirected.
+- Verify production DB cannot be opened by test.
+
+========================================
+8. EXACT NEXT ACTION
+========================================
+
+Do not ask the user to resend batch_downloader.py.
+Do not repeat previous inspections.
+
+Prepare one isolated test script for:
+1. Duplicate insertion prevention.
+2. HTTP 401/403/429 stop behavior.
+3. Checkpoint completed/failed consistency.
+
+Run only those new tests.
+
+After verified results:
+- Update PROJECT_STATE.md
+- Update PROJECT_LOG.md
+- Update CONTINUE_HERE.txt
+
+Then report the exact next unfinished task.
+
+========================================
+9. COMMUNICATION RULES
+========================================
+
+The user works in Termux on Android.
+
+Give one actionable instruction at a time.
+Avoid repeated diagnostic commands.
+Do not ask for information already supplied.
+Do not restart completed work after a new chat.
+Use this file as the primary continuation reference.
+
+Continue from the exact next action above.
+========================================
+
+========================================
+UPDATED CONTINUATION — 2026-11-27
+========================================
+
+LATEST VERIFIED TEST:
+process_batch isolated integration: OK (3 tests)
+
+PASS:
+- Successful processing and retry.
+- Sensitive HTTP 403 stop behavior.
+- Invalid history rejection.
+- Temporary checkpoint verification.
+- Temporary raw directory isolation.
+
+The older instruction to repeat duplicate insertion,
+HTTP stop, and checkpoint state tests is superseded.
+Do not repeat those tests unless a relevant code change
+requires retesting.
+
+NEXT UNFINISHED TASK:
+Phase 1 data integrity review.
+
+Start by inspecting the database schema definitions
+and comparing them with data module contracts:
+- database.py schema, indexes, UNIQUE constraints.
+- history.py functions.
+- incremental.py functions.
+- batch_downloader.py functions.
+
+Identify schema/data-contract mismatches only.
+Do not modify source files or production database
+during this inspection.
+
+Live API and production DB integration remain NOT TESTED.
+========================================
+
+
+==================================================
+LATEST VERIFIED MILESTONE — 2026-11-27
+==================================================
+
+Batch Data Integrity patch completed.
+
+File changed:
+- src/data/batch_downloader.py
+
+New test:
+- tools/test_batch_data_integrity.py
+
+Results:
+- Syntax: PASS
+- Data Integrity: 15/15 PASS
+
+Shared validation:
+- _normalize_batch_record
+
+Functions using shared validation:
+- save_to_db
+- _count_valid_history_records
+
+Rules:
+- Gregorian YYYYMMDD validation
+- Reject negative price/volume/value/trades fields
+- Allow negative priceChange
+- Require close or last price > 0
+- Fallback between close and last
+- Reject NaN/Infinity
+- Preserve existing DB rows with ON CONFLICT DO NOTHING
+
+Production DB and checkpoint were not used or changed.
+
+NEXT TASK:
+Perform isolated SQLite integration tests for save_to_db.
+Use a temporary database and verify insert count, invalid-record rejection,
+duplicate protection, and stored normalized values.
+Do not use the production DB.
+Do not repeat the 15 Data Integrity tests unless code changes affect them.
+==================================================
+
+
+==================================================
+LATEST VERIFIED MILESTONE — SQLITE INTEGRATION
+==================================================
+
+Date: 2026-11-27
+
+Data Integrity:
+- 15/15 PASS
+
+SQLite save integration:
+- tools/test_batch_save_to_db.py
+- 5/5 PASS
+
+Verified using temporary isolated SQLite DB only.
+Production database and checkpoint untouched.
+
+Do NOT repeat these tests unless related code changes.
+
+NEXT:
+Continue project development from the existing project roadmap/state.
+Before selecting a new task, inspect current project state and identify
+the next unfinished milestone. Avoid repeating completed work.
+==================================================
+
+==================================================
+LATEST VERIFIED MILESTONE — DATABASE CRUD
+==================================================
+
+Date: 2026-11-27
+
+Test:
+- tools/test_database_crud.py
+- 8/8 PASS
+
+Verified:
+- Schema and tables
+- Primary key and index
+- Insert and Read
+- Upsert and Update
+- Duplicate prevention
+- Missing symbol handling
+- List ordering and limit
+- Empty ins_code handling
+- Fetch log and stats
+- Delete using isolated DB
+
+Production DB and checkpoint untouched.
+
+NEXT TASK:
+Phase 1 — Data Quality Verification.
+
+Create isolated data-quality tests.
+Use temporary data only.
+No production DB writes.
+No live API.
+Do not repeat completed tests.
+==================================================
+
+LATEST VERIFIED MILESTONE:
+Incremental normalization — 14/13 tests PASS.
+
+Test:
+tools/test_incremental_normalization.py
+
+NEXT:
+Phase 1 — Cross-module Data Quality Verification.
+Do not repeat completed tests.
+Do not access production DB or live API without approval.
+
+==================================================
+LATEST VERIFIED MILESTONE — CROSS-MODULE DATA QUALITY
+Date: 2026-11-27
+Test:
+• tools/test_cross_module_quality.py (4/4 PASS)
+NEXT:
+Phase 1 — Schema/index integrity review and recovery/performance checks on isolated temporary DBs.
+Do not repeat completed tests. Do not access production DB or live API without approval.
+==================================================
