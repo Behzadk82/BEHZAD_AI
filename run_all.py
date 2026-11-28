@@ -49,6 +49,23 @@ class Handler(BaseHTTPRequestHandler):
 
         try:
             if path == "/api/health": return self._send_json(200, {"status": "ok", "version": VERSION})
+            if path == "/api/pro-scan":
+                scanner = ProScanner()
+                try:
+                    results = scanner.scan(min_score=40, limit=30)
+                    return self._send_json(200, {"count": len(results), "items": results})
+                finally:
+                    scanner.close()
+
+            if path == "/api/signal":
+                ins_code = query.get("ins_code", [""])[0]
+                if not ins_code:
+                    return self._send_json(400, {"error": "ins_code required"})
+                result = get_final_signal(ins_code)
+                if not result:
+                    return self._send_json(404, {"error": "not found"})
+                return self._send_json(200, result)
+
             if path == "/api/smart-scan":
                 analyzer = DeepAnalyzer()
                 try:
